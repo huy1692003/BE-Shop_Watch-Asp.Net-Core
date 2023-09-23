@@ -1,0 +1,15 @@
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\bin\Debug\net6.0\DAL.deps.json
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\bin\Debug\net6.0\DAL.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\bin\Debug\net6.0\DAL.pdb
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.csproj.AssemblyReference.cache
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.GeneratedMSBuildEditorConfig.editorconfig
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.AssemblyInfoInputs.cache
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.AssemblyInfo.cs
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.csproj.CoreCompileInputs.cache
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\refint\DAL.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.pdb
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\ref\DAL.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\bin\Debug\net6.0\Data_Model.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\bin\Debug\net6.0\Data_Model.pdb
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\DAL\obj\Debug\net6.0\DAL.csproj.CopyComplete
