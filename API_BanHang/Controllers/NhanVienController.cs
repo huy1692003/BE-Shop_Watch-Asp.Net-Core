@@ -9,38 +9,38 @@ namespace API_BanHang.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NhanVienController : ControllerBase
+    public class HoaDonBanController : ControllerBase
     {
-        private INhanVienBusiness _nhanVienBusiness;
-        public NhanVienController(INhanVienBusiness nhanVienBusiness) 
+        private IHoaDonBanBusiness _HoaDonBanBusiness;
+        public HoaDonBanController(IHoaDonBanBusiness HoaDonBanBusiness) 
         {
-            _nhanVienBusiness = nhanVienBusiness;
+            _HoaDonBanBusiness = HoaDonBanBusiness;
         }
         [Route("get-byid/{id}")]
         [HttpGet]
-        public NhanVien GetNVbyID(string id)
+        public HoaDonBan GetHDBbyID(string id)
         {
-            return _nhanVienBusiness.GetNV_byID(id);
+            return _HoaDonBanBusiness.GetHDB_byID(id);
         }
-        [Route("create-nhanvien")]
+        [Route("create-HoaDonBan")]
         [HttpPost]
-        public NhanVien CreateNV([FromBody] NhanVien nv)
+        public HoaDonBan CreateHDB([FromBody] HoaDonBan HDB)
         {
-            _nhanVienBusiness.Create_NV(nv);
-            return nv;
+            _HoaDonBanBusiness.Create_HDB(HDB);
+            return HDB;
         }
-        [Route ("update_nhanvien")]
+        [Route ("update_HoaDonBan")]
         [HttpPut]
-        public NhanVien Update_NV([FromBody] NhanVien nv)
+        public HoaDonBan Update_HDB([FromBody] HoaDonBan HDB)
         {
-            _nhanVienBusiness.Update_NV(nv);
-            return nv;
+            _HoaDonBanBusiness.Update_HDB(HDB);
+            return HDB;
         }
-        [Route("delete_nhanvien")]
+        [Route("delete_HoaDonBan")]
         [HttpDelete]
-        public IActionResult Delete_NV([FromBody] string manv)
+        public IActionResult Delete_HDB([FromBody] string maHDB)
         {
-            _nhanVienBusiness.Delete_NV(manv);
+            _HoaDonBanBusiness.Delete_HDB(maHDB);
             return Ok();
         }
         

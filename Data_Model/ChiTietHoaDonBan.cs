@@ -6,5 +6,6 @@
         public string MaSP { get; set; }
         public int soLuong { get; set; }
         public float giaBan { get; set; }
+        public float tongtien { get; set; }
     }
 }
