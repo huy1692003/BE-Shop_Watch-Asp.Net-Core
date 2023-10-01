@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Interface
+namespace DAL
 {
-    internal interface ISanPhamRepository
+    internal class TaiKhoanRepository
     {
     }
 }

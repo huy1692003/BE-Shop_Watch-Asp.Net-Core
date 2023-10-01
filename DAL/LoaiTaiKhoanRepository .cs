@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class NhanVienRepository:INhanVienRepository
+    public class SanPhamRepository:ISanPhamRepository
     {
         private IDatabaseHelper _dbHelper;
-        public NhanVienRepository(IDatabaseHelper dbHelper)
+        public SanPhamRepository(IDatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper;
         }
-        public NhanVien GetNV_byID(string MaNV)
+        public LoaiTaiKhoan GetSP_byID(string MaNV)
         {
             string msgError = "";
             try
@@ -25,14 +25,14 @@ namespace DAL
                      "@MaNV", MaNV);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<NhanVien>().FirstOrDefault();
+                return dt.ConvertTo<LoaiTaiKhoan>().FirstOrDefault();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
         }
-        public bool Create_NV(NhanVien nv)
+        public bool Create_SP(LoaiTaiKhoan nv)
         {
             string msgError = "";
             try
@@ -54,21 +54,21 @@ namespace DAL
                 throw ex;
             }
         }
-        public bool Update_NV(NhanVien nv)
+        public bool Update_SP(SanPham nv)
         {
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_nhanvien_update",
-                "@MaNV", nv.MaNV,
-                "@TenNV", nv.TenNV,
-                "@DiaChi", nv.DiaChi,
-                "@Dienthoai", nv.DienThoai,
-                "@ngaysinh", nv.ngaysinh);
-                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
-                {
-                    throw new Exception(Convert.ToString(result) + msgError);
-                }
+                //var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_nhanvien_update",
+                //"@MaNV", nv.MaNV,
+                //"@TenNV", nv.TenNV,
+                //"@DiaChi", nv.DiaChi,
+                //"@Dienthoai", nv.DienThoai,
+                //"@ngaysinh", nv.ngaysinh);
+                //if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                //{
+                //    throw new Exception(Convert.ToString(result) + msgError);
+                //}
                 return true;
             }
             catch (Exception ex)
@@ -76,7 +76,7 @@ namespace DAL
                 throw ex;
             }
         }
-        public bool Delete_NV(string MaNV)
+        public bool Delete_SP(string MaNV)
         {
             string msgError = "";
             try

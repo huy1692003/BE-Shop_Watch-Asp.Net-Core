@@ -2,14 +2,17 @@
 {
     public class SanPham
     {
-        public string MaSP { get; set; }
+        public int MaSP { get; set; }
+        public int MaTH { get; set; }
         public string TenMH { get; set; }
-        public string MaLoai { get; set; }
+        public int MaLoaiSP { get; set; }
         public int SoLuongTon { get; set; }
-        public string ImageUrl { get; set; }
+        public double GiaBan { get; set; }
+        public string Image_SP { get; set; }
         public string Mota { get; set; }
-        public bool TrangThai { get; set; }
-        public TheLoai TheLoai { get; set; }
+        public int SoLuongDaBan { get; set; }
+        public string TrangThai { get; set; }
     }
+
 
 }

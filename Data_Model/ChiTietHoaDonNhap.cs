@@ -2,9 +2,11 @@
 {
     public class ChiTietHoaDonNhap
     {
-        public string MaHD { get; set; }
-        public string MaSP { get; set; }
-        public int soLuong { get; set; }
-        public decimal giaNhap { get; set; }
+        public int MaChiTietHDN { get; set; }
+        public int MaHDN { get; set; }
+        public int MaSP { get; set; }
+        public int SoLuong { get; set; }
+        public decimal GiaNhap { get; set; }
+        public float TongTien { get; set; }
     }
 }

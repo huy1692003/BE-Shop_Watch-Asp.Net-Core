@@ -18,20 +18,20 @@ namespace API_BanHang.Controllers
         }
         [Route("get-byid/{id}")]
         [HttpGet]
-        public NhanVien GetNVbyID(string id)
+        public LoaiTaiKhoans GetNVbyID(string id)
         {
             return _nhanVienBusiness.GetNV_byID(id);
         }
         [Route("create-nhanvien")]
         [HttpPost]
-        public NhanVien CreateNV([FromBody] NhanVien nv)
+        public LoaiTaiKhoans CreateNV([FromBody] LoaiTaiKhoans nv)
         {
             _nhanVienBusiness.Create_NV(nv);
             return nv;
         }
         [Route ("update_nhanvien")]
         [HttpPut]
-        public NhanVien Update_NV([FromBody] NhanVien nv)
+        public LoaiTaiKhoans Update_NV([FromBody] LoaiTaiKhoans nv)
         {
             _nhanVienBusiness.Update_NV(nv);
             return nv;

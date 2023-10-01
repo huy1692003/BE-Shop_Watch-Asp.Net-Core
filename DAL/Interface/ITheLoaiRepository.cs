@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.Interface
 {
-    internal interface ISanPhamRepository
+    internal interface ITheLoaiRepository
     {
     }
 }

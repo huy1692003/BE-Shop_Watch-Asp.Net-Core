@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Interface
+namespace Data_Model
 {
-    internal interface ISanPhamRepository
+    internal class ThuongHieu
     {
     }
 }
