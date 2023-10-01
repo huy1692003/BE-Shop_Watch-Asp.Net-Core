@@ -1,52 +1,114 @@
-﻿---Thủ tục thêm NHÂN VIÊN
-create proc sp_nhanvien_create 
- @MaNV nchar(20),
- @TenNV nvarchar(50),
- @DiaChi nvarchar(100),
- @Dienthoai nvarchar(15),
- @ngaysinh date,
- @email nvarchar(100)
- as
- begin
-	insert into NhanVien(MaNV,TenNV,DiaChi,DienThoai,ngaysinh,email) values (@MaNV,@TenNV,@DiaChi,@Dienthoai,@ngaysinh,@email)
- end
-  exec sp_nhanvien_create 'NV30',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
+﻿---Thủ tục Tài Khoản
+-- Tạo stored procedure cho thêm loại tài khoản
+CREATE PROCEDURE sp_ThemLoaiTaiKhoan
+    @TenLoai NVARCHAR(50),
+    @MoTa NVARCHAR(250)
+AS
+BEGIN
+    INSERT INTO LoaiTaiKhoans (TenLoai, MoTa)
+    VALUES (@TenLoai, @MoTa);
+END;
 
- -----Tìm kiếm nhân viên by Mã NV
- create proc sp_searchNV_by_MaNV
- @MaNV nchar(20)
- as
- begin 
- select * From NhanVien as nv where nv.MaNV=@MaNV
- end
+-- Tạo stored procedure cho sửa loại tài khoản
+CREATE PROCEDURE sp_SuaLoaiTaiKhoan
+    @MaLoaiTaiKhoan INT,
+    @TenLoai NVARCHAR(50),
+    @MoTa NVARCHAR(250)
+AS
+BEGIN
+    UPDATE LoaiTaiKhoans
+    SET TenLoai = @TenLoai, MoTa = @MoTa
+    WHERE MaLoaiTaiKhoan = @MaLoaiTaiKhoan;
+END;
 
- ----Cập nhật thông tin Nhân Viên
-create proc sp_nhanvien_update
- @MaNV nchar(20),
- @TenNV nvarchar(50) ,
- @DiaChi nvarchar(100) ,
- @Dienthoai nvarchar(15),
- @ngaysinh date ,
- @email nvarchar(100)
- as
- begin
-	update NhanVien Set TenNV=@TenNV,DiaChi=@DiaChi,DienThoai=@Dienthoai,ngaysinh=@ngaysinh,email=@email where MaNV=@MaNV
- end
- exec sp_nhanvien_update 'NV01',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
+-- Tạo stored procedure cho xóa loại tài khoản
+CREATE PROCEDURE sp_XoaLoaiTaiKhoan
+    @MaLoaiTaiKhoan INT
+AS
+BEGIN
+    DELETE FROM LoaiTaiKhoans
+    WHERE MaLoaiTaiKhoan = @MaLoaiTaiKhoan;
+END;
 
- ----Xóa nhân viên theo mã 
- create proc sp_DeleteNV
- @MaNV nchar(20)
- as
- begin 
- delete NhanVien where @MaNV=MaNV
- end
- exec sp_DeleteNV 'NV30'
+-- Tạo stored procedure cho tìm kiếm loại tài khoản
+CREATE PROCEDURE sp_TimKiemLoaiTaiKhoan
+    @TenLoai NVARCHAR(50)
+AS
+BEGIN
+    SELECT * FROM LoaiTaiKhoans
+    WHERE TenLoai LIKE N'%' + @TenLoai + '%';
+END;
+
+
+ ------Thủ tục Tài Khoản 
+-- Tạo stored procedure cho thêm tài khoản
+CREATE PROCEDURE sp_ThemTaiKhoan
+    @TenTaiKhoan NVARCHAR(50),
+    @MatKhau NVARCHAR(50),
+    @Email NVARCHAR(50),
+    @MaLoaiTaiKhoan INT,
+    @HoTen NVARCHAR(50),
+    @DiaChi NVARCHAR(250),
+    @SoDienThoai NVARCHAR(11),
+    @AnhDaiDien NVARCHAR(500),
+    @Token NVARCHAR(500)
+AS
+BEGIN
+    INSERT INTO TaiKhoans (TenTaiKhoan, MatKhau, Email, MaLoaiTaiKhoan, HoTen, DiaChi, SoDienThoai, AnhDaiDien, token)
+    VALUES (@TenTaiKhoan, @MatKhau, @Email, @MaLoaiTaiKhoan, @HoTen, @DiaChi, @SoDienThoai, @AnhDaiDien, @Token);
+END;
+
+-- Tạo stored procedure cho xóa tài khoản
+CREATE PROCEDURE sp_XoaTaiKhoan
+    @TenTaiKhoan NVARCHAR(50)
+AS
+BEGIN
+    DELETE FROM TaiKhoans
+    WHERE TenTaiKhoan = @TenTaiKhoan;
+END;
+
+-- Tạo stored procedure cho đổi mật khẩu
+CREATE PROCEDURE sp_DoiMatKhau
+    @TenTaiKhoan NVARCHAR(50),
+    @MatKhauMoi NVARCHAR(50)
+AS
+BEGIN
+    UPDATE TaiKhoans
+    SET MatKhau = @MatKhauMoi
+    WHERE TenTaiKhoan = @TenTaiKhoan;
+END;
+
+-- Tạo stored procedure cho cập nhật tài khoản
+CREATE PROCEDURE sp_CapNhatTaiKhoan
+    @TenTaiKhoan NVARCHAR(50),
+    @Email NVARCHAR(50),
+    @HoTen NVARCHAR(50),
+    @DiaChi NVARCHAR(250),
+    @SoDienThoai NVARCHAR(11),
+    @AnhDaiDien NVARCHAR(500),
+    @Token NVARCHAR(500)
+AS
+BEGIN
+    UPDATE TaiKhoans
+    SET Email = @Email, HoTen = @HoTen, DiaChi = @DiaChi, SoDienThoai = @SoDienThoai, AnhDaiDien = @AnhDaiDien, token = @Token
+    WHERE TenTaiKhoan = @TenTaiKhoan;
+END;
+
+-- Tạo stored procedure cho đăng nhập
+CREATE PROCEDURE sp_DangNhap
+    @TenTaiKhoan NVARCHAR(50),
+    @MatKhau NVARCHAR(50)
+AS
+BEGIN
+    SELECT * FROM TaiKhoans
+    WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau;
+END;
+
   
  -------BẢNG NHÀ CUNG CẤP-----------------------
    ----1.Tìm kiếm nhà cung cấp theo mã Nhà cung cấp
     create proc sp_searchNCC_by_MaNCC
- @MaNCC nchar(20)
+ @MaNCC int
  as
  begin 
  select * From NhaCungCap as ncc where ncc.MaNCC=@MaNCC
@@ -54,7 +116,7 @@ create proc sp_nhanvien_update
 
    ----2.Tạo mới nhà cung cấp
  create proc sp_nhacungcap_create 
- @MaNCC nchar(20),
+ @MaNCC int,
  @TenNCC nvarchar(50) ,
  @DiaChi nvarchar(100) ,
  @SoDienThoai nvarchar(15)
@@ -65,7 +127,7 @@ create proc sp_nhanvien_update
 
  ----Cập nhật thông tin Nhà cung cấp
 create proc sp_nhacungcap_update
- @MaNCC nchar(20),
+ @MaNCC int,
  @TenNCC nvarchar(50) ,
  @DiaChi nvarchar(100) ,
  @SoDienThoai nvarchar(15)
@@ -75,9 +137,9 @@ create proc sp_nhacungcap_update
  end
 
 
- ----Xóa nhân viên theo mã 
+ ----Xóa ncc theo mã 
  create proc sp_DeleteNCC
- @MaNCC nchar(20)
+ @MaNCC int
  as
  begin 
  delete NhaCungCap where @MaNCC=MaNCC
@@ -85,27 +147,26 @@ create proc sp_nhacungcap_update
  exec sp_DeleteNV 'NV30'
 
  -----Tạo khách hàng
- create proc sp_khachhang_create 
- @MaKH nchar(20),
+ alter proc sp_khachhang_create ( 
  @TenKH nvarchar(50),
  @DiaChi nvarchar(100),
  @Dienthoai nvarchar(15),
- @ngaysinh date
+ @ngaysinh date)
  as
  begin
-	insert into KhachHang(MaKH,TenKhachHang,DiaChi,DienThoai,ngaysinh) values (@MaKH,@TenKH,@DiaChi,@Dienthoai,@ngaysinh)
+	insert into KhachHang(TenKhachHang,DiaChi,DienThoai,ngaysinh) values (@TenKH,@DiaChi,@Dienthoai,@ngaysinh)
  end
   exec sp_nhanvien_create 'NV30',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
  -----Tìm kiếm khachhang by Mã KH
- create proc sp_searchKH_by_MaKH
- @MaKH nchar(20)
+ alter proc sp_searchKH_by_MaKH
+ @MaKH int
  as
  begin 
  select * From KhachHang as kh where kh.MaKH=@MaKH
  end
- ----Cập nhật thông tin Nhân Viên
-create proc sp_khachhang_update
- @MaKH nchar(20),
+ ----Cập nhật thông tin khách hàng
+alter proc sp_khachhang_update
+ @MaKH int,
  @TenKH nvarchar(50) ,
  @DiaChi nvarchar(100) ,
  @Dienthoai nvarchar(15),
@@ -115,113 +176,167 @@ create proc sp_khachhang_update
 	update KhachHang Set TenKhachHang=@TenKH,DiaChi=@DiaChi,DienThoai=@Dienthoai,ngaysinh=@ngaysinh where MaKH=@MaKH
  end
  exec sp_nhanvien_update 'NV01',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
- ----Xóa nhân viên theo mã 
- create proc sp_DeleteKH
- @MaKH nchar(20)
+ ----Xóa khách hàng theo mã 
+ alter proc sp_DeleteKH
+ @MaKH int
  as
  begin 
  delete KhachHang where @MaKH=MaKH
  end
- exec sp_DeleteNV 'NV30'
 
-----------------tạo hóa đơn 
- alter PROCEDURE [dbo].[sp_hoadon_create]
-(@TenKH              NVARCHAR(50), 
- @Diachi          NVARCHAR(250), 
- @TrangThai         bit,  
- @list_json_chitiethoadon NVARCHAR(MAX)
-)
+
+----------------Thủ tục Thể Loại
+-- Tạo stored procedure cho thêm thể loại
+CREATE PROCEDURE sp_ThemTheLoai
+    @TenLoai NVARCHAR(50),
+    @GhiChu NVARCHAR(250)
 AS
-    BEGIN
-		DECLARE @MaHoaDon INT;
-        INSERT INTO HoaDons
-                (TenKH, 
-                 Diachi, 
-                 TrangThai               
-                )
-                VALUES
-                (@TenKH, 
-                 @Diachi, 
-                 @TrangThai
-                );
+BEGIN
+    INSERT INTO TheLoai (TenLoai, Ghichu)
+    VALUES (@TenLoai, @GhiChu);
+END;
 
-				SET @MaHoaDon = (SELECT SCOPE_IDENTITY());
-                IF(@list_json_chitiethoadon IS NOT NULL)
-                    BEGIN
-                        INSERT INTO ChiTietHoaDons
-						 (MaSanPham, 
-						  MaHoaDon,
-                          SoLuong, 
-                          TongGia               
-                        )
-                    SELECT JSON_VALUE(p.value, '$.maSanPham'), 
-                            @MaHoaDon, 
-                            JSON_VALUE(p.value, '$.soLuong'), 
-                            JSON_VALUE(p.value, '$.tongGia')    
-                    FROM OPENJSON(@list_json_chitiethoadon) AS p;
-                END;
-        SELECT '';
-    END;
-
-
-	-------
-	create PROCEDURE [dbo].[sp_hoa_don_update]
-(@MaHoaDon        int, 
- @TenKH              NVARCHAR(50), 
- @Diachi          NVARCHAR(250), 
- @TrangThai         bit,  
- @list_json_chitiethoadon NVARCHAR(MAX)
-)
+-- Tạo stored procedure cho sửa thể loại
+CREATE PROCEDURE sp_SuaTheLoai
+    @MaLoai INT,
+    @TenLoai NVARCHAR(50),
+    @GhiChu NVARCHAR(250)
 AS
-    BEGIN
-		UPDATE HoaDons
-		SET
-			TenKH  = @TenKH ,
-			Diachi = @Diachi,
-			TrangThai = @TrangThai
-		WHERE MaHoaDon = @MaHoaDon;
-		
-		IF(@list_json_chitiethoadon IS NOT NULL) 
-		BEGIN
-			 -- Insert data to temp table 
-		   SELECT
-			  JSON_VALUE(p.value, '$.maChiTietHoaDon') as maChiTietHoaDon,
-			  JSON_VALUE(p.value, '$.maHoaDon') as maHoaDon,
-			  JSON_VALUE(p.value, '$.maSanPham') as maSanPham,
-			  JSON_VALUE(p.value, '$.soLuong') as soLuong,
-			  JSON_VALUE(p.value, '$.tongGia') as tongGia,
-			  JSON_VALUE(p.value, '$.status') AS status 
-			  INTO #Results 
-		   FROM OPENJSON(@list_json_chitiethoadon) AS p;
-		 
-		 -- Insert data to table with STATUS = 1;
-			INSERT INTO ChiTietHoaDons (MaSanPham, 
-						  MaHoaDon,
-                          SoLuong, 
-                          TongGia ) 
-			   SELECT
-				  #Results.maSanPham,
-				  @MaHoaDon,
-				  #Results.soLuong,
-				  #Results.tongGia			 
-			   FROM  #Results 
-			   WHERE #Results.status = '1' 
-			
-			-- Update data to table with STATUS = 2
-			  UPDATE ChiTietHoaDons 
-			  SET
-				 SoLuong = #Results.soLuong,
-				 TongGia = #Results.tongGia
-			  FROM #Results 
-			  WHERE  ChiTietHoaDons.maChiTietHoaDon = #Results.maChiTietHoaDon AND #Results.status = '2';
-			
-			-- Delete data to table with STATUS = 3
-			DELETE C
-			FROM ChiTietHoaDons C
-			INNER JOIN #Results R
-				ON C.maChiTietHoaDon=R.maChiTietHoaDon
-			WHERE R.status = '3';
-			DROP TABLE #Results;
-		END;
-        SELECT '';
-    END;
+BEGIN
+    UPDATE TheLoai
+    SET TenLoai = @TenLoai, Ghichu = @GhiChu
+    WHERE MaLoai = @MaLoai;
+END;
+
+-- Tạo stored procedure cho xóa thể loại
+CREATE PROCEDURE sp_XoaTheLoai
+    @MaLoai INT
+AS
+BEGIN
+    DELETE FROM TheLoai
+    WHERE MaLoai = @MaLoai;
+END;
+
+-- Tạo stored procedure cho tìm kiếm thể loại
+CREATE PROCEDURE sp_TimKiemTheLoai
+    @TenLoai NVARCHAR(50)
+AS
+BEGIN
+    SELECT *
+    FROM TheLoai
+    WHERE TenLoai LIKE N'%' + @TenLoai + '%';
+END;
+   
+
+
+
+   ------Thủ tục Thương hiệu
+   -- Tạo stored procedure cho thêm thương hiệu
+CREATE PROCEDURE sp_ThemThuongHieu
+    @TenThuongHieu NVARCHAR(255),
+    @MoTa NVARCHAR(MAX),
+    @HinhAnh NVARCHAR(500)
+AS
+BEGIN
+    INSERT INTO ThuongHieu (TenThuongHieu, MoTa, HinhAnh)
+    VALUES (@TenThuongHieu, @MoTa, @HinhAnh);
+END;
+
+-- Tạo stored procedure cho sửa thông tin thương hiệu
+CREATE PROCEDURE sp_SuaThuongHieu
+    @MaTH INT,
+    @TenThuongHieu NVARCHAR(255),
+    @MoTa NVARCHAR(MAX),
+    @HinhAnh NVARCHAR(500)
+AS
+BEGIN
+    UPDATE ThuongHieu
+    SET TenThuongHieu = @TenThuongHieu, MoTa = @MoTa, HinhAnh = @HinhAnh
+    WHERE MaTH = @MaTH;
+END;
+
+-- Tạo stored procedure cho xóa thương hiệu
+CREATE PROCEDURE sp_XoaThuongHieu
+    @MaTH INT
+AS
+BEGIN
+    DELETE FROM ThuongHieu
+    WHERE MaTH = @MaTH;
+END;
+
+-- Tạo stored procedure cho tìm kiếm thương hiệu
+CREATE PROCEDURE sp_TimKiemThuongHieu
+    @TenThuongHieu NVARCHAR(255)
+AS
+BEGIN
+    SELECT *
+    FROM ThuongHieu
+    WHERE TenThuongHieu LIKE N'%' + @TenThuongHieu + '%';
+END;
+
+
+
+
+------Thủ tục bảng sản Phẩm
+-- Tạo stored procedure cho thêm sản phẩm
+CREATE PROCEDURE sp_ThemSanPham
+    @MaTH INT,
+    @TenMH NVARCHAR(50),
+    @MaLoai INT,
+    @SoLuongTon INT,
+    @Image_SP NVARCHAR(MAX),
+    @MoTa NVARCHAR(MAX),
+    @TrangThai NVARCHAR(255)
+AS
+BEGIN
+    INSERT INTO SanPham (MaTH, TenMH, MaLoai, soLuongton, image_SP, mota, trangthai)
+    VALUES (@MaTH, @TenMH, @MaLoai, @SoLuongTon, @Image_SP, @MoTa, @TrangThai);
+END;
+
+-- Tạo stored procedure cho sửa thông tin sản phẩm (không sửa sldaban)
+CREATE PROCEDURE sp_SuaThongTinSanPham
+    @MaSP INT,
+    @MaTH INT,
+    @TenMH NVARCHAR(50),
+    @MaLoai INT,
+    @SoLuongTon INT,
+    @Image_SP NVARCHAR(MAX),
+    @MoTa NVARCHAR(MAX),
+    @TrangThai NVARCHAR(255)
+AS
+BEGIN
+    UPDATE SanPham
+    SET MaTH = @MaTH, TenMH = @TenMH, MaLoai = @MaLoai, soLuongton = @SoLuongTon,
+        image_SP = @Image_SP, mota = @MoTa, trangthai = @TrangThai
+    WHERE MaSP = @MaSP;
+END;
+
+-- Tạo stored procedure cho sửa sldaban của sản phẩm
+CREATE PROCEDURE sp_SuaSLDaBanSanPham
+    @MaSP INT,
+    @SoLuongDaBan INT
+AS
+BEGIN
+    UPDATE SanPham
+    SET sldaban = @SoLuongDaBan
+    WHERE MaSP = @MaSP;
+END;
+
+-- Tạo stored procedure cho xóa sản phẩm
+CREATE PROCEDURE sp_XoaSanPham
+    @MaSP INT
+AS
+BEGIN
+    DELETE FROM SanPham
+    WHERE MaSP = @MaSP;
+END;
+
+-- Tạo stored procedure cho tìm kiếm sản phẩm theo tên
+CREATE PROCEDURE sp_TimKiemSanPhamTheoTen
+    @TenMH NVARCHAR(50)
+AS
+BEGIN
+    SELECT *
+    FROM SanPham
+    WHERE TenMH LIKE '%' + @TenMH + '%';
+END;
