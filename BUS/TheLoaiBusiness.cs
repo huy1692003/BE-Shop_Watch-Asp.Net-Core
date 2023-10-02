@@ -11,29 +11,35 @@ using DAL.Interface;
 
 namespace BUS
 {
-    public class TheLoaiBusiness : INhaCungCapBusiness
+    public class TheLoaiBusiness : ITheLoaiBusiness
     {
-        private INhaCungCapRepository _res;
-        public TheLoaiBusiness(INhaCungCapRepository res)
+        private ITheLoaiRepository tlDAL;
+        public TheLoaiBusiness(ITheLoaiRepository tlDAL)
         {
-            _res = res;
+            this.tlDAL = tlDAL;
         }
-        public NhaCungCap GetNCC_byID(int MaNCC)
+
+        public List<TheLoai> GetAll_TheLoai()
         {
-            return _res.GetNCC_byID(MaNCC);
+            return tlDAL.GetAll_TheLoai();
         }
-        public bool Create_NCC(NhaCungCap ncc)
+        public bool Create_TheLoai(TheLoai tl)
         {
-            return _res.Create_NCC(ncc);
+            return tlDAL.Create_TheLoai(tl);
         }
-        public bool Delete_NCC(string MaNCC)
+        public bool Delete_TheLoai(int id)
         {
-            return _res.Delete_NCC(MaNCC);
+            return tlDAL.Delete_TheLoai(id);
         }
-        public bool Update_NCC(NhaCungCap model)
+        public bool Update_TheLoai(TheLoai tl)
         {
-            return _res.Update_NCC(model);
+            return tlDAL.Update_TheLoai(tl);
         }
+        public List<TheLoai> Get_TheLoai_byName(string name)
+        {
+            return tlDAL.Get_TheLoai_byName(name);
+        }
+
     }
 
 }

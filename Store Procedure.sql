@@ -229,6 +229,13 @@ END;
    
 
 
+   ---Tạo procedure lấy tất cả thể loại
+   create proc sp_GetALl_TheLoai
+   as
+   begin
+   select *From TheLoai
+   end
+
 
    ------Thủ tục Thương hiệu
    -- Tạo stored procedure cho thêm thương hiệu
@@ -274,7 +281,12 @@ BEGIN
     WHERE TenThuongHieu LIKE N'%' + @TenThuongHieu + '%';
 END;
 
-
+---Tạo sto procedure lấy tất cả các thương hiệu
+create proc sp_getAll_ThuongHieu
+as
+begin
+select * From ThuongHieu
+end
 
 
 ------Thủ tục bảng sản Phẩm

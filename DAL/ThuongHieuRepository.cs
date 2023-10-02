@@ -44,7 +44,7 @@ namespace DAL
                  "@TenThuongHieu",th.TenThuongHieu,
                  "@MoTa",th.MoTa,
                  "@HinhAnh",th.HinhAnh);
-                if (string.IsNullOrEmpty(dt.ToString())||!string.IsNullOrEmpty(msgError))                {
+                if ((dt != null && !string.IsNullOrEmpty(dt.ToString())) ||!string.IsNullOrEmpty(msgError))                {
                    
                     throw new Exception(dt.ToString()+msgError);
                 }
@@ -62,14 +62,14 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_XoaThuongHieu", "@MaTH", id);
-                if (string.IsNullOrEmpty(dt.ToString()) || !string.IsNullOrEmpty(msgError))
+                var result = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_XoaThuongHieu", "@MaTH", id);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
-                    throw new Exception(dt.ToString() + msgError);
+                    throw new Exception(Convert.ToString(result) + msgError);
                 }
                 return true;
-                
-            }catch(Exception ex) { throw ex; }
+            }
+            catch(Exception ex) { throw ex; }
         }
         public bool Update_ThuongHieu(ThuongHieu th)
         {
@@ -77,11 +77,11 @@ namespace DAL
             try
             {
                 var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_SuaThuongHieu",
-                    "@MaTH",th.MaTH,
+                 "@MaTH",th.MaTH,
                  "@TenThuongHieu", th.TenThuongHieu,
                  "@MoTa", th.MoTa,
                  "@HinhAnh", th.HinhAnh);
-                if(string.IsNullOrEmpty(dt.ToString())||!string.IsNullOrEmpty(msgError))
+                if((dt!=null&&!string.IsNullOrEmpty(dt.ToString()))||!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(dt.ToString() + msgError);
                 }

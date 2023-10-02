@@ -31,10 +31,10 @@ namespace API_BanHang.Controllers
         }
         [Route ("update_KhachHang")]
         [HttpPut]
-        public KhachHang Update_NV([FromBody] KhachHang nv)
+        public IActionResult Update_NV([FromBody] KhachHang nv)
         {
             _KhachHangBusiness.Update_KH(nv);
-            return nv;
+            return Ok("Cập nhật thành công");
         }
         [Route("delete_KhachHang")]
         [HttpDelete]

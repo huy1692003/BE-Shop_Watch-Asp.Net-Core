@@ -11,29 +11,35 @@ using DAL.Interface;
 
 namespace BUS
 {
-    public class ThuongHieuBusiness : INhaCungCapBusiness
+    public class ThuongHieuBusiness : IThuongHieuBusiness
     {
-        private INhaCungCapRepository _res;
-        public ThuongHieuBusiness(INhaCungCapRepository res)
+        private IThuongHieuRepository thDAL;
+        public ThuongHieuBusiness(IThuongHieuRepository th)
         {
-            _res = res;
+            this.thDAL = th;
         }
-        public NhaCungCap GetNCC_byID(int MaNCC)
+        public List<ThuongHieu> GetAll_ThuongHieu()
         {
-            return _res.GetNCC_byID(MaNCC);
+          return thDAL.GetAll_ThuongHieu();
+            
         }
-        public bool Create_NCC(NhaCungCap ncc)
+        public bool Create_ThuongHieu(ThuongHieu th)
         {
-            return _res.Create_NCC(ncc);
+            return thDAL.Create_ThuongHieu(th);
         }
-        public bool Delete_NCC(string MaNCC)
+        public bool Delete_ThuongHieu(int id)
         {
-            return _res.Delete_NCC(MaNCC);
+            return thDAL.Delete_ThuongHieu(id);
         }
-        public bool Update_NCC(NhaCungCap model)
+        public  bool Update_ThuongHieu(ThuongHieu th)
         {
-            return _res.Update_NCC(model);
+            return thDAL.Update_ThuongHieu(th);
         }
+        public List<ThuongHieu> Get_ThuongHieu_byName(string Name)
+        {
+            return thDAL.Get_ThuongHieu_byName(Name);
+        }
+    
     }
 
 }

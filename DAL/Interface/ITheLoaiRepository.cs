@@ -12,7 +12,7 @@ namespace DAL.Interface
         List<TheLoai> GetAll_TheLoai();
         bool Create_TheLoai(TheLoai tl);
         bool Delete_TheLoai(int id);
-        bool Update_TheLoai(TheLoai th);
-        TheLoai Get_TheLoai_byID(int id);
+        bool Update_TheLoai(TheLoai tl);
+        List<TheLoai> Get_TheLoai_byName(string name);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data_Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,12 @@ using System.Threading.Tasks;
 
 namespace BUS.Interface
 {
-    internal interface ITheLoaiBusiness
+    public interface ITheLoaiBusiness
     {
+        List<TheLoai> GetAll_TheLoai();
+        bool Create_TheLoai(TheLoai tl);
+        bool Delete_TheLoai(int id);
+        bool Update_TheLoai(TheLoai tl);
+        List<TheLoai> Get_TheLoai_byName(string name);
     }
 }
