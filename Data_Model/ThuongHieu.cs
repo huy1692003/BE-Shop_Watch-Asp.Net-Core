@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Data_Model
 {
-    internal class ThuongHieu
+    public class ThuongHieu
     {
+        public int MaTH { get; set; }     
+        public string TenThuongHieu { get; set; }
+        public string MoTa { get; set; }    
+        public string HinhAnh { get; set; }
     }
+
 }

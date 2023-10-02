@@ -147,7 +147,7 @@ create proc sp_nhacungcap_update
  exec sp_DeleteNV 'NV30'
 
  -----Tạo khách hàng
- alter proc sp_khachhang_create ( 
+alter proc sp_khachhang_create ( 
  @TenKH nvarchar(50),
  @DiaChi nvarchar(100),
  @Dienthoai nvarchar(15),
@@ -279,34 +279,36 @@ END;
 
 ------Thủ tục bảng sản Phẩm
 -- Tạo stored procedure cho thêm sản phẩm
-CREATE PROCEDURE sp_ThemSanPham
+alter PROCEDURE sp_ThemSanPham
     @MaTH INT,
     @TenMH NVARCHAR(50),
     @MaLoai INT,
     @SoLuongTon INT,
+	@GiaBan FLoat,
     @Image_SP NVARCHAR(MAX),
     @MoTa NVARCHAR(MAX),
     @TrangThai NVARCHAR(255)
 AS
 BEGIN
-    INSERT INTO SanPham (MaTH, TenMH, MaLoai, soLuongton, image_SP, mota, trangthai)
-    VALUES (@MaTH, @TenMH, @MaLoai, @SoLuongTon, @Image_SP, @MoTa, @TrangThai);
+    INSERT INTO SanPham (MaTH, TenMH, MaLoai, soLuongton,GiaBan, image_SP, mota, trangthai)
+    VALUES (@MaTH, @TenMH, @MaLoai, @SoLuongTon,@GiaBan ,@Image_SP, @MoTa, @TrangThai);
 END;
 
 -- Tạo stored procedure cho sửa thông tin sản phẩm (không sửa sldaban)
-CREATE PROCEDURE sp_SuaThongTinSanPham
+alter PROCEDURE sp_SuaThongTinSanPham
     @MaSP INT,
     @MaTH INT,
     @TenMH NVARCHAR(50),
     @MaLoai INT,
     @SoLuongTon INT,
+	@GiaBan Float,
     @Image_SP NVARCHAR(MAX),
     @MoTa NVARCHAR(MAX),
     @TrangThai NVARCHAR(255)
 AS
 BEGIN
     UPDATE SanPham
-    SET MaTH = @MaTH, TenMH = @TenMH, MaLoai = @MaLoai, soLuongton = @SoLuongTon,
+    SET MaTH = @MaTH, TenMH = @TenMH, MaLoai = @MaLoai, soLuongton = @SoLuongTon,GiaBan=@GiaBan,
         image_SP = @Image_SP, mota = @MoTa, trangthai = @TrangThai
     WHERE MaSP = @MaSP;
 END;
@@ -338,5 +340,5 @@ AS
 BEGIN
     SELECT *
     FROM SanPham
-    WHERE TenMH LIKE '%' + @TenMH + '%';
+    WHERE TenMH LIKE N'%' + @TenMH + '%';
 END;

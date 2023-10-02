@@ -24,10 +24,10 @@ namespace API_BanHang.Controllers
         }
         [Route("create-KhachHang")]
         [HttpPost]
-        public KhachHang CreateNV([FromBody] KhachHang nv)
+        public IActionResult CreateNV([FromBody] KhachHang nv)
         {
             _KhachHangBusiness.Create_KH(nv);
-            return nv;
+            return Ok("Thêm thành công");
         }
         [Route ("update_KhachHang")]
         [HttpPut]

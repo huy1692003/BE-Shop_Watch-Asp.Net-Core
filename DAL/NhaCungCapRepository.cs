@@ -16,7 +16,7 @@ namespace DAL
         {
             _dbHelper = dbHelper;
         }
-        public NhaCungCap GetNCC_byID(string MaNCC)
+        public NhaCungCap GetNCC_byID(int MaNCC)
         {
             string msgError = "";
             try

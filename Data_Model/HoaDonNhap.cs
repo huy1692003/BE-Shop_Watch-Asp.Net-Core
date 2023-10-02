@@ -1,13 +1,13 @@
 ﻿namespace Data_Model
 {
     public class HoaDonNhap
-    {
-        public string MaHD { get; set; }
-        public DateTime NgayNhap { get; set; }
-        public string maNCC { get; set; }
-        public string MaNV { get; set; }
-        public NhaCungCap NhaCungCap { get; set; }
-        public LoaiTaiKhoan NhanVien { get; set; }
-        public List<ChiTietHoaDonNhap> ChiTietHoaDonNhap { get; set; }
+    {        
+            public int MaHD { get; set; }
+            public DateTime NgayNhap { get; set; }
+            public int MaNCC { get; set; }
+            public string TenTaiKhoan { get; set; }
+            public string GhiChu { get; set; }
+            public List<ChiTietHoaDonNhap> ChiTietHoaDonNhap { get; set; }      
+             
     }
 }

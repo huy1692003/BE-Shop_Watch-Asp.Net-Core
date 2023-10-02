@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace DAL.Interface
 {
-    public partial interface ISanPhamRepository
+    public partial interface ILoaiTaiKhoanRepository
     {
-        bool Create_SP(LoaiTaiKhoan nv);
-        LoaiTaiKhoan GetSP_byID(string MaSP);
-        bool Update_SP(SanPham sp);
-        bool Delete_SP(string MaSP);
+        bool Create_LoaiTaiKhoan(LoaiTaiKhoans nv);
+        List<LoaiTaiKhoans> GetAll_LoaiTK();
+        bool Update_LoaiTK(LoaiTaiKhoans LoaiTK);
+        bool Delete_LoaiTK(int id);
     }
 }

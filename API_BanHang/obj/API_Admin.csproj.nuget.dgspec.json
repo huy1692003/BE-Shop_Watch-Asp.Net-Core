@@ -1,0 +1,306 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_Admin.csproj": {}
+  },
+  "projects": {
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_Admin.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_Admin.csproj",
+        "projectName": "API_Admin",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_Admin.csproj",
+        "packagesPath": "C:\\Users\\84364\\.nuget\\packages\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\84364\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj",
+        "projectName": "BUS",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj",
+        "packagesPath": "C:\\Users\\84364\\.nuget\\packages\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\84364\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj"
+              },
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj",
+        "projectName": "DAL",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj",
+        "packagesPath": "C:\\Users\\84364\\.nuget\\packages\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\84364\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj",
+        "projectName": "Data_Model",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj",
+        "packagesPath": "C:\\Users\\84364\\.nuget\\packages\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\84364\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

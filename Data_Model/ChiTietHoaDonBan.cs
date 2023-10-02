@@ -2,10 +2,11 @@
 {
     public class ChiTietHoaDonBan
     {
-        public string MaHD { get; set; }
-        public string MaSP { get; set; }
-        public int soLuong { get; set; }
-        public float giaBan { get; set; }
-        public float tongtien { get; set; }
+        public int MaChiTietHD { get; set; }
+        public int MaHD { get; set; }
+        public int MaSP { get; set; }
+        public int SoLuong { get; set; }
+        public float GiaBan { get; set; }
+        public float TongTien { get; set; }
     }
 }

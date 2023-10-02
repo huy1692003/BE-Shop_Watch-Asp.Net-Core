@@ -11,7 +11,7 @@ namespace DAL.Interface
     public partial interface IHoaDonBanRepository
     {
         bool Create_HDB(HoaDonBan hdb);
-        HoaDonBan GetHDB_byID(string Ma_hdb);
+        HoaDonBan GetHDB_byID(int Ma_hdb);
         bool Update_HDB(HoaDonBan hdb);
         bool Delete_HDB(string MaHDB);
     }

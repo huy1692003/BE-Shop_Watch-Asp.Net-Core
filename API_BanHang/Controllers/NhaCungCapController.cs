@@ -17,7 +17,7 @@ namespace API_BanHang.Controllers
         }
         [Route("GetNCC_byID/{MaNCC}")]
         [HttpGet]
-        public NhaCungCap GetNhaCungCap_byMa(string MaNCC)
+        public NhaCungCap GetNhaCungCap_byMa(int MaNCC)
         {
             return NCCBusiness.GetNCC_byID(MaNCC);
         }

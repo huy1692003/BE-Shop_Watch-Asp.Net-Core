@@ -18,7 +18,7 @@ namespace BUS
         {
             _res = res;
         }
-        public NhaCungCap GetNCC_byID(string MaNCC)
+        public NhaCungCap GetNCC_byID(int MaNCC)
         {
             return _res.GetNCC_byID(MaNCC);
         }

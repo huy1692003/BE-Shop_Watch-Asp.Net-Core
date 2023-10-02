@@ -11,7 +11,7 @@ namespace DAL.Interface
     public partial interface INhaCungCapRepository
     {
         bool Create_NCC(NhaCungCap ncc);
-        NhaCungCap GetNCC_byID(string MaNCC);
+        NhaCungCap GetNCC_byID(int MaNCC);
         bool Update_NCC(NhaCungCap ncc);
         bool Delete_NCC(string MaNCC);
     }

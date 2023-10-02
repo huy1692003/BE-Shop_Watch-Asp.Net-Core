@@ -37,8 +37,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_khachhang_create",
-                "@MaKH", kh.MaKH,
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_khachhang_create",                
                 "@TenKH", kh.TenKhachHang,
                 "@DiaChi", kh.DiaChi,
                 "@Dienthoai", kh.DienThoai,
