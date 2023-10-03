@@ -10,7 +10,7 @@ namespace DAL.Interface
 {
     public partial interface ILoaiTaiKhoanRepository
     {
-        bool Create_LoaiTaiKhoan(LoaiTaiKhoans nv);
+        bool Create_LoaiTaiKhoan(LoaiTaiKhoans tk);
         List<LoaiTaiKhoans> GetAll_LoaiTK();
         bool Update_LoaiTK(LoaiTaiKhoans LoaiTK);
         bool Delete_LoaiTK(int id);

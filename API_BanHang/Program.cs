@@ -19,6 +19,8 @@ builder.Services.AddTransient<IThuongHieuRepository, ThuongHieuRepository>();
 builder.Services.AddTransient<IThuongHieuBusiness, ThuongHieuBusiness>();
 builder.Services.AddTransient<ITheLoaiRepository, TheLoaiRepository>();
 builder.Services.AddTransient<ITheLoaiBusiness, TheLoaiBusiness>();
+builder.Services.AddTransient<ILoaiTaiKhoanRepository, LoaiTaiKhoanRepository>();
+builder.Services.AddTransient<ILoaiTaiKhoanBusiness, LoaiTaiKhoanBusiness>();
 
 
 

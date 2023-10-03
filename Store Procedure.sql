@@ -38,7 +38,14 @@ BEGIN
     SELECT * FROM LoaiTaiKhoans
     WHERE TenLoai LIKE N'%' + @TenLoai + '%';
 END;
-
+--------------------------lấy tất cả loại tài khoản
+CREATE PROCEDURE sp_GetAll_LoaiTaiKhoan
+    
+AS
+BEGIN
+    SELECT * FROM LoaiTaiKhoans
+   
+END;
 
  ------Thủ tục Tài Khoản 
 -- Tạo stored procedure cho thêm tài khoản
