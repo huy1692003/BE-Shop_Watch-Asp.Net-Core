@@ -8,31 +8,63 @@ using BUS.Interface;
 using DAL;
 using Data_Model;
 using DAL.Interface;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace BUS
 {
-    public class TaiKhoanBusiness : INhaCungCapBusiness
+    public class TaiKhoanBusiness : ITaiKhoanBusiness
     {
-        private INhaCungCapRepository _res;
-        public TaiKhoanBusiness(INhaCungCapRepository res)
+        private ITaiKhoanRepository tk_Dal;
+        public TaiKhoanBusiness(ITaiKhoanRepository tk_Dal)
         {
-            _res = res;
+            this.tk_Dal = tk_Dal;
         }
-        public NhaCungCap GetNCC_byID(int MaNCC)
+
+        public bool Login(string username, string password)
         {
-            return _res.GetNCC_byID(MaNCC);
+            if(tk_Dal.Login(username, password))
+            {
+                return true;
+            }
+            return false;
         }
-        public bool Create_NCC(NhaCungCap ncc)
+        public bool Create_TaiKhoan(string username, string password,int ltk)
         {
-            return _res.Create_NCC(ncc);
+            
+                return tk_Dal.Create_TaiKhoan(username, password, ltk);
+          
         }
-        public bool Delete_NCC(string MaNCC)
+        public bool Update_TaiKhoan(TaiKhoans tk)
         {
-            return _res.Delete_NCC(MaNCC);
+            if (tk_Dal.Update_TaiKhoan(tk))
+            {
+                return true;
+            }
+            return false;
         }
-        public bool Update_NCC(NhaCungCap model)
+        public bool Delete_TaiKhoan(string tentk)
         {
-            return _res.Update_NCC(model);
+            if (tk_Dal.Delete_TaiKhoan(tentk))
+            {
+                return true;
+            }
+            return false;
+        }
+        public bool DoiMatKhau(string username, string new_Password)
+        {
+            if (tk_Dal.DoiMatKhau(username,new_Password))
+            {
+                return true;
+            }
+            return false;
+        }    
+        public TaiKhoans GetInfo_User(string username)
+        {
+            if (tk_Dal.GetInfo_User(username)==null)
+            {
+                return null;
+            }
+            return tk_Dal.GetInfo_User(username);
         }
     }
 

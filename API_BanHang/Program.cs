@@ -21,6 +21,11 @@ builder.Services.AddTransient<ITheLoaiRepository, TheLoaiRepository>();
 builder.Services.AddTransient<ITheLoaiBusiness, TheLoaiBusiness>();
 builder.Services.AddTransient<ILoaiTaiKhoanRepository, LoaiTaiKhoanRepository>();
 builder.Services.AddTransient<ILoaiTaiKhoanBusiness, LoaiTaiKhoanBusiness>();
+builder.Services.AddTransient<ITaiKhoanRepository,TaiKhoanRepository>();
+builder.Services.AddTransient<ITaiKhoanBusiness,TaiKhoanBusiness>();
+builder.Services.AddTransient<ISanPhamRepository, SanPhamRepository>();
+builder.Services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
+
 
 
 

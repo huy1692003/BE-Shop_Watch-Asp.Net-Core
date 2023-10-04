@@ -49,20 +49,14 @@ END;
 
  ------Thủ tục Tài Khoản 
 -- Tạo stored procedure cho thêm tài khoản
-CREATE PROCEDURE sp_ThemTaiKhoan
+alter PROCEDURE sp_ThemTaiKhoan
     @TenTaiKhoan NVARCHAR(50),
-    @MatKhau NVARCHAR(50),
-    @Email NVARCHAR(50),
-    @MaLoaiTaiKhoan INT,
-    @HoTen NVARCHAR(50),
-    @DiaChi NVARCHAR(250),
-    @SoDienThoai NVARCHAR(11),
-    @AnhDaiDien NVARCHAR(500),
-    @Token NVARCHAR(500)
+    @MatKhau NVARCHAR(50) ,
+	@LoaiTaiKhoan INT
 AS
 BEGIN
-    INSERT INTO TaiKhoans (TenTaiKhoan, MatKhau, Email, MaLoaiTaiKhoan, HoTen, DiaChi, SoDienThoai, AnhDaiDien, token)
-    VALUES (@TenTaiKhoan, @MatKhau, @Email, @MaLoaiTaiKhoan, @HoTen, @DiaChi, @SoDienThoai, @AnhDaiDien, @Token);
+    INSERT INTO TaiKhoans (TenTaiKhoan, MatKhau,MaLoaiTaiKhoan)
+    VALUES (@TenTaiKhoan, @MatKhau,@LoaiTaiKhoan);
 END;
 
 -- Tạo stored procedure cho xóa tài khoản
@@ -86,18 +80,17 @@ BEGIN
 END;
 
 -- Tạo stored procedure cho cập nhật tài khoản
-CREATE PROCEDURE sp_CapNhatTaiKhoan
+alter PROCEDURE sp_CapNhatTaiKhoan
     @TenTaiKhoan NVARCHAR(50),
     @Email NVARCHAR(50),
     @HoTen NVARCHAR(50),
     @DiaChi NVARCHAR(250),
     @SoDienThoai NVARCHAR(11),
-    @AnhDaiDien NVARCHAR(500),
-    @Token NVARCHAR(500)
+    @AnhDaiDien NVARCHAR(500)  
 AS
 BEGIN
     UPDATE TaiKhoans
-    SET Email = @Email, HoTen = @HoTen, DiaChi = @DiaChi, SoDienThoai = @SoDienThoai, AnhDaiDien = @AnhDaiDien, token = @Token
+    SET Email = @Email, HoTen = @HoTen, DiaChi = @DiaChi, SoDienThoai = @SoDienThoai, AnhDaiDien = @AnhDaiDien
     WHERE TenTaiKhoan = @TenTaiKhoan;
 END;
 
@@ -110,7 +103,13 @@ BEGIN
     SELECT * FROM TaiKhoans
     WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau;
 END;
-
+----Tạo procude Get infor user
+create procedure sp_GetInfo_User
+@TenTaiKhoan nvarchar(50)
+as 
+begin
+select k.HoTen,k.DiaChi,k.SoDienThoai,k.Email From TaiKhoans as k where k.TenTaiKhoan=@TenTaiKhoan
+end
   
  -------BẢNG NHÀ CUNG CẤP-----------------------
    ----1.Tìm kiếm nhà cung cấp theo mã Nhà cung cấp

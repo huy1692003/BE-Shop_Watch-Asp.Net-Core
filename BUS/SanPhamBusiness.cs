@@ -11,29 +11,35 @@ using DAL.Interface;
 
 namespace BUS
 {
-    public class SanPhamBusiness : INhaCungCapBusiness
+    public class SanPhamBusiness : ISanPhamBusiness
     {
-        private INhaCungCapRepository _res;
-        public SanPhamBusiness(INhaCungCapRepository res)
+        private ISanPhamRepository sp_Dal;
+        public SanPhamBusiness(ISanPhamRepository sp_Dal)
         {
-            _res = res;
+            this.sp_Dal = sp_Dal;
         }
-        public NhaCungCap GetNCC_byID(int MaNCC)
+
+        public List<SanPham> GetSP_TheoTen(string TenSP)
         {
-            return _res.GetNCC_byID(MaNCC);
+            return sp_Dal.GetSP_TheoTen(TenSP);
         }
-        public bool Create_NCC(NhaCungCap ncc)
+        public bool Create_SanPham(SanPham sp)
         {
-            return _res.Create_NCC(ncc);
+            return sp_Dal.Create_SanPham(sp);
         }
-        public bool Delete_NCC(string MaNCC)
+        public bool Delete_SanPham(int id)
         {
-            return _res.Delete_NCC(MaNCC);
+            return sp_Dal.Delete_SanPham(id);
         }
-        public bool Update_NCC(NhaCungCap model)
+        public bool Update_Info_SanPham(SanPham sp)
         {
-            return _res.Update_NCC(model);
+            return sp_Dal.Update_Info_SanPham(sp);
         }
+        public bool Update_SLdaban_New(int id, int sldaban)
+        {
+            return sp_Dal.Update_SLdaban_New(id, sldaban);
+        }
+
     }
 
 }

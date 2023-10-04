@@ -10,9 +10,10 @@ namespace DAL.Interface
     public interface ITaiKhoanRepository
     {
         bool Login(string username, string password);
-        bool Create_TaiKhoan(TaiKhoans tk);
+        bool Create_TaiKhoan(string username, string password, int ltk);
         bool Update_TaiKhoan(TaiKhoans tk);
-        bool Delete_TaiKhoan(TaiKhoans tk);
+        bool Delete_TaiKhoan(string tentk);
         bool DoiMatKhau (string username,string new_Password);
+        TaiKhoans GetInfo_User(string username);
     }
 }
