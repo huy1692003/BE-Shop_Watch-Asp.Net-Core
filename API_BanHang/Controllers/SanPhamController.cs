@@ -14,7 +14,7 @@ namespace API_BanHang.Controllers
         {
             this.sp_Bus = sp_Bus;
         }
-        [Route("GetSP_byName/{name}")]
+        [Route("GetSP_byName")]
         [HttpGet]
         public List<SanPham> GetSP_TheoTen(string TenSP)
         {
@@ -31,7 +31,7 @@ namespace API_BanHang.Controllers
             }
             return BadRequest("Thêm thất bại");
         }
-        [Route("Delete_SP/{maSP}")]
+        [Route("Delete_SP")]
         [HttpDelete]
         public IActionResult Delete_SanPham(int id)
         {
@@ -53,7 +53,7 @@ namespace API_BanHang.Controllers
             }
             return BadRequest("Sửa thất bại");
         }
-        [Route("UpdateSP_Slban/{id},{sldaban}")]
+        [Route("UpdateSP_Slban")]
         [HttpPut]
         public IActionResult Update_SLdaban_New(int id, int sldaban)
         {

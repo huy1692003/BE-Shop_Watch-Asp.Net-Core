@@ -329,6 +329,7 @@
           "Data_Model": "1.0.0",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Swashbuckle.AspNetCore": "6.2.3",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
@@ -345,6 +346,7 @@
           "Data_Model": "1.0.0",
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Swashbuckle.AspNetCore": "6.2.3",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
@@ -360,6 +362,7 @@
         "dependencies": {
           "Microsoft.Extensions.Configuration": "7.0.0",
           "Newtonsoft.Json": "13.0.3",
+          "Swashbuckle.AspNetCore": "6.2.3",
           "System.Data.SqlClient": "4.8.5"
         },
         "compile": {
@@ -977,9 +980,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_BanHang.csproj",
-      "projectName": "API_BanHang",
-      "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_BanHang.csproj",
+      "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_Admin.csproj",
+      "projectName": "API_Admin",
+      "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_Admin.csproj",
       "packagesPath": "C:\\Users\\84364\\.nuget\\packages\\",
       "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "8oV+e+kYMBk6e6nN1qFY2/LotbnXrKH6zR96HfQk2o0=",
-  "Source": "API_BanHang",
-  "BasePath": "_content/API_BanHang",
+  "Hash": "eO2C2mCf4ODn+Ux9bQZY4Mge/dixbNMGf4sZENO/esQ=",
+  "Source": "API_Admin",
+  "BasePath": "_content/API_Admin",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

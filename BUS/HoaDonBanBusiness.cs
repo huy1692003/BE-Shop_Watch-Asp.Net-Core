@@ -11,29 +11,25 @@ using DAL.Interface;
 
 namespace BUS
 {
-    public class HoaDonBanBusiness 
+    public class HoaDonBanBusiness:IHoaDonBanBusiness
     {
-        //private IHoaDonBanRepository _res;
-        //public HoaDonBanBusiness(IHoaDonBanRepository res)
-        //{
-        //    _res = res;
-        //}
-        //public HoaDonBan GetNV_byID(string id)
-        //{
-        //    return _res.GetNV_byID(id);
-        //}
-        //public bool Create_NV(HoaDonBan model)
-        //{
-        //    return _res.Create_NV(model);
-        //}
-        //public bool Delete_NV(string MaNV)
-        //{
-        //    return _res.Delete_NV(MaNV);
-        //}
-        //public bool Update_NV(HoaDonBan model)
-        //{
-        //    return (_res.Update_NV(model));
-        //}
+        private IHoaDonBanRepository hdb_Dal;
+        public HoaDonBanBusiness(IHoaDonBanRepository hdb_helper)
+        {
+            this.hdb_Dal = hdb_helper;
+        }
+        public bool Create_HDB(HoaDonBan hdb)
+        {
+            return hdb_Dal.Create_HDB(hdb);
+        }
+        public bool Delete_HDB(int MaHD)
+        {
+            return hdb_Dal.Delete_HDB(MaHD);
+        }
+        public bool ConFirm_HDB(int MaHD)
+        {
+            return hdb_Dal.ConFirm_HDB(MaHD);
+        }
     }
 
 }

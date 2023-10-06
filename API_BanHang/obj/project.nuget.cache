@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eB0aNBx0QRzUd98wV7kvq338o8Nw8+jkiXx+kI7nvNunFOcUV7NjR27ec+JdnqSTG5SJV8Ce1vJirQPkacu89A==",
+  "dgSpecHash": "UFyG9lMiF+fWIFTOA9THmpLtESEUBJC6GOJOGa30JCjPWzHSuD9Ov+DVVIL3uUMk5Y1uaj6bwvrbNh6lQ4DpzQ==",
   "success": true,
-  "projectFilePath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_BanHang.csproj",
+  "projectFilePath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_BanHang\\API_Admin.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\84364\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\84364\\.nuget\\packages\\microsoft.extensions.configuration\\7.0.0\\microsoft.extensions.configuration.7.0.0.nupkg.sha512",

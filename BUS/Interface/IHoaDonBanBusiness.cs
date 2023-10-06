@@ -11,8 +11,7 @@ namespace BUS.Interface
   public partial interface IHoaDonBanBusiness
     {
         bool Create_HDB(HoaDonBan hdb);
-        HoaDonBan GetHDB_byID(string MaHDB);
-        bool Update_HDB(HoaDonBan nv);
-        bool Delete_NV(string MaNV);
+        bool Delete_HDB(int MaHD);
+        bool ConFirm_HDB(int MaHD);
     }
 }

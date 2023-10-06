@@ -104,7 +104,7 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_SuaThongTinSanPham",
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_SuaSLDaBanSanPham",
                      "@MaSP",id,
                      "@SoLuongDaBan",sldaban
                     );

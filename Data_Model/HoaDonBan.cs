@@ -11,6 +11,7 @@
         public string Email { get; set; }
         public string SDT { get; set; }
         public string DiaChiGiaoHang { get; set; }
+        public float ThanhTien { get; set; }
         public DateTime ThoiGianGiaoHang { get; set; }
         public List<ChiTietHoaDonBan> ChiTietHoaDonBan { get; set; }
     }

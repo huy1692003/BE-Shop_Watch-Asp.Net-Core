@@ -9,88 +9,66 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class HoaDonBanRepository
+    public class HoaDonBanRepository:IHoaDonBanRepository
     {
-        private IDatabaseHelper _dbHelper;
+        private IDatabaseHelper db;
         public HoaDonBanRepository(IDatabaseHelper dbHelper)
         {
-            _dbHelper = dbHelper;
+            db = dbHelper;
         }
-        public HoaDonBan GetHDB_byID(string id)
+        public bool Create_HDB(HoaDonBan hdb)
+        {
+            
+            string msgError = "";
+            try
+            {
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_CreateDonHangBan",
+                    "@TrangThai", 0,
+                    "@NgayTao", DateTime.Now,
+                    "@TenKH", hdb.TenKH,
+                    "@Diachi", hdb.DiaChi,
+                    "@Email", hdb.Email,
+                    "@SDT", hdb.SDT,
+                    "@DiaChiGiaoHang", hdb.DiaChiGiaoHang,
+                    "@ThoiGianGiaoHang", DateTime.Now.AddDays(2),
+                    "list_json_chitietHDB", hdb.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(hdb.ChiTietHoaDonBan) : null);
+                if(!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError+dt.ToString());
+                }
+                return string.IsNullOrEmpty(msgError) ? true : false;
+            }
+            catch(Exception ex) { throw ex; }
+        }
+        public bool Delete_HDB(int MaHD)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_hoadon_get_by_id",
-                     "@MaHoaDon", id);
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_Delete_DonHangBan", "@MaHD", MaHD);
+                   
                 if (!string.IsNullOrEmpty(msgError))
-                    throw new Exception(msgError);
-                return dt.ConvertTo<HoaDonBan>().FirstOrDefault();
+                {
+                    throw new Exception(msgError + dt.ToString());
+                }
+                return string.IsNullOrEmpty(msgError) ? true : false;
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            catch (Exception ex) { throw ex; }
         }
-        public bool Create_HDB(HoaDonBan model)
-        {
-            //string msgError = "";
-            //try
-            //{
-            //    var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoadon_create",
-            //    "@MaHD", model.MaHD,
-            //    "@MaNV", model.MaNV,
-            //    "@MaKH", model.MaKH,
-            //    "@listSP_chitiethoadon", model.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(model.ChiTietHoaDonBan) : null);
-            //    if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
-            //    {
-            //        throw new Exception(Convert.ToString(result) + msgError);
-            //    }
-            return true;
-            //}
-            //catch (Exception ex)
-            //{
-            //throw ex;
-        
-        }
-        public bool Update_HDB(HoaDonBan model)
+        public bool ConFirm_HDB(int MaHD)
         {
             string msgError = "";
             try
             {
-               // var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_hoa_don_update",
-               //"@MaHD", model.MaHD,
-               // "@MaNV", model.MaNV,
-               // "@MaKH", model.MaKH,
-               // "@listSP_chitiethoadon", model.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(model.ChiTietHoaDonBan) : null);
-               // if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
-               // {
-               //     throw new Exception(Convert.ToString(result) + msgError);
-               // }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public bool Delete_HDB(string MaHDB)
-        {
-            string msgError = "";
-            try
-            {
-            //var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_DeleteHDB",
-            //     "@MaHDB", MaHDB);
-            //if (!string.IsNullOrEmpty(msgError))
-            //throw new Exception(msgError);
-            return true;
-        }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_XacNhan_HDB", "@MaHD", MaHD);
 
-
+                if (!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError + dt.ToString());
+                }
+                return string.IsNullOrEmpty(msgError) ? true : false;
+            }
+            catch (Exception ex) { throw ex; }
+        }
     }
 }
