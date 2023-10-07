@@ -9,7 +9,7 @@ namespace BUS.Interface
 {
    public interface ITaiKhoanBusiness
     {
-        bool Login(string username, string password);
+        TaiKhoans Login(string username, string password);
         bool Create_TaiKhoan(string username, string password, int ltk);
         bool Update_TaiKhoan(TaiKhoans tk);
         bool Delete_TaiKhoan(string tk);

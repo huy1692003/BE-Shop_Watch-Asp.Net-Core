@@ -360,3 +360,67 @@ BEGIN
     FROM SanPham
     WHERE TenMH LIKE N'%' + @TenMH + '%';
 END;
+
+
+----------Thủ tục bảng Hóa Đơn Bán and Chi tiết hóa đơn bán
+Create proc sp_CreateDonHangBan
+    @TrangThai BIT,
+    @NgayTao DATETIME,      
+    @TenKH NVARCHAR(50),    
+    @Diachi NVARCHAR(250),
+    @Email NVARCHAR(50),
+    @SDT NVARCHAR(50),
+    @DiaChiGiaoHang NVARCHAR(350),
+    @ThoiGianGiaoHang DATETIME,
+	@list_json_chitietHDB NVARCHAR(MAX)
+	as
+begin
+		----Tạo hóa đơn
+		insert into HoaDonBan(TrangThai,NgayTao,TenKH,Diachi,Email,SDT,DiaChiGiaoHang,ThoiGianGiaoHang)
+		values(@TrangThai,@NgayTao,@TenKH,@Diachi,@Email,@SDT,@DiaChiGiaoHang,@ThoiGianGiaoHang)
+
+		----Lấy mã hóa hơn vừa tạo xong
+		declare @MaHoaDon int 
+		set @MaHoaDon=SCOPE_IDENTITY();
+		declare @Tongtien Float;
+
+		---Thêm chi tiết hóa đơn nhập
+		if(@list_json_chitietHDB is not null)
+		begin
+			insert into ChiTietHoaDonBan(MaHD,MaSP,soLuong,giaBan,tongtien)
+			select
+			@MaHoaDon,
+			JSON_VALUE(l.value,'$.MaSP'),
+			JSON_VALUE(l.value,'$.SoLuong'),
+			JSON_VALUE(l.value,'$.GiaBan'),
+			cast(JSON_VALUE(l.value,'$.SoLuong')as int)*CAST(JSON_VALUE(l.value,'$.GiaBan')as float)
+			from openjson(@list_json_chitietHDB) as l
+		end
+		---Cập nhật giá tiền tất cả của hóa đơn
+		---lấy tổng tiền tất cả
+		declare @ThanhTien float
+		select @ThanhTien=(select SUM(ct.tongtien) from ChiTietHoaDonBan ct where ct.MaHD=@MaHoaDon)
+		----Cập nhật
+		Update HoaDonBan 
+		set HoaDonBan.ThanhTien=@ThanhTien
+	    where HoaDonBan.MaHD=@MaHoaDon
+end
+
+------Xóa đơn hàng bán
+create proc sp_Delete_DonHangBan
+@MaHD int
+as
+begin
+delete HoaDonBan 
+where HoaDonBan.MaHD=@MaHD
+end
+
+----Xác nhận đơn hàng bởi admin---
+create proc sp_XacNhan_HDB
+@MaHD int
+as
+begin
+update HoaDonBan 
+set HoaDonBan.TrangThai=1,HoaDonBan.NgayDuyet=GetDate()
+where MaHD=@MaHD
+end

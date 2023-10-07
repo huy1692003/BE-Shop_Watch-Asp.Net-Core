@@ -19,7 +19,7 @@ namespace DAL
             this.db = db;
         }
 
-        public bool Login(string username, string password)
+        public TaiKhoans? Login(string username, string password)
         {
             string msgError = "";
             try
@@ -27,12 +27,14 @@ namespace DAL
                 var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_DangNhap",
                     "@TenTaiKhoan", username,
                     "@MatKhau", password);
-                int taikhoan = dt.ConvertTo<TaiKhoans>().ToList().Count;
-                if(taikhoan > 0)
+                TaiKhoans tk = dt.ConvertTo<TaiKhoans>().ToList().FirstOrDefault();
+                if(!string.IsNullOrEmpty
+                    (msgError) )
                 {
-                    return true;
+                    throw new Exception(msgError);
                 }
-                return false;
+                return tk!=null ? tk :null;
+              
             }
             catch(Exception ex) 
             { throw new Exception(msgError, ex); }

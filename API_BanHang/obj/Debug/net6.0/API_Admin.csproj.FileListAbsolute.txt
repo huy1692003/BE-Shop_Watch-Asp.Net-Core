@@ -47,3 +47,10 @@ D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\o
 D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\obj\Debug\net6.0\API_Admin.csproj.CopyComplete
 D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\obj\Debug\net6.0\API_Admin.genruntimeconfig.cache
 D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\obj\Debug\net6.0\ref\API_Admin.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

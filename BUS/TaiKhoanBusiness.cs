@@ -9,24 +9,46 @@ using DAL;
 using Data_Model;
 using DAL.Interface;
 using static System.Net.Mime.MediaTypeNames;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using Microsoft.Extensions.Configuration;
 
 namespace BUS
 {
     public class TaiKhoanBusiness : ITaiKhoanBusiness
     {
         private ITaiKhoanRepository tk_Dal;
-        public TaiKhoanBusiness(ITaiKhoanRepository tk_Dal)
+        private string secret;
+        public TaiKhoanBusiness(ITaiKhoanRepository tk_Dal,IConfiguration configuration)
         {
             this.tk_Dal = tk_Dal;
+            secret = configuration["AppSettings:Secret"];
+           
         }
 
-        public bool Login(string username, string password)
+        public TaiKhoans Login(string username, string password)
         {
-            if(tk_Dal.Login(username, password))
+
+            var user = tk_Dal.Login(username, password);
+            if (user == null)
+                return null;
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
             {
-                return true;
-            }
-            return false;
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, user.TenTaiKhoan.ToString()),
+                    new Claim(ClaimTypes.Email, user.Email)
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            user.Token = tokenHandler.WriteToken(token);
+            return user;
         }
         public bool Create_TaiKhoan(string username, string password,int ltk)
         {

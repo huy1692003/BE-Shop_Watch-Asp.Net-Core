@@ -26,6 +26,7 @@ namespace API_Admin.Controllers
             return BadRequest("Hủy đơn hàng thất bại hãy thử lại !");
         }
         [Route("ConFirm_HDB")]
+        [HttpPut]
         public IActionResult ConFirm_HDB(int Mahdb)
         {
             if (hdb_Bus.ConFirm_HDB(Mahdb))

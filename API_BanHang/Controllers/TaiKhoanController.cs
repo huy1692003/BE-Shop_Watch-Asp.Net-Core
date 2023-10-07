@@ -1,5 +1,6 @@
 ﻿using BUS.Interface;
 using Data_Model;
+using Data_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +16,13 @@ namespace API_BanHang.Controllers
             this.tk_Bus = tk_Bus;
         }
         [Route("Login")]
-        [HttpGet]
-        public async Task <IActionResult> Login(string username, string password)
+        [HttpPost]
+        public IActionResult Login([FromBody] AuthenticateModel user)
         {
-            if(tk_Bus.Login(username,password))
+            var tk = tk_Bus.Login(user.Username, user.Password);
+            if (tk!=null)
             {
-                return Ok("Đăng Nhập Thành Công");
+                return Ok(new {taikhoan=tk.TenTaiKhoan,email=tk.Email,tk.Token});
             }
             return BadRequest("Thông tin tài khoản hoặc mật khẩu không chính xác !");
         }

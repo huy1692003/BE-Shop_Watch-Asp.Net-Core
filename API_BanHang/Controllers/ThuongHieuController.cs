@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Data_Model;
 using BUS;
 using BUS.Interface;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_BanHang.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ThuongHieuController : ControllerBase
     {
@@ -15,6 +16,7 @@ namespace API_BanHang.Controllers
         {
             this.thBUS = thBUS;
         }
+        
         [Route("getALL_ThuongHieu")]
         [HttpGet]
         public List<ThuongHieu> GetAll_ThuongHieu()
