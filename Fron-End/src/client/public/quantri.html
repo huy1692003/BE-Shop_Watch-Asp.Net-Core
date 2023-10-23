@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/CSS/quantri.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="/library/angular.min.js"></script>
+    <script src="../assets/Javascript/admin.js"></script>
+    <title>Admin</title>
+</head>
+<body  ng-app="myAdmin">
+    <!-- -->
+    <div class="container">
+       
+        <!-- Các chức năng chính phía trái -->
+        <div class="content_left">
+             <h2 style="text-align: center;margin-top: 5%;color: white;">Xin chào</h2>
+             <div class="fuction_system">Chức năng hệ thống</div>
+             <div class="menu">
+                <p style="margin-bottom: 10px;margin-top: 20px;"><i class="fa-solid fa-house"></i>Trang chủ</p>
+                <div class="quanly sanpham"><i class="fa-solid fa-bag-shopping"></i>Quản lý sản phẩm<i class="fa-sharp fa-solid fa-caret-left iconmenu"onclick="checkedicon(this)"></i>
+                    <ul class="menu2">
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Kho hàng</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Sản phẩm đã bán</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i> Sản phẩm tồn</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i> Thêm danh mục</li>
+                    </ul>
+                </div>
+                <div class="quanly website"><i class="fa-sharp fa-solid fa-gears"></i>Quản lý website<i class="fa-sharp fa-solid fa-caret-left iconmenu"onclick="checkedicon(this)"></i>
+                <ul class="menu2">
+                    <li><i class="fa-sharp fa-solid fa-caret-right"></i>Chỉnh sửa CSS</li>
+                    <li><i class="fa-sharp fa-solid fa-caret-right"></i>Quản lý tập tin</li>
+                    <li><i class="fa-sharp fa-solid fa-caret-right"></i>Khóa Website</li>
+                </ul>
+                </div>
+                <div class="quanly website"><i class="fa-solid fa-bars"></i>Quản lý giao diện<i class="fa-sharp fa-solid fa-caret-left iconmenu"onclick="checkedicon(this)"></i>
+                    <ul class="menu2">
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Thiết lập Menu</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Tùy chỉnh giao diện</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Kho giao diện</li>
+                    </ul>
+                </div>
+                
+                <div class="quanly banner"><i class="fa-solid fa-image"></i></i>Quản lý banner<i class="fa-sharp fa-solid fa-caret-left iconmenu"onclick="checkedicon(this)"></i>
+                    <ul class="menu2">
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Thêm banner</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Cập nhật banner</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Danh sách banner</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Xóa banner</li>
+                    </ul>
+                </div>
+                <div class="quanly language"><i class="fa-solid fa-language"></i>Quản lý ngôn ngữ<i class="fa-sharp fa-solid fa-caret-left iconmenu"onclick="checkedicon(this)"></i>
+                    <ul class="menu2">
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Thiết lập</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Ngôn ngữ hiện tại</li>
+                        <li><i class="fa-sharp fa-solid fa-caret-right"></i>Thay đổi</li>
+                    </ul>
+                </div>      
+
+                </div>     
+        
+            
+        </div>
+        <!-- Nội dung phải -->
+        <div class="content_right">
+            <div class="header_top">
+               <p ng-controller="timeNow" style="float: right;margin-right: 20px;margin-top: 6px;">{{timenow}}</p>
+            </div>
+<!--  -->
+        <div class="title" ng-init="titles='Sản Phẩm'" style="margin: 18px 0 20px  20px;font-size: 18px;">Trang chủ / {{titles}}</div>
+            <!-- Table detail -->
+            <div ng-controller="manage">              
+              <row-sanpham id="rowSP"></row-sanpham>
+            </div>
+        </div>
+
+
+    </div>
+    
+</body>
+</html>

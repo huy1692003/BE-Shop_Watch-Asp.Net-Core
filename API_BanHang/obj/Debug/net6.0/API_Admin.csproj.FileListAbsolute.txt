@@ -54,3 +54,8 @@ D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\b
 D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.Azure.Search.Common.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.Azure.Search.Data.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.Rest.ClientRuntime.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.Rest.ClientRuntime.Azure.dll
+D:\Học Tập\Lập trình hướng dịch vụ\Quan_Ly_BanDongHo\API_BanHang\bin\Debug\net6.0\Microsoft.Spatial.dll

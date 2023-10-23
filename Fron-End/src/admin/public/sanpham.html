@@ -1,0 +1,35 @@
+<div class="blockTable">
+<h3 class="title_manage">Quản lý sản phẩm</h3>
+<button class="addnew"> Thêm mới</button>
+<div class="taskbar">
+    <div style="margin-left: 2%;">
+        <input type="text" class="search" style="height: 29px;width: 200px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập từ khóa tìm kiếm" ng-model="txtSearchTenSanPham">
+        <button style="width: 90px;height: 30px;border-radius: 5px;cursor: pointer;" ng-click="clickSearch()">Search</button>
+    </div>
+</div>
+<table  border="1" cellspacing="0" cellpadding="5">
+    <thead>
+        <td style="width: 5%;height: 19px;">Mã SP</td>     
+        <td style="width: 18%;" >Tên sản phẩm</td>        
+        <td style="width: 8%;">Số lượng tồn</td>
+        <td style="width: 7%;">Giá bán</td>        
+        <td style="width: 10%;">Trạng thái</td>
+        <td style="width: 10%;">Image</td>
+        <td style="width: 14%;">Chức năng</td>        
+    </thead>
+   
+    <tr ng-repeat="x in listItem">
+        <td style="width: 5%;height: 19px;">{{x.maSP}}</td>     
+        <td style="width: 10%;" >{{x.tenMH}}</td>        
+        <td style="width: 8%;">{{x.soLuongton}}</td>
+        <td style="width: 7%;">{{x.giaBan}}</td>        
+        <td style="width: 10%;">{{x.trangthai}}</td>
+        <td style="width: 10%;">{{x.image_SP}}</td>
+        <td style="width: 14%;">
+            <button class="task"><i class="fa-solid fa-wrench"></i></button>
+            <button class="task"><i class="fa-solid fa-circle-info"></i></button>
+            <button class="task"><i class="fa-solid fa-delete-left"></i></button>
+        </td>  
+    </tr>
+</table>
+</div>

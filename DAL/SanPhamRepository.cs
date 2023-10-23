@@ -17,20 +17,29 @@ namespace DAL
             this.db = db;
         }
 
-       public List<SanPham>? GetSP_TheoTen(string TenSP)
+       public List<SanPham> SearchSP(int pageIndex, int pageSize, out int total, string TenSanPham, string TenTheLoai, string TenThuongHieu,string giatien)
         {
             string msgError = "";
+            total = 0;
             try
             {
-                var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_TimKiemSanPhamTheoTen", "@TenMH", TenSP);
-                if(!string.IsNullOrEmpty(msgError))
-                {
+                var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_search_sanpham",
+                    "@page_index ",pageIndex,
+                    "@page_size",pageSize,
+                    "@ten_sanpham",TenSanPham,
+                    "@gia_tien",giatien,
+                    "@ten_theloai ",TenTheLoai,
+                    "@ten_thuonghieu",TenThuongHieu
+                    );
+                if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                }
-                return dt.ConvertTo<SanPham>().ToList().Count>0?dt.ConvertTo<SanPham>().ToList():null;
-
+                if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<SanPham>().ToList();
             }
-            catch (Exception ex) { throw new Exception(msgError, ex); }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
        public bool Create_SanPham(SanPham sp)
         {
@@ -41,12 +50,12 @@ namespace DAL
                 var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_ThemSanPham",
                     "@MaTH", sp.MaTH,
                     "@TenMH", sp.TenMH,
-                    "@MaLoai", sp.MaLoaiSP,
-                    "@SoLuongTon", sp.SoLuongTon,
+                    "@MaLoai", sp.MaLoai,
+                    "@SoLuongTon", sp.soLuongton,
                     "@GiaBan", sp.GiaBan,
-                    "@Image_SP", sp.Image_SP,
-                    "@MoTa", sp.Mota,
-                    "@TrangThai", sp.TrangThai);
+                    "@Image_SP", sp.image_SP,
+                    "@MoTa", sp.mota,
+                    "@TrangThai", sp.trangthai);
                 if (!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(msgError);
@@ -82,12 +91,12 @@ namespace DAL
                      "@MaSP", sp.MaSP,
                     "@MaTH", sp.MaTH,
                     "@TenMH", sp.TenMH,
-                    "@MaLoai", sp.MaLoaiSP,
-                    "@SoLuongTon", sp.SoLuongTon,
-                    "@GiaBan", sp.SoLuongTon,
-                    "@Image_SP", sp.Image_SP,
-                    "@MoTa", sp.Mota,
-                    "@TrangThai", sp.TrangThai);
+                    "@MaLoai", sp.MaLoai,
+                    "@SoLuongTon", sp.soLuongton,
+                    "@GiaBan", sp.soLuongton,
+                    "@Image_SP", sp.image_SP,
+                    "@MoTa", sp.mota,
+                    "@TrangThai", sp.trangthai);
                 if (!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(msgError);

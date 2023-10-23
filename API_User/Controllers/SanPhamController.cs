@@ -14,11 +14,6 @@ namespace API_User.Controllers
         {
             this.sp_Bus = sp_Bus;
         }
-        [Route("GetSP_byName")]
-        [HttpGet]
-        public List<SanPham> GetSP_TheoTen(string TenSP)
-        {
-            return sp_Bus.GetSP_TheoTen(TenSP);
-        }
+     
     }
 }

@@ -360,6 +360,66 @@ BEGIN
     FROM SanPham
     WHERE TenMH LIKE N'%' + @TenMH + '%';
 END;
+----tạo procedure search và phân trang
+alter PROCEDURE [dbo].[sp_search_sanpham]
+    @page_index INT,
+    @page_size INT,
+    @ten_sanpham NVARCHAR(250) ,
+    @gia_tien VARCHAR(50) ,
+    @ten_theloai VARCHAR(250) ,
+    @ten_thuonghieu VARCHAR(250)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    IF @page_size = 0
+    BEGIN
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY MaSP ASC) AS RowNumber, 
+          sp.*
+        FROM SanPham AS sp
+		join TheLoai as tl on sp.MaLoai=tl.MaLoai
+		join ThuongHieu as th on th.MaTH=sp.MaTH
+        WHERE
+             (@ten_sanpham ='' OR sp.TenMH LIKE '%' + @ten_sanpham + '%')
+            AND (@gia_tien ='' OR sp.GiaBan LIKE '%' + @gia_tien + '%')
+            AND (@ten_theloai ='' OR tl.TenLoai like '%'+ @ten_theloai+ '%')
+            AND (@ten_thuonghieu='' OR th.TenThuongHieu = '%'+@ten_thuonghieu+'%');
+    END
+    ELSE
+    BEGIN
+        DECLARE @RecordCount INT;
+        
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY MaSP ASC) AS RowNumber, 
+            sp.*
+        INTO #Results
+        FROM SanPham AS sp
+		join TheLoai as tl on sp.MaLoai=tl.MaLoai
+		join ThuongHieu as th on th.MaTH=sp.MaTH
+        WHERE
+            (@ten_sanpham ='' OR sp.TenMH LIKE '%' + @ten_sanpham + '%')
+            AND (@gia_tien ='' OR sp.GiaBan LIKE '%' + @gia_tien + '%')
+            AND (@ten_theloai ='' OR tl.TenLoai like '%'+ @ten_theloai+ '%')
+            AND (@ten_thuonghieu='' OR th.TenThuongHieu = '%'+@ten_thuonghieu+'%');
+
+        SELECT @RecordCount = COUNT(*)
+        FROM #Results;
+
+        SELECT
+            *,
+            @RecordCount AS RecordCount
+        FROM #Results
+        WHERE
+            RowNumber BETWEEN (@page_index - 1) * @page_size + 1
+            AND ((@page_index - 1) * @page_size + 1) + @page_size - 1
+            OR @page_index = -1;
+        
+        DROP TABLE #Results;
+    END;
+END;
+
+EXEC sp_search_sanpham @page_size=2,@page_index=5 ,@ten_sanpham = '',    @gia_tien = '',    @ten_theloai  = '',    @ten_thuonghieu  = ''
 
 
 ----------Thủ tục bảng Hóa Đơn Bán and Chi tiết hóa đơn bán

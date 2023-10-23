@@ -2,6 +2,7 @@
 using Data_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.Search.Models;
 
 namespace API_BanHang.Controllers
 {
@@ -9,20 +10,57 @@ namespace API_BanHang.Controllers
     [ApiController]
     public class SanPhamController : ControllerBase
     {
+       
+        public class SearchParameters
+        {
+            public int Page { get; set; }
+            public int PageSize { get; set; }
+            public string TenSanPham { get; set; }
+            public string TenTheLoai { get; set; }
+            public string TenThuongHieu { get; set; }
+            public string GiaTien { get; set; }
+        }
         private ISanPhamBusiness sp_Bus;
         public SanPhamController(ISanPhamBusiness sp_Bus)
         {
             this.sp_Bus = sp_Bus;
         }
-        [Route("GetSP_byName")]
-        [HttpGet]
-        public List<SanPham> GetSP_TheoTen(string TenSP)
-        {
-            return sp_Bus.GetSP_TheoTen(TenSP);
-        }
-        [Route("Create_SP")]
+
+        [Route("search_SP")]
         [HttpPost]
-        public IActionResult Create_SanPham([FromBody]SanPham sp)
+        public IActionResult SearchSanPham([FromBody] Dictionary<string, object> ch)
+        {
+            try
+            {
+                int page = ch.ContainsKey("page") ? Convert.ToInt32(ch["page"].ToString()) : 1;
+                int pageSize = ch.ContainsKey("pageSize") ? Convert.ToInt32(ch["pageSize"].ToString()) : 1;
+                string tenSanPham = ch.ContainsKey("tenSanPham") ? Convert.ToString(ch["tenSanPham"].ToString()) : "";
+                string tenTheLoai = ch.ContainsKey("tenTheLoai") ? Convert.ToString(ch["tenTheLoai"].ToString()) : "";
+                string tenThuongHieu = ch.ContainsKey("tenThuongHieu") ? Convert.ToString(ch["tenThuongHieu"].ToString()) : "";
+                string giatien = ch.ContainsKey("giatien") ? Convert.ToString(ch["giatien"].ToString()) : "";
+
+                int total = 0;
+                var data = sp_Bus.SearchSP(page, pageSize, out total, tenSanPham, tenTheLoai, tenThuongHieu, giatien);
+
+                return Ok(new
+                {
+                    TotalItems = total,
+                    Data = data,
+                    Page = page,
+                    PageSize = pageSize
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Lỗi: {ex.Message}");
+            }
+        }
+
+
+
+        [Route("create_SP")]
+        [HttpPost]
+    public IActionResult Create_SanPham([FromBody]SanPham sp)
         {
             bool check = sp_Bus.Create_SanPham(sp);
             if(check)
