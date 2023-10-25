@@ -11,15 +11,7 @@ namespace API_BanHang.Controllers
     public class SanPhamController : ControllerBase
     {
        
-        public class SearchParameters
-        {
-            public int Page { get; set; }
-            public int PageSize { get; set; }
-            public string TenSanPham { get; set; }
-            public string TenTheLoai { get; set; }
-            public string TenThuongHieu { get; set; }
-            public string GiaTien { get; set; }
-        }
+       
         private ISanPhamBusiness sp_Bus;
         public SanPhamController(ISanPhamBusiness sp_Bus)
         {
@@ -33,7 +25,7 @@ namespace API_BanHang.Controllers
             try
             {
                 int page = ch.ContainsKey("page") ? Convert.ToInt32(ch["page"].ToString()) : 1;
-                int pageSize = ch.ContainsKey("pageSize") ? Convert.ToInt32(ch["pageSize"].ToString()) : 1;
+                int pageSize = ch.ContainsKey("pageSize") ? Convert.ToInt32(ch["pageSize"].ToString()) : 10;
                 string tenSanPham = ch.ContainsKey("tenSanPham") ? Convert.ToString(ch["tenSanPham"].ToString()) : "";
                 string tenTheLoai = ch.ContainsKey("tenTheLoai") ? Convert.ToString(ch["tenTheLoai"].ToString()) : "";
                 string tenThuongHieu = ch.ContainsKey("tenThuongHieu") ? Convert.ToString(ch["tenThuongHieu"].ToString()) : "";

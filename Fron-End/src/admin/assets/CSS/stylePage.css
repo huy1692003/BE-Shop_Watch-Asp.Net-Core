@@ -6,6 +6,17 @@
     background-color: white;
     border-radius: 5px;
     padding: 5px;
+    
+ 
+}
+.table_content{
+    width: 100%;
+    height: 74%;
+    overflow: auto;
+    margin-top: 0;
+}
+body{
+overflow: hidden;
 }
 thead{
     background-color: #3C8DBC;
@@ -32,3 +43,72 @@ thead{
 .addnew:hover{
     background-color: rgb(134, 130, 130);
 }
+.Screen{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color:rgba(46, 45, 45, 0.537);
+    top: 0;
+    left: 0;   
+   
+}
+.form
+{
+    z-index: 999;
+    width: 70%;
+    height: 550px;
+    background-color: white;
+    position: fixed;
+    top: 4%;
+    left: 15%;
+    border-radius: 10px;
+}
+
+.buttonExit {
+    float: right;
+    position: absolute;
+    right: 7px;
+    top: 7px;
+    border: 0px;
+    border-radius: 70%; /* Để biến nút thành hình tròn */
+    margin:5px 10px 0 0;
+    width: 26px; /* Đặt chiều rộng của nút */
+    height: 26px; /* Đặt chiều cao của nút */
+    
+}
+.titleForm{
+    color: #7e7e80;
+    margin-bottom: 3%;
+    position: absolute;
+    top: 2%;
+}
+.buttonExit:hover{
+    background-color: black;
+}
+
+.formcontent{
+        padding:4% ;   
+    
+}
+.titlePrp{
+    font-size: 18px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.submit{
+    position: absolute;
+    bottom: 13px;
+    right: 13px;
+    background-color: rgb(248, 79, 79);
+    color: white;   
+    border: 0;
+    border-radius: 5px;
+    width: 60px;
+    height: 35px;
+}
+.submit:active{
+    background-color: red;
+}
+
+
+

@@ -1,13 +1,12 @@
 <div class="blockTable">
 <h3 class="title_manage">Quản lý sản phẩm</h3>
-<button class="addnew"> Thêm mới</button>
-<div class="taskbar">
-    <div style="margin-left: 2%;">
+<button class="addnew" ng-click="showAddSP()"> Thêm mới</button>
+<div class="taskbar">   
         <input type="text" class="search" style="height: 29px;width: 200px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập từ khóa tìm kiếm" ng-model="txtSearchTenSanPham">
         <button style="width: 90px;height: 30px;border-radius: 5px;cursor: pointer;" ng-click="clickSearch()">Search</button>
-    </div>
+      
 </div>
-<table  border="1" cellspacing="0" cellpadding="5">
+<table  border="1" cellspacing="0" cellpadding="5" class="table_header">
     <thead>
         <td style="width: 5%;height: 19px;">Mã SP</td>     
         <td style="width: 18%;" >Tên sản phẩm</td>        
@@ -17,19 +16,66 @@
         <td style="width: 10%;">Image</td>
         <td style="width: 14%;">Chức năng</td>        
     </thead>
-   
-    <tr ng-repeat="x in listItem">
-        <td style="width: 5%;height: 19px;">{{x.maSP}}</td>     
-        <td style="width: 10%;" >{{x.tenMH}}</td>        
-        <td style="width: 8%;">{{x.soLuongton}}</td>
-        <td style="width: 7%;">{{x.giaBan}}</td>        
-        <td style="width: 10%;">{{x.trangthai}}</td>
-        <td style="width: 10%;">{{x.image_SP}}</td>
-        <td style="width: 14%;">
-            <button class="task"><i class="fa-solid fa-wrench"></i></button>
-            <button class="task"><i class="fa-solid fa-circle-info"></i></button>
-            <button class="task"><i class="fa-solid fa-delete-left"></i></button>
-        </td>  
-    </tr>
 </table>
+<div class="table_content">
+    <table  border="1" cellspacing="0" cellpadding="5" >
+        <tr ng-repeat="x in listItem">
+            <td style="width: 5%;height: 19px;">{{x.maSP}}</td>     
+            <td style="width: 18%;" >{{x.tenMH}}</td>        
+            <td style="width: 8%;">{{x.soLuongton}}</td>
+            <td style="width: 7%;">{{x.giaBan}}</td>        
+            <td style="width: 10%;">{{x.trangthai}}</td>
+            <td style="width: 10%;">{{x.image_SP}}</td>
+            <td style="width: 14%;">
+                <button class="task" ng-click="editsp(x)"><i class="fa-solid fa-wrench"></i></button>
+                <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button>
+                <button class="task" ng-click="deleteSP(x) "><i class="fa-solid fa-delete-left"></i></button>
+            </td>  
+        </tr>
+    </table>
+</div>
+ <div class="nextpage" style="float: right;margin-right: 3%;">
+    <button ng-click="page_prev()" ng-disabled="pageprev" >Trang trước</button>
+    <button ng-click="page_after()" ng-disabled="pageafter">Trang sau</button>
+ </div>
+
+  <!-- Phủ đen màn hình -->
+  <div class="Screen" ng-hide="screen_shadow"></div>
+    
+   <div class="form AddSP" ng-show="addSPShow">  
+    <form class="formcontent" onsubmit="resetForm(this)">
+        <h2 class="titleForm">Thêm sản phẩm</h2>
+        <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
+        <div style="margin-top:2%;">
+           
+                    <label class="titlePrp">Tên Sản Phẩm</label></td>
+                    <input type="text" placeholder="  Ví dụ : Đồng hồ Rolex" ng-model="tenSP"><br></td>
+               
+
+               
+                    <label class="titlePrp" >Thương hiệu</label></td>
+                    
+                        <select name="" id="" ng-model="MaTH">
+                            <option style="color: rgb(166, 163, 163);font-style: italic;" selected>Chọn thương hiệu</option>
+                            <option ng-repeat="th in listTH" value="{{th.maTH}}">{{th.tenThuongHieu}}</option></select>                   
+                        </select>
+               
+                   
+               
+            
+         
+            
+            
+           
+
+            
+            <button type="submit" class="submit" ng-click="addSP()">Lưu</button>
+        </div>
+       
+    </form>
+   </div>
+   <div class="form EditSP" ng-show="editSPShow"></div>
+   <div class="form DetailSP" ng-show="detailSPShow"></div>
+  <!-- form xem chi tiết sản phẩm -->
+
 </div>

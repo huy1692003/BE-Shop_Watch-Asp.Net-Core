@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API_BanHang.Controllers
 {
-    [Authorize]
+    
     [ApiController]
     public class ThuongHieuController : ControllerBase
     {

@@ -48,8 +48,8 @@ BEGIN
 END;
 
  ------Thủ tục Tài Khoản 
--- Tạo stored procedure cho thêm tài khoản
-alter PROCEDURE sp_ThemTaiKhoan
+-- Tạo stored procedure cho thêm tài khoảnc
+create PROCEDURE sp_ThemTaiKhoan
     @TenTaiKhoan NVARCHAR(50),
     @MatKhau NVARCHAR(50) ,
 	@LoaiTaiKhoan INT
@@ -80,7 +80,7 @@ BEGIN
 END;
 
 -- Tạo stored procedure cho cập nhật tài khoản
-alter PROCEDURE sp_CapNhatTaiKhoan
+create PROCEDURE sp_CapNhatTaiKhoan
     @TenTaiKhoan NVARCHAR(50),
     @Email NVARCHAR(50),
     @HoTen NVARCHAR(50),
@@ -153,7 +153,7 @@ create proc sp_nhacungcap_update
  exec sp_DeleteNV 'NV30'
 
  -----Tạo khách hàng
-alter proc sp_khachhang_create ( 
+create proc sp_khachhang_create ( 
  @TenKH nvarchar(50),
  @DiaChi nvarchar(100),
  @Dienthoai nvarchar(15),
@@ -164,14 +164,14 @@ alter proc sp_khachhang_create (
  end
   exec sp_nhanvien_create 'NV30',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
  -----Tìm kiếm khachhang by Mã KH
- alter proc sp_searchKH_by_MaKH
+ create proc sp_searchKH_by_MaKH
  @MaKH int
  as
  begin 
  select * From KhachHang as kh where kh.MaKH=@MaKH
  end
  ----Cập nhật thông tin khách hàng
-alter proc sp_khachhang_update
+create proc sp_khachhang_update
  @MaKH int,
  @TenKH nvarchar(50) ,
  @DiaChi nvarchar(100) ,
@@ -183,7 +183,7 @@ alter proc sp_khachhang_update
  end
  exec sp_nhanvien_update 'NV01',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
  ----Xóa khách hàng theo mã 
- alter proc sp_DeleteKH
+ create proc sp_DeleteKH
  @MaKH int
  as
  begin 
@@ -297,7 +297,7 @@ end
 
 ------Thủ tục bảng sản Phẩm
 -- Tạo stored procedure cho thêm sản phẩm
-alter PROCEDURE sp_ThemSanPham
+create PROCEDURE sp_ThemSanPham
     @MaTH INT,
     @TenMH NVARCHAR(50),
     @MaLoai INT,
@@ -313,7 +313,7 @@ BEGIN
 END;
 
 -- Tạo stored procedure cho sửa thông tin sản phẩm (không sửa sldaban)
-alter PROCEDURE sp_SuaThongTinSanPham
+create PROCEDURE sp_SuaThongTinSanPham
     @MaSP INT,
     @MaTH INT,
     @TenMH NVARCHAR(50),
@@ -361,7 +361,7 @@ BEGIN
     WHERE TenMH LIKE N'%' + @TenMH + '%';
 END;
 ----tạo procedure search và phân trang
-alter PROCEDURE [dbo].[sp_search_sanpham]
+create PROCEDURE [dbo].[sp_search_sanpham]
     @page_index INT,
     @page_size INT,
     @ten_sanpham NVARCHAR(250) ,

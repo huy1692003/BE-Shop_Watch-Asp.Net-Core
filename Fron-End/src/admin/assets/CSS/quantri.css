@@ -139,12 +139,14 @@ i{
 .taskbar{
     width: 99%;
     height: 30px;
-    margin: 10px 0;
+    padding-left: 2%;
+    margin-bottom: 0.5%;
+    
 }
  /* table */
  table{
     width: 95%;    
-    margin-top: 10px;
+ 
    border-collapse: collapse;
     margin-left: 2%;
  }

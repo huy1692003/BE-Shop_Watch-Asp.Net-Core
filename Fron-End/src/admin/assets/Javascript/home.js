@@ -49,5 +49,8 @@ a.style.color='blue'
    
 }
 
-
+function resetForm(a)
+{
+  a.reset()
+}
 
