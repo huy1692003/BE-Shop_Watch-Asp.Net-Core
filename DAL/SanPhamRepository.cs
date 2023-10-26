@@ -93,7 +93,7 @@ namespace DAL
                     "@TenMH", sp.TenMH,
                     "@MaLoai", sp.MaLoai,
                     "@SoLuongTon", sp.soLuongton,
-                    "@GiaBan", sp.soLuongton,
+                    "@GiaBan", sp.GiaBan,
                     "@Image_SP", sp.image_SP,
                     "@MoTa", sp.mota,
                     "@TrangThai", sp.trangthai);

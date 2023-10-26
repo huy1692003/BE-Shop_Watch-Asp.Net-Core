@@ -27,7 +27,7 @@
             <td style="width: 10%;">{{x.trangthai}}</td>
             <td style="width: 10%;">{{x.image_SP}}</td>
             <td style="width: 14%;">
-                <button class="task" ng-click="editsp(x)"><i class="fa-solid fa-wrench"></i></button>
+                <button class="task" ng-click="showeditSP(x)"><i class="fa-solid fa-wrench"></i></button>
                 <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button>
                 <button class="task" ng-click="deleteSP(x) "><i class="fa-solid fa-delete-left"></i></button>
             </td>  
@@ -40,41 +40,84 @@
  </div>
 
   <!-- Phủ đen màn hình -->
-  <div class="Screen" ng-hide="screen_shadow"></div>
+  <div class="Screen" ng-show="screen_shadow"></div>
     
+  <!-- Form add sản phẩm -->
    <div class="form AddSP" ng-show="addSPShow">  
     <form class="formcontent" onsubmit="resetForm(this)">
-        <h2 class="titleForm">Thêm sản phẩm</h2>
+        <h1 class="titleForm">Thêm sản phẩm</h1>
         <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
-        <div style="margin-top:2%;">
-           
-                    <label class="titlePrp">Tên Sản Phẩm</label></td>
-                    <input type="text" placeholder="  Ví dụ : Đồng hồ Rolex" ng-model="tenSP"><br></td>
-               
+        <div style="margin-top:2%;" >
+                     <h4 class="title_info">Thông tin sản phẩm</h4>
+                    <label class="titlePrp">Tên Sản Phẩm</label>
+                    <input type="text" placeholder="  Ví dụ : Đồng hồ Rolex" ng-model="TenSP"><br>          
+              
+                    <label class="titlePrp" >Thương hiệu</label>
+                    <select ng-model="MaTH">
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> -Chọn thương hiệu-</option>
+                        <option ng-repeat="th in listTH" value={{th.maTH}}>{{th.tenThuongHieu}}</option></select>                   
+                    </select> <br>
 
-               
-                    <label class="titlePrp" >Thương hiệu</label></td>
-                    
-                        <select name="" id="" ng-model="MaTH">
-                            <option style="color: rgb(166, 163, 163);font-style: italic;" selected>Chọn thương hiệu</option>
-                            <option ng-repeat="th in listTH" value="{{th.maTH}}">{{th.tenThuongHieu}}</option></select>                   
-                        </select>
-               
-                   
-               
-            
-         
-            
-            
-           
+                    <label class="titlePrp">Thể Loại</label>
+                    <select ng-model="maLoai">
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>-Chọn thể loại-</option>
+                        <option ng-repeat="tl in listTheLoai" value={{tl.maLoai}}>{{tl.tenLoai}}</option>
+                    </select> <br>
+                    <label class="titlePrp">Giá Bán</label>
+                    <input type="number" placeholder=" Ví dụ : 10000" ng-model="giaBan"><br>
 
-            
-            <button type="submit" class="submit" ng-click="addSP()">Lưu</button>
-        </div>
-       
+                    <label class="titlePrp">Số lượng</label>
+                    <input type="number" placeholder="  Ví dụ : 10000" ng-model="soLuongton"><br>
+
+                    <label class="titlePrp">Ảnh</label>
+                    <input type="file"ng-model="imageSP" style="padding: 0; width: 280px;"><br>
+
+                    <label class="titlePrp">Mô tả</label>
+                    <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="Mota"></textarea>
+                        
+                    <button type="submit" class="submit" ng-click="addSP()">Lưu</button>
+                </div>
     </form>
    </div>
-   <div class="form EditSP" ng-show="editSPShow"></div>
+
+   <div class="form EditSP" ng-show="editSPShow">
+    <form class="formcontent" onsubmit="resetForm(this)">
+        <h1 class="titleForm">Sửa sản phẩm</h1>
+        <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
+        <div style="margin-top:2%;" >
+                     <h4 class="title_info">Thông tin sản phẩm</h4>
+                    <label class="titlePrp">Mã Sản Phẩm</label>
+                    <input type="text" ng-model="MaSP" ng-disabled="true"><br> 
+                    <label class="titlePrp">Tên Sản Phẩm</label>
+                    <input type="text" ng-model="TenSP"><br>          
+              
+                    <label class="titlePrp" >Thương hiệu</label>
+                    <select ng-model="MaTH">
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> -Chọn thương hiệu-</option>
+                        <option ng-repeat="th in listTH" value={{th.maTH}}>{{th.tenThuongHieu}}</option></select>                   
+                    </select> <br>
+
+                    <label class="titlePrp">Thể Loại</label>
+                    <select ng-model="maLoai">
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>-Chọn thể loại-</option>
+                        <option ng-repeat="tl in listTheLoai" value={{tl.maLoai}}>{{tl.tenLoai}}</option>
+                    </select> <br>
+                    <label class="titlePrp">Giá Bán</label>
+                    <input type="number"  ng-model="giaBan"><br>
+
+                    <label class="titlePrp">Số lượng</label>
+                    <input type="number"  ng-model="soLuongton"><br>
+
+                    <label class="titlePrp">Ảnh</label>
+                    <input type="file"ng-model="imageSP" style="padding: 0; width: 280px;"><br>
+                    
+                    <label class="titlePrp">Mô tả</label>
+                    <textarea ng-model="Mota"></textarea>
+                        
+                    <button type="submit" class="submit" ng-click="editSP()">Lưu</button>
+                </div>
+    </form>
+   </div>
    <div class="form DetailSP" ng-show="detailSPShow"></div>
   <!-- form xem chi tiết sản phẩm -->
 

@@ -61,7 +61,7 @@ namespace API_BanHang.Controllers
             }
             return BadRequest("Thêm thất bại");
         }
-        [Route("Delete_SP")]
+        [Route("Delete_SP/{id}")]
         [HttpDelete]
         public IActionResult Delete_SanPham(int id)
         {

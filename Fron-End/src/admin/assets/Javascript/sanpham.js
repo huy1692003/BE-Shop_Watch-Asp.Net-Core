@@ -8,7 +8,8 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     $scope.txtSearchTheloai='';
     $scope.txtSearchGiaTien='';  
     $scope.listItem = [];
-    $scope.totalItems = 0;   
+    $scope.totalItems = 0;  
+    $scope.objSP={} 
     $scope.clickSearch=()=>{
         $scope.searchParameters = {
             page: $scope.page,              // Set the initial page value
@@ -40,25 +41,35 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
 
 
     // Các form chức năng thêm sửa xóa sản phẩm
-    $scope.screen_shadow=true;
+    $scope.screen_shadow=false;
     $scope.addSPShow=false;
     $scope.editSPShow=false;
     $scope.detailSPShow=false;
     $scope.exitForm=()=>{
-        $scope.screen_shadow=true;
+        $scope.screen_shadow=false;
         $scope.addSPShow=false;
         $scope.editSPShow=false;
         $scope.detailSPShow=false;
+        $scope.MaSP=null;
+        $scope.TenSP=null;
+        $scope.MaTH=null;
+        $scope.maLoai=null;
+        $scope.giaBan=null;
+        $scope.imageSP="";
+        $scope.Mota=null;
+        $scope.sldaban=null;
+        $scope.soLuongton=null;
     }
     // model
     $scope.MaSP=1;
-    $scope.TenSP="";
-    $scope.MaTH=1;
-    $scope.maLoai=1;
-    $scope.giaBan=10000;
-    $scope.imageSP='anh.jpg';
-    $scope.Mota="";
-    $scope.sldaban=0;
+    $scope.TenSP;
+    $scope.MaTH;
+    $scope.maLoai;
+    $scope.giaBan;
+    $scope.imageSP="";
+    $scope.Mota;
+    $scope.sldaban;
+    $scope.soLuongton;
     $scope.trangthai="Còn Hàng"
     $scope.listTH={};
     $scope.listTheLoai={};
@@ -89,53 +100,86 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     $scope.getTheLoai();   
     $scope.getThuongHieu();  
         // hàm
-    $scope.editSP=(x)=>{
-        $scope.screen_shadow=false;
+    $scope.editSP=()=>{    
+          
+        $scope.reloadSP()  ;
+        console.log($scope.objSP)   
+        $http({
+            method:"PUT",
+            url:"https://localhost:44334/api/SanPham/UpdateSP_Info",
+            data:$scope.objSP
+        }).then((response)=>{alert("Thông báo :"+response.data),$scope.getProducts()}).catch((error)=>{alert("Thông báo :" + error.data)})    
+        
     }
     $scope.showAddSP=()=>{
-        $scope.screen_shadow=false;
+        $scope.screen_shadow=true;
         $scope.addSPShow=true;
         console.log($scope.listTheLoai)  
     }
+    $scope.showeditSP=(x)=>{
+        $scope.screen_shadow=true;
+        $scope.editSPShow=true; 
+        $scope.MaSP=x.maSP;
+        $scope.TenSP=x.tenMH;
+        $scope.MaTH=x.maTH;
+        $scope.maLoai=x.maLoai;
+        $scope.giaBan=x.giaBan;
+        $scope.imageSP="";
+        $scope.Mota=x.mota;
+        $scope.sldaban=x.sldaban;
+        $scope.soLuongton=x.soLuongton;
+        $scope.trangthai="Còn Hàng" 
+       
+    }
     // Thêm sp
-    $scope.objSP={        
-             maSP: $scope.MaSP,
-             maTH: $scope.MaTH,
-             tenMH: $scope.TenSP,
-             maLoai: $scope.maLoai,
-             soLuongton: $scope.sldaban,
-             giaBan: $scope.giaBan,
-             image_SP: $scope.imageSP,
-             mota: $scope.Mota,
-             sldaban: $scope.sldaban,
-             trangthai: $scope.trangthai          
+    $scope.reloadSP=()=>{
+        $scope.objSP={        
+            maSP: $scope.MaSP,
+            maTH: $scope.MaTH,
+            tenMH: $scope.TenSP,
+            maLoai: $scope.maLoai,
+            soLuongton: $scope.soLuongton,
+            giaBan: $scope.giaBan,
+            image_SP: $scope.imageSP,
+            mota: $scope.Mota,
+            sldaban: $scope.sldaban,
+            trangthai: $scope.trangthai}  
     }
     $scope.addSP=()=>{   
-        console.log($scope.objSP)  
-       
+              $scope.reloadSP() 
+                
         $http({
             method:"POST",
             url:'https://localhost:44334/api/SanPham/create_SP',
             data: $scope.objSP
         }).then((result)=>{
             alert("Thông báo : "+result.data)
-        }).catch((error)=>{alert("Có lỗi khi thêm sản phẩm : "+ error)})
+        }).catch((error)=>
+                 {alert("Có lỗi khi thêm sản phẩm hãy xem lại dữ liệu đã nhập đầy đủ hay chưa ?")
+                 console.log("Lỗi :" + error)}
+                 )
 
     }
     $scope.detailSP=(x)=>{
         $scope.screen_shadow=false;
     }
-    $scope.deleteSP=(x)=>{
-        if (confirm("Bạn có chắc chắn muốn xóa?")) {
-            // Người dùng đã nhấn nút "OK", thực hiện hành động xóa ở đây
-            console.log("Hành động xóa đã được thực hiện.");
+    $scope.deleteSP = (x) => {              
+        if (confirm("Bạn có chắc chắn muốn xóa")) {
+            $http({
+                method: "DELETE",
+                url: 'https://localhost:44334/api/SanPham/Delete_SP/' + x.maSP
+            }).then((result) => {
+                alert("Thông báo: " + result.data);
+                $scope.getProducts();
+            }).catch((error) => {
+                alert("Thông báo: " + error);
+            });
         } else {
             // Người dùng đã nhấn nút "Cancel", không thực hiện hành động xóa
             console.log("Hành động xóa đã bị hủy bỏ.");
         }
-        
     }
-
+    
 
 
 

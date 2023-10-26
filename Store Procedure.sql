@@ -330,7 +330,7 @@ BEGIN
         image_SP = @Image_SP, mota = @MoTa, trangthai = @TrangThai
     WHERE MaSP = @MaSP;
 END;
-
+ exec sp_SuaThongTinSanPham 20000,1,'ok',1,55,10000,'ok','ok','còn'
 -- Tạo stored procedure cho sửa sldaban của sản phẩm
 CREATE PROCEDURE sp_SuaSLDaBanSanPham
     @MaSP INT,

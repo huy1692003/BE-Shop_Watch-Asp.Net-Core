@@ -90,10 +90,17 @@ thead{
         padding:4% ;   
     
 }
+.title_info{
+    color:blue;
+    text-transform: uppercase;
+    margin-top: 50px;
+    margin-bottom: 10px
+}
 .titlePrp{
     font-size: 18px;
     display: inline-block;
     margin-bottom: 10px;
+    width: 130px;
 }
 .submit{
     position: absolute;
@@ -109,6 +116,18 @@ thead{
 .submit:active{
     background-color: red;
 }
+input,select{
+    width: 180px;
+    height: 29px;
+    padding-left: 15px;
+}
+textarea{
+    width: 300px;
+    height: 180px;
+    padding: 5px;
+}
+
+
 
 
 
