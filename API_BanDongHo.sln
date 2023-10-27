@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data_Model", "Data_Model\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_Admin", "API_BanHang\API_Admin.csproj", "{A8B050AC-70A6-498D-90FC-4A128CE56C3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_User", "API_User\API_User.csproj", "{0B0EFC40-B5C2-4E2E-BF20-C3C02A4F1C44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "API_User", "API_User\API_User.csproj", "{0B0EFC40-B5C2-4E2E-BF20-C3C02A4F1C44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

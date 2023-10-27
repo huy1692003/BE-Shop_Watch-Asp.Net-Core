@@ -1,1 +1,78 @@
-<h1>{{message}}</h1>
+<div class="blockTable">
+    <h3 class="title_manage">Quản lý thương hiệu</h3>
+    <button class="addnew" ng-click="showAddTH()"> Thêm mới</button> 
+    <table  border="1" cellspacing="0" cellpadding="5" class="table_header">
+        <thead>
+            <td style="width: 5%;height: 19px;">Mã TH</td>     
+            <td style="width: 18%;" >Tên thương hiệu</td>        
+            <td style="width: 8%;">Hình ảnh</td>          
+            <td style="width: 14%;">Chức năng</td>        
+        </thead>
+    </table>
+    <div class="table_content" >
+        <table  border="1" cellspacing="0" cellpadding="5" >
+            <tr ng-repeat="x in listTH">
+                   <td style="width: 5%;height: 19px;">{{x.maTH}}</td>     
+                   <td style="width: 18%;" >{{x.tenThuongHieu}}</td>        
+                   <td style="width: 8%;padding:3px;"><img src="/image/{{x.hinhAnh}}" style="width: 80px;height: 40px;" alt="error"></td>         
+                  
+                   <td style="width: 14%;">
+                    <button class="task" ng-click="showeditSP(x)"><i class="fa-solid fa-wrench"></i></button>
+                    <!-- <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button> -->
+                    <button class="task" ng-click="deleteTH(x) "><i class="fa-solid fa-delete-left"></i></button>
+                </td>  
+            </tr>
+        </table>
+    </div>
+    
+    
+      <!-- Phủ đen màn hình -->
+      <div class="Screen" ng-show="screen_shadow"></div>
+        
+      <!-- Form add sản phẩm -->
+       <div class="form AddTH" ng-show="addTHShow">  
+        <form class="formcontent" onsubmit="resetForm(this)">
+            <h1 class="titleForm">Thêm thương hiệu</h1>
+            <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
+            <div style="margin-top:2%;" >
+                         <h4 class="title_info">Thông tin thương hiệu</h4>
+                        <label class="titlePrp">Tên thương hiệu</label>
+                        <input type="text" ng-model="tenThuongHieu" placeholder=" Ví dụ : Dior" >  <br>                                 
+                                                                 
+                         <label class="titlePrp">Mô tả</label>
+                        <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="moTa"></textarea> <br>
+                        <label class="titlePrp">Ảnh</label>
+                        <input type="file" ng-model="imageFile" id="fileInput"> <br>
+                        <img src="/image/{{hinhAnh}}" alt="errr" style="width: 200px;height: 100px; margin-left: 23%;border: 1px solid;">              
+                            
+                        <button type="submit" class="submit" ng-click="addTH()">Lưu</button>
+                    </div>
+        </form>
+       </div>
+    
+       <div class="form EditSP" ng-show="editTHShow">
+        <form class="formcontent" onsubmit="resetForm(this)">
+            <h1 class="titleForm">Thêm thương hiệu</h1>
+            <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
+            <div style="margin-top:2%;" >
+                         <h4 class="title_info">Thông tin thương hiệu</h4>
+                        <label class="titlePrp">Tên thương hiệu</label>
+                        <input type="text" ng-model="tenThuongHieu" placeholder=" Ví dụ : Dior" >  <br>                                 
+                                                                 
+                         <label class="titlePrp">Mô tả</label>
+                        <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="moTa"></textarea> <br>
+                        <label class="titlePrp">Ảnh</label>
+                        <input type="file"  id="fileInputedit"> <br>
+                        <img src="/image/{{hinhAnh}}" alt="errr" style="width: 200px;height: 100px; margin-left: 23%;border: 1px solid;">              
+                            
+             
+                       
+                        <button type="submit" class="submit" ng-click="editTH()">Lưu</button>
+                    </div>
+        </form>
+       </div>
+       <div class="form DetailSP" ng-show="detailSPShow"></div>
+      <!-- form xem chi tiết sản phẩm -->
+    
+    </div>
+    

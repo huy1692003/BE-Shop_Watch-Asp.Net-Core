@@ -18,8 +18,10 @@ myAdmin.controller("homeCtrl",($scope,$location)=>{
 });
 //////Tạo config để load trang khác
 myAdmin.config(($routeProvider)=>{
-$routeProvider .
-      when('/sanpham',{
+$routeProvider .when('/', {
+         templateUrl: 'home.html',
+         controller: 'homeCtrl'
+     }).when('/sanpham',{
          templateUrl:"sanpham.html",
          controller:'sanphamCtrl'
       })
@@ -35,6 +37,11 @@ $routeProvider .
          templateUrl:"nhacungcap.html",
          controller:'nhacungcapCtrl'
       })
+      .when('/khachhang',{
+         templateUrl:"khachhang.html",
+         controller:'khachhangCtrl'
+      }).otherwise({ redirectTo: '/' }); // Đặt trang chính là '/'
+
      
 })
 

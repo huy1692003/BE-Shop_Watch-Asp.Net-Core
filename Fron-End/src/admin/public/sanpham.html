@@ -25,10 +25,10 @@
             <td style="width: 8%;">{{x.soLuongton}}</td>
             <td style="width: 7%;">{{x.giaBan}}</td>        
             <td style="width: 10%;">{{x.trangthai}}</td>
-            <td style="width: 10%;">{{x.image_SP}}</td>
+            <td style="width: 10%;height: 40px;"><img src="/image/{{x.image_SP}}" style="width: 70%;height:91%;"></td>
             <td style="width: 14%;">
                 <button class="task" ng-click="showeditSP(x)"><i class="fa-solid fa-wrench"></i></button>
-                <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button>
+                <!-- <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button> -->
                 <button class="task" ng-click="deleteSP(x) "><i class="fa-solid fa-delete-left"></i></button>
             </td>  
         </tr>
@@ -50,17 +50,20 @@
         <div style="margin-top:2%;" >
                      <h4 class="title_info">Thông tin sản phẩm</h4>
                     <label class="titlePrp">Tên Sản Phẩm</label>
-                    <input type="text" placeholder="  Ví dụ : Đồng hồ Rolex" ng-model="TenSP"><br>          
+                    <input type="text" placeholder="  Ví dụ : Đồng hồ Rolex" ng-model="TenSP">
+                    <label class="titlePrp">Ảnh</label>
+                    <input type="file" id="fileInput">
+                    <img src="/image/{{imageSP}}" alt="errr" style="width: 130px;height: 70px;"><br>     
               
                     <label class="titlePrp" >Thương hiệu</label>
                     <select ng-model="MaTH">
-                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> -Chọn thương hiệu-</option>
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> - Chọn thương hiệu -</option>
                         <option ng-repeat="th in listTH" value={{th.maTH}}>{{th.tenThuongHieu}}</option></select>                   
                     </select> <br>
 
                     <label class="titlePrp">Thể Loại</label>
                     <select ng-model="maLoai">
-                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>-Chọn thể loại-</option>
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>- Chọn thể loại -</option>
                         <option ng-repeat="tl in listTheLoai" value={{tl.maLoai}}>{{tl.tenLoai}}</option>
                     </select> <br>
                     <label class="titlePrp">Giá Bán</label>
@@ -69,8 +72,10 @@
                     <label class="titlePrp">Số lượng</label>
                     <input type="number" placeholder="  Ví dụ : 10000" ng-model="soLuongton"><br>
 
-                    <label class="titlePrp">Ảnh</label>
-                    <input type="file"ng-model="imageSP" style="padding: 0; width: 280px;"><br>
+                    
+                    
+
+                      
 
                     <label class="titlePrp">Mô tả</label>
                     <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="Mota"></textarea>
@@ -93,13 +98,13 @@
               
                     <label class="titlePrp" >Thương hiệu</label>
                     <select ng-model="MaTH">
-                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> -Chọn thương hiệu-</option>
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> - Chọn thương hiệu -</option>
                         <option ng-repeat="th in listTH" value={{th.maTH}}>{{th.tenThuongHieu}}</option></select>                   
                     </select> <br>
 
                     <label class="titlePrp">Thể Loại</label>
                     <select ng-model="maLoai">
-                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>-Chọn thể loại-</option>
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>- Chọn thể loại -</option>
                         <option ng-repeat="tl in listTheLoai" value={{tl.maLoai}}>{{tl.tenLoai}}</option>
                     </select> <br>
                     <label class="titlePrp">Giá Bán</label>
@@ -109,7 +114,7 @@
                     <input type="number"  ng-model="soLuongton"><br>
 
                     <label class="titlePrp">Ảnh</label>
-                    <input type="file"ng-model="imageSP" style="padding: 0; width: 280px;"><br>
+                    <input type="file"  id="fileInputedit"> <br>
                     
                     <label class="titlePrp">Mô tả</label>
                     <textarea ng-model="Mota"></textarea>

@@ -1,0 +1,432 @@
+*{
+    margin: 0;padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    
+}
+#header{
+    background-color:black;
+    width: 100%;
+    height: 98px;
+    position: relative;
+    display: flex;
+    
+    
+}
+a{
+    list-style: none;
+    text-decoration: none;
+}
+.vnd{
+    font-size: 21px;
+    color: #f50;
+
+}
+.logos{
+    width: 18%;
+    height:78%;
+    margin-left: 70px;
+}
+#logo{
+    
+    width: 100%;
+    height:100%;
+    margin-left: 70px;
+    color: #f2ebeb;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 30px;
+    font-weight: bold;
+    border-bottom: 3px solid white;
+    
+  
+}
+#search{       
+    width: 30%;
+    height: 34px;  
+    margin-top: 40px;
+    border-radius: 24px;
+    margin-left: 15%;
+    border: #faf2f2;
+    align-items: center;
+    position: relative;
+   
+    
+}
+#search>input{     
+    width: 87%;    
+    height: 99%;
+    font-size: 15px;
+    border-radius: 24px ;
+    background-color: #252525;
+    color: white;
+    position: relative;      
+    padding-left: 20px; 
+    border: 0;
+    
+}
+#buttonsearch{
+    background-color:#252525;
+    width: 14%;
+    height: 20px;   
+    position: absolute;
+    border: none;
+    top:18%;
+    right:16%;
+    cursor: pointer;
+    
+}
+#lienhe_giohang{         
+    width: 38%;
+    height: 40px;
+    position: relative;   
+    display: flex; 
+    top: 40px;
+    margin-left: 30px;
+}
+#diadiem{
+    position: absolute;
+    left: 45%;
+    
+   
+}
+.sldh{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color:white;
+    color: red;
+    position: absolute;
+    left:15.8%;
+    bottom: 70%;
+    padding:1%;
+    text-align: center;
+    border:1px solid black;
+    font-size: 14px;
+    
+}
+.phonenumber{
+     text-align: left;
+     font-size: 16px;
+     position:absolute;
+     left:37px;
+     color:white;
+}
+.phonenumber:hover{color:gold;}
+
+#giohang{
+    width: 120px;
+    height: 35px;
+    position: absolute;
+    display: flex;
+    right: 60px;
+    
+    
+}
+#giohang>button{
+    font-size: 19px;
+    color: aliceblue;
+    background-color:transparent;
+    border: 0;
+    cursor: pointer;
+    position: relative;
+    
+}
+
+#giohang>button:hover{
+    color: gold;
+}
+
+/* MeNu */
+.menu{
+    width: 100%;
+    height: 45px;
+    background-color:#796752;
+   
+    display: flex;
+    padding-right: 20px;
+    
+}
+.home{    
+     
+     margin-bottom: 3px;
+     margin: 10px 20px 1.4px 80px;
+}
+.menu1{
+   
+    
+    font-size: 15px;
+    display: flex;
+    width: 100%;
+
+    
+  
+}
+
+
+/* menu cấp 2 */
+.menu2{
+    display: none;
+    position: absolute;
+    width: 300px;
+    background-color: #695640c8;
+    border-top: 1px solid white;
+    top:45px;
+    padding: 10px;
+    color: #f2ebeb;
+    border-radius:0px 0px 5px 5px;
+}
+.menu2>li{
+    font-size: 17px;
+    text-align: left;
+    
+}
+.menu1>li{
+    list-style-type: none;     
+    text-align: center;
+    line-height: 30px;
+    padding-top: 9px;
+    position: relative;
+    width: 14%;
+    
+}
+.menu1>li:hover .menu2{
+    display: block;
+}
+.menu1>li>a{     
+        
+     text-decoration: none;
+     text-transform: uppercase;
+     color: white;
+   
+     
+}
+.menu1>li>a:hover{
+    padding-bottom: 10px;
+    border-bottom:2px solid white ;
+    
+}
+.menu1>li:hover>a{
+    color: black;
+    
+}
+.menu2>li:hover{
+    color:rgb(185, 49, 49);
+}
+.thongtintrang{
+ 
+    padding: 10px;
+    padding-left: 75px;
+    margin-bottom: 15px;
+    background-color: darkgrey;
+  }
+/* Phần Thân */
+.sanpham{
+    margin: auto;
+    margin-top: 18px;
+    padding-top: 7px;
+   width: 1200px;
+   height: 40px;
+   font-size: 22px;
+   text-align: center;
+   font-weight: bold;
+   background-color: #F3F3F3;
+}
+.tittledonghonam{
+    width: 1135px;
+    height: auto;
+    padding: 30px 0;
+    margin: 0 auto;
+   font-style: italic;
+   line-height: 25px;
+}
+
+
+.containersp{
+   
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 1195px;
+    height: auto;    
+    display: flex;
+    flex-wrap: wrap;      
+    justify-content: space-between;
+    /* flex wrap giúp các phần tử nếu full chiều ngang sẽ tự 
+    xuống dòng */
+}
+.containersp .boxsp{
+    width: 24.2%;
+    height: 390px;          
+    padding-top: 10px;
+    text-align: center;
+  
+    margin:10px 0;
+}
+.containersp .boxsp img{
+    width: 89%;
+    height: 75%;
+    margin-bottom: 10px;
+
+}
+.containersp .boxsp img:hover{
+    width: 92%;
+    height: 79%;
+
+}
+.containersp .boxsp .titlettsp{
+    font-size: 18px;
+    text-decoration: none;
+    color: black;    
+}
+.containersp .boxsp .titlettsp:hover{
+    color: #f50;
+}
+.containersp .boxsp .giattsp{
+    width: 90%;
+    height: 10%;
+    margin: 0 auto;
+    margin-top: 12px;
+    
+}
+.giattsp .gia{
+    color: #f50;
+    font-size: 17px;
+    display: inline;
+    font-weight: 700;
+}
+.giattsp .giacu{
+    color: rgb(54, 52, 52);
+    font-size: 13px;
+    display: inline;
+    text-decoration: line-through;
+}
+.giattsp>span{
+    display: inline-block;
+    background-color:#f50;
+    color: #faf2f2;
+    border-radius: 5px;
+    width: 40px;
+    height: 18px;
+    padding-top: 2px;
+    font-size: 14px;
+    margin-left: 10px;
+    
+}
+.themsp{   
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 1195px;
+    height: auto;    
+    display: flex;
+    flex-wrap: wrap;      
+    justify-content: space-between; 
+}
+
+#xemthem{
+  background-color:rgb(185, 176, 176);
+  border: 3px solid rgb(104, 103, 103);
+  font-size: 16.9px;
+  font-weight: bold;   
+  width: 200px;
+  height: 30px;
+   margin: auto;
+   margin-top: 50px;
+   color: rgb(8, 8, 8);
+   border-radius: 12px;
+   cursor: pointer;
+   
+}
+#xemthem:hover{
+    background-color: blue;
+}
+
+
+/* Phần kết thúc */
+.kengang2{
+    width: 900px;
+    height: 3px;
+    background-color: #796752;
+    border-radius: 4px;
+    margin: 0 auto;
+    margin-top: 50px;
+    
+}
+.kengang2 .title3{
+    width: 46%;
+    font-size: 26px;
+    position: relative;  
+    bottom:13px;
+    left: 24%;
+    background-color: white;
+    text-transform: uppercase;
+    padding:0 10px 0;
+    text-align: center;
+    font-weight: bold;
+
+}
+.footer{
+    background-color:#796752;	
+	width: 100%;
+    
+    margin-top: 40px;
+    border-radius: 6px;
+    padding: 20px 20px 20px 22px;
+    
+}
+.logo{
+    display: inline-block;
+    margin-top: 38px;
+    margin-left: 20px;
+    width: 390px;
+    height: 230px;
+    border-radius: 9px;
+    margin-right: 80px;
+    
+}
+.logo>img{
+    
+    display: inline-block;
+    width: 100%;
+    height: 92%;
+    border-radius: 15px;
+}
+.noidung{
+    
+    display: inline-block;
+    width: 390px;
+    height: 250px;
+    text-align: center;
+   
+}
+li{list-style: none;}
+.noidung>ul>li{
+    text-align: left;
+    font-size: 19px;
+    color: #f2ebeb;
+    line-height: 35px;
+}
+.noidung>ul>li:hover{
+    color: gold;
+    cursor: pointer;
+}
+.noidung>ul>li>a{
+    text-decoration: none;
+    font-size: 28px;
+    color: gold;
+    font-weight: bold;
+}
+.noidung>ul>li>a:hover{color: black;}
+.ndend{
+    display: block;
+    width: 1100px;
+    margin: auto;
+    height: 80px;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 30px;
+    border-top: 1px solid black;
+    padding-top: 25px;
+}

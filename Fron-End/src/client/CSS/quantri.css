@@ -1,0 +1,302 @@
+*{margin: 0;
+padding: 0;
+font-family: Arial, Helvetica, sans-serif;
+box-sizing: border-box;}
+.login{
+    width: 100%;
+    height:100%;
+    text-align: center;
+   
+
+}
+
+.login .form{
+    border-radius: 20px;
+    width: 40%;
+    height: 370px;
+    margin: 100px auto;
+    background-color: rgb(233, 232, 232);
+    border: 1px solid;
+}
+.form h2{
+    font-size: 30px;
+    text-align: center;
+    padding-top: 18px;    
+    padding-bottom: 3px;
+    margin-bottom: 50px;
+}
+.icons{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+    padding: 5px 6px;
+}
+.check{
+    width: 80%;
+    height: 50px;
+    margin: 0 auto;
+    background-color: aliceblue;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    display: flex;
+    padding-top: 3px;
+    border: 1px solid;
+}
+.check input{
+    width: 78%;
+    height: 100%;
+    font-size: 20px;
+    display: inline-block;
+    background-color: aliceblue;
+    border: 0px;
+}
+
+input:focus{
+    outline: none;
+}
+#dangnhap{
+width: 180px;
+height: 40px;
+font-size: 20px;
+text-align: center;
+border-radius: 15px;
+cursor: pointer;
+margin-top: 30px;
+font-weight: bold;
+box-shadow: 10px rgba(111, 108, 108, 0.301);
+background-color: rgb(51, 140, 235);
+}
+#dangnhap:hover{
+    background-color: gold;
+}
+/*  */
+.hienthiadmin{
+    height: 100%;
+    display: none;
+    
+}
+.container-left{
+    width: 24%;
+    height: 100%;
+    background-color: #222D32;
+    color: white;
+    border: 0px;
+   
+    padding: 15px 0;
+    float: left;
+}
+#admin{
+    width: 100%;
+    height: auto;
+    font-size: 17px;
+    
+    padding-bottom: 17px;
+   
+    font-weight: bold;
+    text-align: center;
+}
+.tieude{
+    width: 100%;
+    height: 45px;
+    padding: 11px 15px;
+    background-color: #1A2226;
+    color: #b0d2ee;
+    font-size: 18.5px;
+    text-align: center;
+    margin-top: 14px;
+    text-transform: uppercase;
+    
+}
+.menu{
+    width: 100%;
+    padding: 11px 43px;
+    padding-right: 10px;
+    height: 370px;
+    overflow:overlay;
+    scroll-behavior: inherit;
+}
+i{
+    margin-right: 10px;
+    font-size: 18px;
+}
+.quanly{
+    height:auto;
+    width: 100%;
+    margin-top: 30px;
+    text-align: left;
+    position: relative;
+    
+    
+    
+}
+.iconmenu{
+    position: absolute;
+    right: 1px;
+    transition: all 0.3s ease;    
+    cursor: pointer;
+    font-size: 25px;
+    
+}
+.iconchecked{
+    transform: rotate(-90deg);
+}
+
+.menu2{
+   display: none;
+    padding-top: 10px;
+    padding-left: 23%;
+    transition: all 5s ease ;
+    
+   
+}
+.menu2>li{
+    list-style: none;
+    line-height: 40px;
+    
+}
+.menu2>li:hover{
+    color: blue;
+    cursor: pointer;
+}
+ 
+
+
+
+
+
+
+
+
+
+
+.container-right{
+    float: left;
+    width: 76%;
+    height: 100%;
+    
+}
+.thanhtrangthai{
+    width: 100%;
+    height: 60px;
+    padding: 20px 20px;
+    background-color: #222D32;
+    color:white;
+    font-size: 16px;
+    font-weight: bold;
+    border-left: 1px solid;
+
+}
+.quanlyhientai{
+    margin-left: 10px;
+    color: gold;
+}
+.quanlys{
+    
+    margin-top: 10px;
+    width: 100%;
+    height: 540px;
+    padding:  10px 0px 10px 30px;
+    
+    
+}
+.qlsp{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    margin-bottom: 15px;
+    
+    
+}
+.chucnang{    
+    border:1px solid grey;
+    height:35px;        
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-left: 9px;  
+    margin-right: 10px;
+    font-size: 15px;
+    position: relative;      
+       
+    
+}
+.themmoi{
+    width: 130px;
+    height: 35px;
+    border-radius: 7px;
+    color: white;
+    background-color: rgb(24, 73, 234);
+    cursor: pointer;
+    margin-right: 30px;
+    
+    
+}
+.icondown{
+    position: absolute;
+    right: 2px;
+    top: 8px;
+    cursor: pointer;
+}
+.chitietqlsp{
+
+   
+    width: 100%;
+    height: 440px;
+    box-shadow: none;
+    overflow :auto;
+    padding-right: 13.6px;
+
+    
+    border-radius: 4px;
+}
+.textsl{
+    width: 30px;
+    text-align: center;
+}
+.anhsp{
+    margin-top: 4px;
+    width: 50px;
+    height: 50px;
+    border-radius: 3px;
+}
+.table1{
+    text-align: center;
+    border-collapse: collapse;
+    
+}
+.table1 tr td{
+    font-weight: bold;
+    height: 40px;
+    font-size: 18px;
+}
+.table1 td{
+    border-bottom: 0px;
+}
+.table{
+    text-align: center;
+    border-collapse: collapse;
+    
+    
+}
+td,th{
+    border: 1.5px solid;
+    
+}
+.notett{
+    color: blue;
+    cursor: pointer;
+}
+.deletesp{
+    color: red;
+    cursor: pointer;
+}
+.collumx{
+    width: 70px;
+    text-align: center;
+}
+.collumimg{
+    width: 100px;
+}
+.collumy{
+    width: 200px;
+}

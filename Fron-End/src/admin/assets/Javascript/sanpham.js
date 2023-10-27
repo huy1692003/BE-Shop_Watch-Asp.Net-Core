@@ -50,14 +50,14 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         $scope.addSPShow=false;
         $scope.editSPShow=false;
         $scope.detailSPShow=false;
-        $scope.MaSP=null;
+        $scope.MaSP=1;
         $scope.TenSP=null;
         $scope.MaTH=null;
         $scope.maLoai=null;
         $scope.giaBan=null;
         $scope.imageSP="";
         $scope.Mota=null;
-        $scope.sldaban=null;
+        $scope.sldaban=0;
         $scope.soLuongton=null;
     }
     // model
@@ -68,7 +68,7 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     $scope.giaBan;
     $scope.imageSP="";
     $scope.Mota;
-    $scope.sldaban;
+    $scope.sldaban=0;
     $scope.soLuongton;
     $scope.trangthai="Còn Hàng"
     $scope.listTH={};
@@ -102,7 +102,7 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         // hàm
     $scope.editSP=()=>{    
           
-        $scope.reloadSP()  ;
+        $scope.reloadSP();
         console.log($scope.objSP)   
         $http({
             method:"PUT",
@@ -121,16 +121,28 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         $scope.editSPShow=true; 
         $scope.MaSP=x.maSP;
         $scope.TenSP=x.tenMH;
-        $scope.MaTH=x.maTH;
-        $scope.maLoai=x.maLoai;
+        $scope.MaTH=null;
+        $scope.maLoai=null;
         $scope.giaBan=x.giaBan;
-        $scope.imageSP="";
+        $scope.imageSP=x.image_SP;
         $scope.Mota=x.mota;
         $scope.sldaban=x.sldaban;
         $scope.soLuongton=x.soLuongton;
         $scope.trangthai="Còn Hàng" 
        
     }
+    angular.element(document.querySelector('#fileInput')).on('change', function(e) {
+        // Lấy tệp đã chọn
+        var selectedFile = e.target.files[0];
+        // Kiểm tra xem tệp đã chọn có tồn tại không
+        if (selectedFile) {
+            $scope.imageSP = selectedFile.name; // Cập nhật biến $scope.selectedFileName với tên tệp đã chọn
+        } else {
+            $scope.imageSP = ''; // Nếu không có tệp được chọn, đặt biến $scope.selectedFileName về rỗng
+        }
+
+        $scope.$apply(); // Áp dụng các thay đổi vào phạm vi AngularJS
+    });
     // Thêm sp
     $scope.reloadSP=()=>{
         $scope.objSP={        
@@ -145,19 +157,23 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             sldaban: $scope.sldaban,
             trangthai: $scope.trangthai}  
     }
-    $scope.addSP=()=>{   
-              $scope.reloadSP() 
-                
+   
+
+    
+    
+    $scope.addSP=()=>{            
+        $scope.reloadSP() ;             
+        console.log($scope.objSP)     
         $http({
             method:"POST",
             url:'https://localhost:44334/api/SanPham/create_SP',
             data: $scope.objSP
         }).then((result)=>{
-            alert("Thông báo : "+result.data)
+            alert("Thông báo : "+result.data);
+            $scope.getProducts();
         }).catch((error)=>
                  {alert("Có lỗi khi thêm sản phẩm hãy xem lại dữ liệu đã nhập đầy đủ hay chưa ?")
-                 console.log("Lỗi :" + error)}
-                 )
+                 console.log("Lỗi :" + error)})
 
     }
     $scope.detailSP=(x)=>{
@@ -179,6 +195,19 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             console.log("Hành động xóa đã bị hủy bỏ.");
         }
     }
+    angular.element(document.querySelector('#fileInputedit')).on('change', function(e) {
+        // Lấy tệp đã chọn
+        var selectedFile = e.target.files[0];
+        // Kiểm tra xem tệp đã chọn có tồn tại không
+        if (selectedFile) {
+            $scope.imageSP = selectedFile.name; // Cập nhật biến $scope.selectedFileName với tên tệp đã chọn
+        } else {
+            $scope.imageSP = ''; // Nếu không có tệp được chọn, đặt biến $scope.selectedFileName về rỗng
+        }
+
+        $scope.$apply(); // Áp dụng các thay đổi vào phạm vi AngularJS
+    });
+
     
 
 
@@ -215,7 +244,7 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         $scope.page+=1;
         console.log(parseInt($scope.totalItems/$scope.pageSize))
         $scope.clickSearch()
-        if($scope.page===parseInt($scope.totalItems/$scope.pageSize)){
+        if($scope.page>parseInt($scope.totalItems/$scope.pageSize)){
         $scope.pageafter=true;
      }
        

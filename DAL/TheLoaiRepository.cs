@@ -39,7 +39,7 @@ namespace DAL
             {
                 var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_ThemTheLoai",
                     "@TenLoai", tl.TenLoai,
-                    "@GhiChu", tl.GhiChu);
+                    "@GhiChu", tl.Ghichu);
                 if(!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(dt.ToString() + msgError);
@@ -53,12 +53,13 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_XoaTheLoai", "@MaLoai", id);
-                if(!string.IsNullOrEmpty(msgError)||(!string.IsNullOrEmpty(dt.ToString())&&dt!=null))
+                var result = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_XoaTheLoai", "@MaLoai", id);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
-                    throw new Exception(dt.ToString()+msgError);
+                    throw new Exception(Convert.ToString(result) + msgError);
                 }
                 return true;
+                
             }
             catch (Exception ex) { throw ex; }
         }
@@ -67,10 +68,10 @@ namespace DAL
             string msgError = "";
             try
             {
-                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_ThemTheLoai",
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_SuaTheLoai",
                    "@MaLoai",tl.MaLoai,
                   "@TenLoai", tl.TenLoai,
-                  "@GhiChu", tl.GhiChu);
+                  "@GhiChu", tl.Ghichu);
                 if ((dt != null && !string.IsNullOrEmpty(dt.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(dt.ToString() + msgError);

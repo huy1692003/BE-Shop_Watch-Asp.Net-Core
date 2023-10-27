@@ -1,4 +1,6 @@
-﻿namespace Data_Model
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Data_Model
 {
     public class SanPham
     {
@@ -14,5 +16,6 @@
         public string trangthai { get; set; }
     }
 
+  
 
 }
