@@ -14,5 +14,6 @@ namespace DAL.Interface
         NhaCungCap GetNCC_byID(int MaNCC);
         bool Update_NCC(NhaCungCap ncc);
         bool Delete_NCC(string MaNCC);
+        List<NhaCungCap> getALL_NCC();
     }
 }

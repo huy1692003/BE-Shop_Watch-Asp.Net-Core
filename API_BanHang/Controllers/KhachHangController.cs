@@ -16,6 +16,12 @@ namespace API_BanHang.Controllers
         {
             _KhachHangBusiness = khachHangBusiness;
         }
+        [Route("get-AllKH")]
+        [HttpGet]
+        public List<KhachHang> getAll_KH()
+        {
+            return _KhachHangBusiness.getAll_KH();
+        }
         [Route("get-byid/{id}")]
         [HttpGet]
         public KhachHang GetNVbyID(string id)

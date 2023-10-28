@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace DAL
@@ -15,6 +16,21 @@ namespace DAL
         public NhaCungCapRepository(IDatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper;
+        }
+        public List<NhaCungCap> getALL_NCC()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_getALL_NCC");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<NhaCungCap>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
         public NhaCungCap GetNCC_byID(int MaNCC)
         {
@@ -38,7 +54,7 @@ namespace DAL
             try
             {
                 var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_nhacungcap_create",
-                "@MaNCC", ncc.MaNCC,
+                "@email", ncc.Email,
                 "@TenNCC", ncc.TenNCC,
                 "@DiaChi", ncc.DiaChi,
                 "@SoDienThoai", ncc.SoDienThoai);
@@ -63,7 +79,8 @@ namespace DAL
                 "@MaNCC", ncc.MaNCC,
                 "@TenNCC", ncc.TenNCC,
                 "@DiaChi", ncc.DiaChi,
-                "@Dienthoai", ncc.SoDienThoai);
+                "@SoDienthoai", ncc.SoDienThoai,
+                "@email", ncc.Email);
           
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {

@@ -14,5 +14,6 @@ namespace BUS.Interface
         KhachHang GetKH_byID(string MaKH);
         bool Update_KH(KhachHang kh);
         bool Delete_KH(string MaKH);
+        List<KhachHang> getAll_KH();
     }
 }

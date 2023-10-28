@@ -16,6 +16,22 @@ namespace DAL
         {
             _dbHelper = dbHelper;
         }
+        public List<KhachHang> getAll_KH()
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "sp_getAllKH");
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<KhachHang>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public KhachHang GetKH_byID(string MaKH)
         {
             string msgError = "";

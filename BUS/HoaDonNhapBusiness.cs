@@ -18,6 +18,12 @@ namespace BUS
         {
             _res = res;
         }
+
+        public List<NhaCungCap> getALL_NCC()
+        {
+            return _res.getALL_NCC();
+
+        }
         public NhaCungCap GetNCC_byID(int MaNCC)
         {
             return _res.GetNCC_byID(MaNCC);

@@ -34,6 +34,8 @@ namespace BUS
         {
             return (_res.Update_KH(model));
         }
+        public List<KhachHang> getAll_KH()
+        { return _res.getAll_KH();}
     }
 
 }

@@ -21,26 +21,45 @@ namespace API_BanHang.Controllers
         {
             return NCCBusiness.GetNCC_byID(MaNCC);
         }
+        [Route("getALL_NCC")]
+        [HttpGet]
+        public List<NhaCungCap> getALL_NCC()
+        {
+            return NCCBusiness.getALL_NCC();
+        }
+        
         [Route("Create_NhaCungCap")]
         [HttpPost]
         public IActionResult Create_NCC([FromBody] NhaCungCap ncc)
         {
-            NCCBusiness.Create_NCC(ncc);
-            return Ok();
+            bool check=NCCBusiness.Create_NCC(ncc);
+            if(check)
+            {
+                return Ok("Thêm thành công");
+            }
+            return BadRequest("Thêm thất bại");
         }
         [Route("Update_NhaCungCap")]
         [HttpPut]
         public IActionResult Update_NCC([FromBody] NhaCungCap ncc)
         {
-            NCCBusiness.Update_NCC(ncc);
-            return Ok();
+            bool check = NCCBusiness.Update_NCC(ncc);
+            if (check)
+            {
+                return Ok("Sửa thành công");
+            }
+            return BadRequest("Sửa thất bại");
         }
-        [Route("Delete_NhaCungCap")]
+        [Route("Delete_NhaCungCap/{id}")]
         [HttpDelete]
         public IActionResult Delete_NCC(string id)
         {
-            NCCBusiness.Delete_NCC(id);
-            return Ok();
+            bool check = NCCBusiness.Delete_NCC(id);
+            if (check)
+            {
+                return Ok("Xóa thành công");
+            }
+            return BadRequest("Xóa thất bại");
         }
     }
 }

@@ -121,6 +121,13 @@ end
  end
 
    ----2.Tạo mới nhà cung cấp
+   create proc sp_getALL_NCC
+ as
+ begin 
+ select * From NhaCungCap 
+ end
+
+--
  create proc sp_nhacungcap_create 
  @MaNCC int,
  @TenNCC nvarchar(50) ,
@@ -193,14 +200,15 @@ create proc sp_khachhang_update
 
 ----------------Thủ tục Thể Loại
 -- Tạo stored procedure cho thêm thể loại
-CREATE PROCEDURE sp_ThemTheLoai
+alter PROCEDURE sp_ThemTheLoai
     @TenLoai NVARCHAR(50),
     @GhiChu NVARCHAR(250)
 AS
 BEGIN
-    INSERT INTO TheLoai (TenLoai, Ghichu)
+    INSERT INTO TheLoai (TenLoai,Ghichu)
     VALUES (@TenLoai, @GhiChu);
 END;
+exec sp_ThemTheLoai 'ok','ok'
 
 -- Tạo stored procedure cho sửa thể loại
 CREATE PROCEDURE sp_SuaTheLoai
@@ -222,6 +230,7 @@ BEGIN
     DELETE FROM TheLoai
     WHERE MaLoai = @MaLoai;
 END;
+exec sp_XoaTheLoai 6
 
 -- Tạo stored procedure cho tìm kiếm thể loại
 CREATE PROCEDURE sp_TimKiemTheLoai
