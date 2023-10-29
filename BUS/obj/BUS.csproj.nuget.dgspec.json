@@ -51,6 +51,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Azure.Search.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -61,7 +65,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -132,6 +136,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Azure.Search.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -142,7 +150,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -209,6 +217,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Azure.Search.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -219,7 +231,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",

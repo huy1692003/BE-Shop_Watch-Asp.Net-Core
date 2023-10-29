@@ -49,16 +49,16 @@ END;
 
  ------Thủ tục Tài Khoản 
 -- Tạo stored procedure cho thêm tài khoảnc
-create PROCEDURE sp_ThemTaiKhoan
+alter PROCEDURE sp_ThemTaiKhoan
     @TenTaiKhoan NVARCHAR(50),
     @MatKhau NVARCHAR(50) ,
 	@LoaiTaiKhoan INT
 AS
 BEGIN
-    INSERT INTO TaiKhoans (TenTaiKhoan, MatKhau,MaLoaiTaiKhoan)
-    VALUES (@TenTaiKhoan, @MatKhau,@LoaiTaiKhoan);
+    INSERT INTO TaiKhoans (TenTaiKhoan, MatKhau,MaLoaiTaiKhoan,HoTen,DiaChi,SoDienThoai,AnhDaiDien,Email)
+    VALUES (@TenTaiKhoan, @MatKhau,@LoaiTaiKhoan,N'Trống',N'Trống',N'Trống',N'Trống',N'Trống');
 END;
-
+exec sp_ThemTaiKhoan 'huyok','123',2
 -- Tạo stored procedure cho xóa tài khoản
 CREATE PROCEDURE sp_XoaTaiKhoan
     @TenTaiKhoan NVARCHAR(50)
@@ -128,25 +128,26 @@ end
  end
 
 --
- create proc sp_nhacungcap_create 
- @MaNCC int,
+ alter proc sp_nhacungcap_create 
+ @email nvarchar(100),
  @TenNCC nvarchar(50) ,
  @DiaChi nvarchar(100) ,
  @SoDienThoai nvarchar(15)
  as
  begin
-		INSERT INTO NhaCungCap(MaNCC,TenNCC,DiaChi,SoDienThoai) values (@MaNCC,@TenNCC,@DiaChi,@SoDienThoai)
+		INSERT INTO NhaCungCap(Email,TenNCC,DiaChi,SoDienThoai) values (@email,@TenNCC,@DiaChi,@SoDienThoai)
  end
 
  ----Cập nhật thông tin Nhà cung cấp
-create proc sp_nhacungcap_update
+alter proc sp_nhacungcap_update
  @MaNCC int,
  @TenNCC nvarchar(50) ,
  @DiaChi nvarchar(100) ,
- @SoDienThoai nvarchar(15)
+ @SoDienThoai nvarchar(15),
+ @email nvarchar(100)
  as
  begin
-	update NhaCungCap Set TenNCC=@TenNCC,DiaChi=@DiaChi,SoDienThoai=@SoDienthoai where MaNCC=@MaNCC
+	update NhaCungCap Set TenNCC=@TenNCC,DiaChi=@DiaChi,SoDienThoai=@SoDienthoai,Email=@email where MaNCC=@MaNCC
  end
 
 
@@ -157,46 +158,7 @@ create proc sp_nhacungcap_update
  begin 
  delete NhaCungCap where @MaNCC=MaNCC
  end
- exec sp_DeleteNV 'NV30'
-
- -----Tạo khách hàng
-create proc sp_khachhang_create ( 
- @TenKH nvarchar(50),
- @DiaChi nvarchar(100),
- @Dienthoai nvarchar(15),
- @ngaysinh date)
- as
- begin
-	insert into KhachHang(TenKhachHang,DiaChi,DienThoai,ngaysinh) values (@TenKH,@DiaChi,@Dienthoai,@ngaysinh)
- end
-  exec sp_nhanvien_create 'NV30',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
- -----Tìm kiếm khachhang by Mã KH
- create proc sp_searchKH_by_MaKH
- @MaKH int
- as
- begin 
- select * From KhachHang as kh where kh.MaKH=@MaKH
- end
- ----Cập nhật thông tin khách hàng
-create proc sp_khachhang_update
- @MaKH int,
- @TenKH nvarchar(50) ,
- @DiaChi nvarchar(100) ,
- @Dienthoai nvarchar(15),
- @ngaysinh date 
- as
- begin
-	update KhachHang Set TenKhachHang=@TenKH,DiaChi=@DiaChi,DienThoai=@Dienthoai,ngaysinh=@ngaysinh where MaKH=@MaKH
- end
- exec sp_nhanvien_update 'NV01',N'NVTest' ,N'Hưng Yên','038746373','2003-09-14'
- ----Xóa khách hàng theo mã 
- create proc sp_DeleteKH
- @MaKH int
- as
- begin 
- delete KhachHang where @MaKH=MaKH
- end
-
+ exec sp_DeleteNCC 0
 
 ----------------Thủ tục Thể Loại
 -- Tạo stored procedure cho thêm thể loại
@@ -432,7 +394,7 @@ EXEC sp_search_sanpham @page_size=2,@page_index=5 ,@ten_sanpham = '',    @gia_ti
 
 
 ----------Thủ tục bảng Hóa Đơn Bán and Chi tiết hóa đơn bán
-Create proc sp_CreateDonHangBan
+alter proc sp_CreateDonHangBan
     @TrangThai BIT,
     @NgayTao DATETIME,      
     @TenKH NVARCHAR(50),    
@@ -441,12 +403,13 @@ Create proc sp_CreateDonHangBan
     @SDT NVARCHAR(50),
     @DiaChiGiaoHang NVARCHAR(350),
     @ThoiGianGiaoHang DATETIME,
+	@tentaikhoan nvarchar(50),
 	@list_json_chitietHDB NVARCHAR(MAX)
 	as
 begin
 		----Tạo hóa đơn
-		insert into HoaDonBan(TrangThai,NgayTao,TenKH,Diachi,Email,SDT,DiaChiGiaoHang,ThoiGianGiaoHang)
-		values(@TrangThai,@NgayTao,@TenKH,@Diachi,@Email,@SDT,@DiaChiGiaoHang,@ThoiGianGiaoHang)
+		insert into HoaDonBan(TrangThai,NgayTao,TenKH,Diachi,Email,SDT,DiaChiGiaoHang,ThoiGianGiaoHang,TenTaiKhoan)
+		values(@TrangThai,@NgayTao,@TenKH,@Diachi,@Email,@SDT,@DiaChiGiaoHang,@ThoiGianGiaoHang,@tentaikhoan)
 
 		----Lấy mã hóa hơn vừa tạo xong
 		declare @MaHoaDon int 
