@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_User\\API_User.csproj": {}
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\API_User\\API_User.csproj": {}
   },
   "projects": {
-    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_User\\API_User.csproj": {
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\API_User\\API_User.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_User\\API_User.csproj",
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\API_User\\API_User.csproj",
         "projectName": "API_User",
-        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_User\\API_User.csproj",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\API_User\\API_User.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\API_User\\obj\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\API_User\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj": {
-                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj"
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\BUS.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\BUS.csproj"
               }
             }
           }
@@ -48,13 +48,17 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Azure.Search.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -84,14 +88,14 @@
         }
       }
     },
-    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj": {
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\BUS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj",
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\BUS.csproj",
         "projectName": "BUS",
-        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\BUS.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\obj\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -108,11 +112,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj": {
-                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj"
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\DAL.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\DAL.csproj"
               },
-              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
-                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj"
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj"
               }
             }
           }
@@ -131,6 +135,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Azure.Search.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -141,7 +149,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -168,14 +176,14 @@
         }
       }
     },
-    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj": {
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\DAL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj",
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\DAL.csproj",
         "projectName": "DAL",
-        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\DAL.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\obj\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -192,8 +200,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
-                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj"
+              "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj": {
+                "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj"
               }
             }
           }
@@ -212,6 +220,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Azure.Search.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -222,7 +234,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
@@ -249,14 +261,14 @@
         }
       }
     },
-    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj",
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj",
         "projectName": "Data_Model",
-        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\obj\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -289,6 +301,10 @@
               "target": "Package",
               "version": "[6.0.0, )"
             },
+            "Microsoft.Azure.Search.Data": {
+              "target": "Package",
+              "version": "[10.1.0, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[7.0.0, )"
@@ -299,7 +315,7 @@
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.5.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",

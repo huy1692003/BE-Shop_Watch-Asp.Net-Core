@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {}
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj": {}
   },
   "projects": {
-    "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
+    "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj",
+        "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj",
         "projectName": "Data_Model",
-        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj",
+        "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\obj\\",
+        "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -24,7 +24,7 @@ namespace DAL
             {
                 var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_ThemLoaiTaiKhoan",
                     "@TenLoai", tk.TenLoai,
-                    "@MoTa", tk.Mota );
+                    "@MoTa", tk.mota );
                 if(!string.IsNullOrEmpty(msgError)) 
                 {
                     throw new Exception(dt.ToString()+msgError);
@@ -58,7 +58,7 @@ namespace DAL
                 var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_SuaLoaiTaiKhoan",
                     "@MaLoaiTaiKhoan", LoaiTK.MaLoaiTaiKhoan,
                     "@TenLoai",LoaiTK.TenLoai,
-                    "@MoTa", LoaiTK.Mota);
+                    "@MoTa", LoaiTK.mota);
                 if (!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(msgError);

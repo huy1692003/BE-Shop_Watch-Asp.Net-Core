@@ -6188,11 +6188,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj",
+      "projectUniqueName": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\BUS.csproj",
       "projectName": "BUS",
-      "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\BUS.csproj",
+      "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\BUS.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\BUS\\obj\\",
+      "outputPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\BUS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6209,11 +6209,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj": {
-              "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\DAL\\DAL.csproj"
+            "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\DAL.csproj": {
+              "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\DAL\\DAL.csproj"
             },
-            "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj": {
-              "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj"
+            "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj": {
+              "projectPath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj"
             }
           }
         }

@@ -126,6 +126,32 @@ textarea{
     height: 180px;
     padding: 5px;
 }
+.hdb{
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 5px;
+    border: 1px solid;
+    cursor: pointer;
+}
+.hdb.no_confirm{
+    background-color: #3C8DBC;
+    color: white;
+    
+}
+.hdb.confirm{
+    background-color:indianred;
+    color: white;
+    
+}
+.hdb_active{
+    border-bottom:1.5px solid black;
+    
+    
+}
+.hdb:active{
+  background-color: blue;  
+}
+
 
 
 

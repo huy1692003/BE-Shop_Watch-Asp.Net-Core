@@ -1,8 +1,11 @@
 <div class="blockTable">
 <h3 class="title_manage">Quản lý sản phẩm</h3>
-<button class="addnew" ng-click="showAddSP()"> Thêm mới</button>
+<button class="addnew" ng init="addSPShow=false" ng-click="showAddSP()"> Thêm mới</button>
 <div class="taskbar">   
-        <input type="text" class="search" style="height: 29px;width: 200px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập từ khóa tìm kiếm" ng-model="txtSearchTenSanPham">
+        <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập tên sản phẩm" ng-model="txtSearchTenSanPham">
+        <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập tên thương hiệu" ng-model="txtSearchThuongHieu">
+        <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập tên thể loại" ng-model="txtSearchTheLoai">
+        <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập giá tiền " ng-model="txtSearchGiaTien">
         <button style="width: 90px;height: 30px;border-radius: 5px;cursor: pointer;" ng-click="clickSearch()">Search</button>
       
 </div>
@@ -40,7 +43,7 @@
  </div>
 
   <!-- Phủ đen màn hình -->
-  <div class="Screen" ng-show="screen_shadow"></div>
+  <div class="Screen" ng-init="screen_shadow=false" ng-show="screen_shadow"></div>
     
   <!-- Form add sản phẩm -->
    <div class="form AddSP" ng-show="addSPShow">  
@@ -85,7 +88,7 @@
     </form>
    </div>
 
-   <div class="form EditSP" ng-show="editSPShow">
+   <div class="form EditSP"ng-init="editSPShow=false" ng-show="editSPShow">
     <form class="formcontent" onsubmit="resetForm(this)">
         <h1 class="titleForm">Sửa sản phẩm</h1>
         <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
@@ -123,7 +126,7 @@
                 </div>
     </form>
    </div>
-   <div class="form DetailSP" ng-show="detailSPShow"></div>
+   <div class="form DetailSP" ng-init="detailSPShow=false" ng-show="detailSPShow"></div>
   <!-- form xem chi tiết sản phẩm -->
 
 </div>

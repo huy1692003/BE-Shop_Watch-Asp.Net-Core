@@ -3,7 +3,7 @@
     public class HoaDonBan
     {
         public int MaHD { get; set; }
-        public int TrangThai { get; set; }
+        public bool TrangThai { get; set; }
         public DateTime NgayTao { get; set; }
         public DateTime NgayDuyet { get; set; }
         public string? TenKH { get; set; }

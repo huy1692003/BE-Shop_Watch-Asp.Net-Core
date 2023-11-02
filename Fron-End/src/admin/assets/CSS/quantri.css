@@ -174,3 +174,14 @@ i{
  i{
     cursor: pointer;
  }
+ /* design thanh cuộn */
+ ::-webkit-scrollbar{
+    width: 7px;
+    
+ }
+ ::-webkit-scrollbar-thumb{
+    background-color: grey;
+    border-radius: 4px;
+    height: 20px;
+ }
+

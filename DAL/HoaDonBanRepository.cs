@@ -71,5 +71,29 @@ namespace DAL
             }
             catch (Exception ex) { throw ex; }
         }
+        public List<HoaDonBan> getHoaDonBan(out int total,int page, int pageSize, int trangthai, string time_begin, string time_end, string tentaikhoan)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_GetHoaDonban",
+                    "@page_index", page,
+                    "@page_size", pageSize,
+                    "@trangthai", trangthai,
+                    "@searchTime_begin", time_begin,
+                    "@searchTime_end", time_end,
+                    "@tentaikhoan", tentaikhoan);
+                if(!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError + dt.ToString());
+                }
+                if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
+                return dt.ConvertTo<HoaDonBan>().ToList();
+            }
+            catch(Exception ex) { throw ex; }
+            
+        }
+
     }
 }

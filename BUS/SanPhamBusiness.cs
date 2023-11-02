@@ -19,9 +19,9 @@ namespace BUS
             this.sp_Dal = sp_Dal;
         }
 
-        public List<SanPham> SearchSP(int pageIndex, int pageSize, out int total, string TenSanPham, string TenTheLoai, string TenThuongHieu, string giatien)
+        public List<SanPham> SearchSP(int pageIndex, int pageSize, out int total, string TenSanPham, int MaTheLoai, int MaThuongHieu, string giatien)
         {
-            return sp_Dal.SearchSP(pageIndex, pageSize, out total, TenSanPham, TenTheLoai, TenThuongHieu, giatien);
+            return sp_Dal.SearchSP(pageIndex, pageSize, out total, TenSanPham, MaTheLoai, MaThuongHieu, giatien);
         }
         public bool Create_SanPham(SanPham sp)
         {

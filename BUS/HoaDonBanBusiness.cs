@@ -30,6 +30,10 @@ namespace BUS
         {
             return hdb_Dal.ConFirm_HDB(MaHD);
         }
+        public List<HoaDonBan> getHoaDonBan(out int total, int page, int pageSize, int trangthai, string time_begin, string time_end, string tentaikhoan)
+        {     
+            return hdb_Dal.getHoaDonBan(out total, page, pageSize, trangthai, time_begin,time_end,  tentaikhoan);
+        }    
     }
 
 }

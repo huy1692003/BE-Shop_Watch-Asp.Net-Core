@@ -17,7 +17,7 @@ namespace DAL
             this.db = db;
         }
 
-       public List<SanPham> SearchSP(int pageIndex, int pageSize, out int total, string TenSanPham, string TenTheLoai, string TenThuongHieu,string giatien)
+       public List<SanPham> SearchSP(int pageIndex, int pageSize, out int total, string TenSanPham, int MaTheLoai, int MaThuongHieu,string giatien)
         {
             string msgError = "";
             total = 0;
@@ -28,8 +28,8 @@ namespace DAL
                     "@page_size",pageSize,
                     "@ten_sanpham",TenSanPham,
                     "@gia_tien",giatien,
-                    "@ten_theloai ",TenTheLoai,
-                    "@ten_thuonghieu",TenThuongHieu
+                    "@ma_theloai ",MaTheLoai==0 ?"":MaTheLoai,
+                    "@ma_thuonghieu",MaThuongHieu==0?"":MaThuongHieu
                     );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);

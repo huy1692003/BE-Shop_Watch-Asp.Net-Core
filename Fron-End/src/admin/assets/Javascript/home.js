@@ -18,9 +18,9 @@ myAdmin.controller("homeCtrl",($scope,$location)=>{
 });
 //////Tạo config để load trang khác
 myAdmin.config(($routeProvider)=>{
-$routeProvider .when('/', {
-         templateUrl: 'home.html',
-         controller: 'homeCtrl'
+$routeProvider.when('/thongke', {
+         templateUrl: 'thongke.html',
+         controller: 'thongkeCtrl'
      }).when('/sanpham',{
          templateUrl:"sanpham.html",
          controller:'sanphamCtrl'
@@ -37,10 +37,18 @@ $routeProvider .when('/', {
          templateUrl:"nhacungcap.html",
          controller:'nhacungcapCtrl'
       })
-      .when('/khachhang',{
-         templateUrl:"khachhang.html",
-         controller:'khachhangCtrl'
-      }).otherwise({ redirectTo: '/' }); // Đặt trang chính là '/'
+      .when('/loaitaikhoan',{
+         templateUrl:"loaitaikhoan.html",
+         controller:'loaitaikhoanCtrl'
+      })
+      .when('/hoadonban',{
+         templateUrl:"hoadonban.html",
+         controller:'hoadonbanCtrl'
+      })
+      .when('/hoadonnhap',{
+         templateUrl:"hoadonnhap.html",
+         controller:'hoadonnhapCtrl'
+      }).otherwise({ redirectTo: '/thongke' }); // Đặt trang chính là '/'
 
      
 })
@@ -49,7 +57,7 @@ $routeProvider .when('/', {
 
 
 
-function check_color(a)
+function check_activePage(a)
 {  
 document.querySelectorAll('.check_color').forEach(x=>x.style.color='white')
 a.style.color='blue'

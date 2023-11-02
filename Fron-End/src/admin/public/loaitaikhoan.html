@@ -1,1 +1,76 @@
-<h1>{{message}}</h1>
+<div class="blockTable">
+    <h3 class="title_manage">Quản lý loại tài khoản</h3>
+    <button class="addnew" ng-click="showAddLTK()"> Thêm mới</button> 
+    <table  border="1" cellspacing="0" cellpadding="5" class="table_header">
+        <thead>
+            <td style="width: 5%;height: 19px;">Mã Loại TK</td>     
+            <td style="width: 12%;" >Tên loại</td>        
+            <td style="width: 14%;">Mô tả</td>          
+            <td style="width: 14%;">Chức năng</td>        
+        </thead>
+    </table>
+    <div class="table_content" >
+        <table  border="1" cellspacing="0" cellpadding="5" >
+            <tr ng-repeat="x in listLTK">
+                   <td style="width: 5%;height: 19px;">{{x.maLoaiTaiKhoan}}</td>     
+                   <td style="width: 12%;" >{{x.tenLoai}}</td>        
+                   <td style="width: 14%;">{{x.mota}}</td>                  
+                   <td style="width: 14%;">
+                    <button class="task" ng-click="showeditLTK(x)"><i class="fa-solid fa-wrench"></i></button>
+                    <!-- <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button> -->
+                    <button class="task" ng-click="deleteLTK(x) "><i class="fa-solid fa-delete-left"></i></button>
+                </td>  
+            </tr>
+        </table>
+    </div>
+    
+    
+      <!-- Phủ đen màn hình -->
+      <div class="Screen" ng-show="screen_shadow"></div>
+        
+      <!-- Form add sản phẩm -->
+       <div class="form AddTL" ng-show="addLTKShow">  
+        <form class="formcontent" onsubmit="resetForm(this)">
+            <h1 class="titleForm">Thêm loại tài khoản</h1>
+            <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
+            <div style="margin-top:2%;" >
+                <h4 class="title_info">Thông tin loại tài khoản</h4>
+                <label class="titlePrp">Tên loại</label>
+                <input type="text" ng-model="tenLoai" placeholder=" Ví dụ : Khách hàng" >  <br>                                
+                                                         
+                 <label class="titlePrp">Mô tả</label>
+                <textarea placeholder="Ví dụ : Tài khoản dành cho khách hàng ,..." ng-model="mota"></textarea> <br>
+                       
+     
+                            
+                        <button type="submit" class="submit" ng-click="addLTK()">Lưu</button>
+                    </div>
+        </form>
+       </div>
+    
+       <div class="form EditTH" ng-show="editLTKShow">
+        <form class="formcontent" onsubmit="resetForm(this)">
+            <h1 class="titleForm">Sửa loại tài khoản</h1>
+            <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
+            <div style="margin-top:2%;" >
+                <h4 class="title_info">Thông tin loại tài khoản</h4>
+                <label class="titlePrp">Mã Loại loại</label>
+                <input type="text" ng-model="maLoai" ng-disabled="true" >  <br>                                
+                
+                <label class="titlePrp">Tên loại</label>
+                <input type="text" ng-model="tenLoai" placeholder=" Ví dụ : Khách hàng" >  <br>                                
+                                                         
+                 <label class="titlePrp">Mô tả</label>
+                <textarea placeholder="Ví dụ : Tài khoản dành cho khách hàng ,..." ng-model="mota"></textarea> <br>
+                       
+     
+                        
+                        <button type="submit" class="submit" ng-click="editLTK()">Lưu</button>
+                    </div>
+        </form>
+       </div>
+     
+      <!-- form xem chi tiết sản phẩm -->
+    
+    </div>
+    

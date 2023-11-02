@@ -337,8 +337,8 @@ create PROCEDURE [dbo].[sp_search_sanpham]
     @page_size INT,
     @ten_sanpham NVARCHAR(250) ,
     @gia_tien VARCHAR(50) ,
-    @ten_theloai VARCHAR(250) ,
-    @ten_thuonghieu VARCHAR(250)
+    @ma_theloai int ,
+    @ma_thuonghieu int
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -354,8 +354,8 @@ BEGIN
         WHERE
              (@ten_sanpham ='' OR sp.TenMH LIKE '%' + @ten_sanpham + '%')
             AND (@gia_tien ='' OR sp.GiaBan LIKE '%' + @gia_tien + '%')
-            AND (@ten_theloai ='' OR tl.TenLoai like '%'+ @ten_theloai+ '%')
-            AND (@ten_thuonghieu='' OR th.TenThuongHieu = '%'+@ten_thuonghieu+'%');
+            AND (@ma_theloai ='' OR tl.MaLoai = @ma_theloai)
+            AND (@ma_thuonghieu='' OR th.TenThuongHieu = @ma_thuonghieu);
     END
     ELSE
     BEGIN
@@ -456,3 +456,101 @@ update HoaDonBan
 set HoaDonBan.TrangThai=1,HoaDonBan.NgayDuyet=GetDate()
 where MaHD=@MaHD
 end
+
+-----Lấy thông tin dơn hàng bán
+exec sp_GetHoaDonban @page_index=1, @page_size=2, @trangthai=1,  @searchTime_begin='',@searchTime_end='',@tentaikhoan =daohuy
+ALTER PROCEDURE sp_GetHoaDonBan
+    @page_index INT,
+    @page_size INT,
+    @trangthai BIT,
+    @searchTime_begin DATE,
+    @searchTime_end DATE,
+    @tentaikhoan VARCHAR(250)
+AS
+BEGIN
+    DECLARE @RecordCount INT;
+
+    IF (@searchTime_begin != '' AND @searchTime_end = '')
+    BEGIN
+        SELECT @searchTime_end = DATEADD(DAY, 1, GETDATE()); -- Add 1 day to the current date
+    END
+
+    -- Search for unconfirmed orders
+    IF (@trangthai = 0)
+    BEGIN
+        SET NOCOUNT ON;
+
+        IF @page_size = 0
+        BEGIN
+            SELECT
+                ROW_NUMBER() OVER (ORDER BY MaHD ASC) AS RowNumber, *
+            FROM HoaDonBan AS h
+            WHERE
+                (@trangthai = '' OR h.TrangThai = @trangthai)
+                AND (@tentaikhoan = '' OR h.TenTaiKhoan = @tentaikhoan)
+                AND (h.NgayTao BETWEEN CONVERT(DATE, @searchTime_begin) AND CONVERT(DATE, @searchTime_end) OR @searchTime_begin = '' AND @searchTime_end = '')
+        END
+        ELSE
+        BEGIN
+            SELECT ROW_NUMBER() OVER (ORDER BY MaHD ASC) AS RowNumber, *
+            INTO #Results
+            FROM HoaDonBan AS h
+            WHERE
+                (@trangthai = '' OR h.TrangThai = @trangthai)
+                AND (@tentaikhoan = '' OR h.TenTaiKhoan = @tentaikhoan)
+                AND (h.NgayTao BETWEEN CONVERT(DATE, @searchTime_begin) AND CONVERT(DATE, @searchTime_end) OR @searchTime_begin = '' AND @searchTime_end = '')
+
+            SELECT @RecordCount = COUNT(*)
+            FROM #Results;
+            
+            SELECT *, @RecordCount AS RecordCount
+            FROM #Results
+            WHERE
+                RowNumber BETWEEN (@page_index - 1) * @page_size + 1
+                AND ((@page_index - 1) * @page_size + 1) + @page_size - 1
+                OR @page_index = -1;
+
+            DROP TABLE #Results;
+        END
+    END
+
+    -- Đơn hàng đã xác nhận
+    if(@trangthai=1)
+    BEGIN
+        SET NOCOUNT ON;
+
+        IF @page_size = 0
+        BEGIN
+            SELECT
+                ROW_NUMBER() OVER (ORDER BY MaHD ASC) AS RowNumber, 
+                *
+            FROM HoaDonBan AS h
+            WHERE
+                (@trangthai = '' OR h.TrangThai = @trangthai)
+                AND (@tentaikhoan = '' OR h.TenTaiKhoan = @tentaikhoan)
+                AND (h.NgayDuyet BETWEEN CONVERT(DATE, @searchTime_begin) AND CONVERT(DATE, @searchTime_end) OR @searchTime_begin = '' AND @searchTime_end = '')
+        END
+        ELSE
+        BEGIN
+            SELECT ROW_NUMBER() OVER (ORDER BY MaHD ASC) AS RowNumber, *
+            INTO #Results1
+            FROM HoaDonBan AS h
+            WHERE
+                (@trangthai = '' OR h.TrangThai = @trangthai)
+                AND (@tentaikhoan = '' OR h.TenTaiKhoan = @tentaikhoan)
+                AND (h.NgayDuyet BETWEEN CONVERT(DATE, @searchTime_begin) AND CONVERT(DATE, @searchTime_end) OR @searchTime_begin = '' AND @searchTime_end = '')
+
+            SELECT @RecordCount = COUNT(*)
+            FROM #Results1;
+            
+            SELECT *, @RecordCount AS RecordCount
+            FROM #Results1
+            WHERE
+                RowNumber BETWEEN (@page_index - 1) * @page_size + 1
+                AND ((@page_index - 1) * @page_size + 1) + @page_size - 1
+                OR @page_index = -1;
+            
+            DROP TABLE #Results1;
+        END
+    END
+END;

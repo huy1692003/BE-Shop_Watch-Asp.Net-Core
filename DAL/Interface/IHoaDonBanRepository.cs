@@ -1,4 +1,5 @@
 ﻿using Data_Model;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace DAL.Interface
         bool Delete_HDB(int MaHD);
 
         bool ConFirm_HDB(int MaHD);
+        List<HoaDonBan> getHoaDonBan(out int total, int page, int pageSize, int trangthai, string time_begin, string time_end, string tentaikhoan);
     }
 }

@@ -1,6 +1,5 @@
 myAdmin.controller('sanphamCtrl', function ($scope,$http) {
-    // Khởi tạo
-   
+    // Khởi tạo   
     $scope.page=1;
     $scope.pageSize=9;
     $scope.txtSearchTenSanPham='';
@@ -38,15 +37,10 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         
         
     };
-
-
-    // Các form chức năng thêm sửa xóa sản phẩm
-    $scope.screen_shadow=false;
-    $scope.addSPShow=false;
-    $scope.editSPShow=false;
-    $scope.detailSPShow=false;
+   // Các form chức năng thêm sửa xóa sản phẩm  
     $scope.exitForm=()=>{
-        $scope.screen_shadow=false;
+        v=$scope
+        v.screen_shadow=false;
         $scope.addSPShow=false;
         $scope.editSPShow=false;
         $scope.detailSPShow=false;
@@ -208,47 +202,20 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         $scope.$apply(); // Áp dụng các thay đổi vào phạm vi AngularJS
     });
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     $scope.pageafter=false;
     $scope.pageprev=true;
     $scope.clickSearch();
     // chuyển trang sau
     $scope.page_after=()=>{
-     $scope.pageprev=false;        
+        $scope.pageprev=false;        
         $scope.page+=1;
-        console.log(parseInt($scope.totalItems/$scope.pageSize))
         $scope.clickSearch()
-        if($scope.page>parseInt($scope.totalItems/$scope.pageSize)){
-        $scope.pageafter=true;
-     }
-       
-     
+        console.log($scope.page * $scope.pageSize)
+         if($scope.page * $scope.pageSize >= $scope.totalItems)
+         {
+            $scope.pageafter=true;
+         }
+
     }
     
     // chuyển trang trước

@@ -1,5 +1,4 @@
 ﻿using BUS.Interface;
-using Data_Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +8,13 @@ namespace API_User.Controllers
     [ApiController]
     public class SanPhamController : ControllerBase
     {
+
         private ISanPhamBusiness sp_Bus;
         public SanPhamController(ISanPhamBusiness sp_Bus)
         {
             this.sp_Bus = sp_Bus;
         }
+
         [Route("search_SP")]
         [HttpPost]
         public IActionResult SearchSanPham([FromBody] Dictionary<string, object> ch)
@@ -43,7 +44,5 @@ namespace API_User.Controllers
                 return BadRequest($"Lỗi: {ex.Message}");
             }
         }
-
-
     }
 }

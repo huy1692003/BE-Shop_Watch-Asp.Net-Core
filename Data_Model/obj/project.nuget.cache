@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sD+lDawpTL2/jnafKfuUesWkvaflDH+6iZtz8TNm9qUCGF8Y2DU8WZrmYb5VOZ7Lj7v/nFwXeT4dF2MvA1HJ0g==",
+  "dgSpecHash": "/DE9x9PvnjED5XFp8hEumZQ2oLJqy/NEh8jqt5DwtjkfZNpXNXG8q/iEZSRsnzzwg19s8Efvy85eqA7FcxSixQ==",
   "success": true,
-  "projectFilePath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\Quan_Ly_BanDongHo\\Data_Model\\Data_Model.csproj",
+  "projectFilePath": "D:\\Học Tập\\Lập trình hướng dịch vụ\\QuanLy_BanDongHo\\Data_Model\\Data_Model.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.0\\microsoft.aspnetcore.authentication.jwtbearer.6.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.azure.search.common\\10.1.0\\microsoft.azure.search.common.10.1.0.nupkg.sha512",

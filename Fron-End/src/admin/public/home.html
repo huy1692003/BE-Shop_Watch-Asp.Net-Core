@@ -1,2 +1,69 @@
-<img src="/image/banner1.webp" alt="" style="width: 100%;height: 48%;">
-<img src="/image/banner2.jpg" alt="" style="width: 100%;height: 48%;">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/CSS/quantri.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="/library/angular.min.js"></script>
+    <script src="/library/angular.route.min.js"></script>
+  
+
+
+    <link rel="stylesheet" href="../assets/CSS/stylePage.css">
+   
+    <title>Admin</title>
+</head>
+<body  ng-app="myAdmin" ng-controller="homeCtrl">
+    <!-- -->
+    <div class="container">
+       
+        <!-- Các chức năng chính phía trái -->
+        <div class="content_left">
+
+             <div class="fuction_system" style="margin-top: 18%;margin-bottom: 14%;">Chức năng hệ thống</div>
+             <div class="menu">
+              <div class="click_page"><i class="fa-solid fa-house"></i><a href="#!thongke" class="check_color" onclick="check_activePage(this)">Thống kê</a></div>
+
+              <div class="click_page"><i class="fa-solid fa-bag-shopping"></i><a href="#!sanpham"class="check_color" onclick="check_activePage(this)">Sản phẩm</a> </div>
+
+              <div class="click_page"><i class="fa-sharp fa-solid fa-gears"></i><a href="#!thuonghieu" class="check_color"onclick="check_activePage(this)">Thương hiệu</a></div>  
+
+              <div class="click_page"><i class="fa-solid fa-bars"></i><a href="#!theloai" class="check_color"onclick="check_activePage(this)">Thể loại</a> </div>
+                
+              <div class="click_page"><i class="fa-solid fa-image"></i> <a href="#!nhacungcap" class="check_color"onclick="check_activePage(this)">Nhà cung cấp</a></div>
+              
+              <div class="click_page"><i class="fa-solid fa-language"></i> <a href="#!loaitaikhoan"class="check_color" onclick="check_activePage(this)">Loại tài khoản</a></div>
+                     
+              <div class="click_page"><i class="fa-solid fa-language"></i> <a href="#!hoadonban"class="check_color" onclick="check_activePage(this)">Hóa Đơn Bán</a></div>
+              
+              <div class="click_page"><i class="fa-solid fa-language"></i> <a href="#!hoadonnhap"class="check_color" onclick="check_activePage(this)">Hóa Đơn Nhập</a></div>
+                  
+        </div>
+            
+        </div>
+        <!-- Nội dung phải---header -->
+        <div class="content_right">
+            <div class="header_top">
+               <p style="float: right;margin-right: 20px;margin-top: 6px;">{{timenow}}</p>
+            </div>
+        <!-- Nội dung phải---content -->
+        <div ng-view style="width: 99%;height: 92.6%;margin-left: 3px;margin-top: 8px;">
+        
+        </div>            
+        </div>
+
+
+    </div>
+    
+</body>
+<script src="../assets/Javascript/home.js"></script>
+<script src="../assets/Javascript/sanpham.js"></script> 
+<script src="../assets/Javascript/thuonghieu.js"></script> 
+<script src="../assets/Javascript/theloai.js"></script> 
+<script src="../assets/Javascript/nhacungcap.js"></script> 
+<script src="../assets/Javascript/loaitaikhoan.js"></script> 
+<script src="../assets/Javascript/hoadonban.js"></script> 
+<script src="../assets/Javascript/hoadonnhap.js"></script> 
+</html>
