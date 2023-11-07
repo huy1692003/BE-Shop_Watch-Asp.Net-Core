@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using Data_Model;
 using DataAccessLayer;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public class HoaDonBanRepository:IHoaDonBanRepository
+    public class HoaDonBanRepository : IHoaDonBanRepository
     {
         private IDatabaseHelper db;
         public HoaDonBanRepository(IDatabaseHelper dbHelper)
@@ -18,7 +19,7 @@ namespace DAL
         }
         public bool Create_HDB(HoaDonBan hdb)
         {
-            
+
             string msgError = "";
             try
             {
@@ -31,23 +32,8 @@ namespace DAL
                     "@SDT", hdb.SDT,
                     "@DiaChiGiaoHang", hdb.DiaChiGiaoHang,
                     "@ThoiGianGiaoHang", DateTime.Now.AddDays(2),
-                    "@tentaikhoan",hdb.TenTaiKhoan,
-                    "list_json_chitietHDB", hdb.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(hdb.ChiTietHoaDonBan) : null);
-                if(!string.IsNullOrEmpty(msgError))
-                {
-                    throw new Exception(msgError+dt.ToString());
-                }
-                return string.IsNullOrEmpty(msgError) ? true : false;
-            }
-            catch(Exception ex) { throw ex; }
-        }
-        public bool Delete_HDB(int MaHD)
-        {
-            string msgError = "";
-            try
-            {
-                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_Delete_DonHangBan", "@MaHD", MaHD);
-                   
+                    "@tentaikhoan", hdb.TenTaiKhoan,
+                    "@list_json_chitietHDB", hdb.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(hdb.ChiTietHoaDonBan) : null);
                 if (!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(msgError + dt.ToString());
@@ -56,12 +42,12 @@ namespace DAL
             }
             catch (Exception ex) { throw ex; }
         }
-        public bool ConFirm_HDB(int MaHD)
+        public bool Delete_HDB(int MaHD)
         {
             string msgError = "";
             try
             {
-                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_XacNhan_HDB", "@MaHD", MaHD);
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_Delete_DonHangBan", "@MaHD", MaHD);
 
                 if (!string.IsNullOrEmpty(msgError))
                 {
@@ -71,7 +57,22 @@ namespace DAL
             }
             catch (Exception ex) { throw ex; }
         }
-        public List<HoaDonBan> getHoaDonBan(out int total,int page, int pageSize, int trangthai, string time_begin, string time_end, string tentaikhoan)
+        public bool update_StatusHDB(int MaHD, int trangthai)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_updateStatus_HDB", "@MaHD", MaHD, "@trangthai", trangthai);
+
+                if (!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError + dt.ToString());
+                }
+                return string.IsNullOrEmpty(msgError) ? true : false;
+            }
+            catch (Exception ex) { throw ex; }
+        }
+        public List<HoaDonBan> getHoaDonBan(out int total, int page, int pageSize, int trangthai, string time_begin, string time_end, string tentaikhoan)
         {
             string msgError = "";
             total = 0;
@@ -84,16 +85,40 @@ namespace DAL
                     "@searchTime_begin", time_begin,
                     "@searchTime_end", time_end,
                     "@tentaikhoan", tentaikhoan);
-                if(!string.IsNullOrEmpty(msgError))
+                if (!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(msgError + dt.ToString());
                 }
                 if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
                 return dt.ConvertTo<HoaDonBan>().ToList();
             }
-            catch(Exception ex) { throw ex; }
-            
+            catch (Exception ex) { throw ex; }
+
         }
 
+        public HoaDonBan? getDetail_HoaDonBan(int MaHD)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_GetDetailDH", "@MaHD", MaHD);
+
+                if (!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError + dt.ToString());
+                }
+                HoaDonBan? a= dt.ConvertTo<HoaDonBan>().ToList().FirstOrDefault();                 
+                string? json = (dt.Rows[0]["ChiTietHoaDonBanJson"]).ToString();
+                List<ChiTietHoaDonBan>? chiTietHoaDonList = JsonConvert.DeserializeObject<List<ChiTietHoaDonBan>>(json)!=null? JsonConvert.DeserializeObject<List<ChiTietHoaDonBan>>(json):null; 
+                a.ChiTietHoaDonBan= chiTietHoaDonList;
+                return a;
+                
+
+            }
+            catch (Exception ex) { throw ex; }
+
+        }
     }
+
 }
+

@@ -14,7 +14,8 @@ namespace DAL.Interface
         bool Create_HDB(HoaDonBan hdb);
         bool Delete_HDB(int MaHD);
 
-        bool ConFirm_HDB(int MaHD);
+        bool update_StatusHDB(int MaHD,int trangthai);
         List<HoaDonBan> getHoaDonBan(out int total, int page, int pageSize, int trangthai, string time_begin, string time_end, string tentaikhoan);
+        HoaDonBan getDetail_HoaDonBan(int MaHD);
     }
 }

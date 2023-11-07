@@ -16,6 +16,8 @@ myAdmin.controller("homeCtrl",($scope,$location)=>{
 
   
 });
+
+
 //////Tạo config để load trang khác
 myAdmin.config(($routeProvider)=>{
 $routeProvider.when('/thongke', {

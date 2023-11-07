@@ -164,9 +164,14 @@ i{
     height: 33px;
    
  }
+ td{
+    font-size: 15px;
+ }
  .task{
    border: none;
    background-color: white;
+   width: 25px;
+   
  }
  .task:hover{
     color:rgb(216, 85, 10);
@@ -183,5 +188,8 @@ i{
     background-color: grey;
     border-radius: 4px;
     height: 20px;
+ }
+ textarea{
+    width: 320px;
  }
 

@@ -1,1 +1,53 @@
-<div> hóa đơn nhập</div>
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+    <title>Tải tệp lên</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script>
+        var myApp = angular.module('myApp', []);
+
+        myApp.controller('MyController', ['$scope', '$http', function ($scope, $http) {
+            $scope.upload = function () {
+                var fd = new FormData();
+                fd.append('file', $scope.myFile);
+                var req = {
+                    method: 'POST',
+                    url: 'https://localhost:44334/api/UploadFile/upload',
+                    headers: {
+                        'Content-Type': undefined
+                    },
+                    data: fd
+                };
+
+                $http(req)
+                    .then(function (result) {
+                        console.log(result);
+                    });
+            };
+        }]);
+
+        myApp.directive('fileModel', ['$parse', function ($parse) {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    var model = $parse(attrs.fileModel);
+                    var modelSetter = model.assign;
+
+                    element.bind('change', function () {
+                        scope.$apply(function () {
+                            modelSetter(scope, element[0].files[0]);
+                        });
+                    });
+                }
+            };
+        }]);
+    </script>
+</head>
+<body>
+    <div ng-controller="MyController">
+        <h1>Tải tệp lên</h1>
+        <input type="file" file-model="myFile" />
+        <button ng-click="upload()">Tải tệp lên</button>
+    </div>
+</body>
+</html>

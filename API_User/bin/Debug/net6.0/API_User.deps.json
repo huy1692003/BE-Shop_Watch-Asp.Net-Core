@@ -10,7 +10,6 @@
         "dependencies": {
           "BUS": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "6.0.0",
-          "Microsoft.Azure.Search.Data": "10.1.0",
           "Newtonsoft.Json": "13.0.3",
           "Swashbuckle.AspNetCore": "6.5.0",
           "System.Data.SqlClient": "4.8.5"

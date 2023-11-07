@@ -15,6 +15,7 @@
     overflow: auto;
     margin-top: 0;
 }
+
 body{
 overflow: hidden;
 }
@@ -122,7 +123,7 @@ input,select{
     padding-left: 15px;
 }
 textarea{
-    width: 300px;
+    width: 320px;
     height: 180px;
     padding: 5px;
 }
@@ -139,7 +140,12 @@ textarea{
     
 }
 .hdb.confirm{
-    background-color:indianred;
+    background-color:rgb(255, 166, 0);
+    color: white;
+    
+}
+.hdb.cancel{
+    background-color:orangered;
     color: white;
     
 }

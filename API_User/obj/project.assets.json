@@ -6199,7 +6199,6 @@
     "net6.0": [
       "BUS >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 6.0.0",
-      "Microsoft.Azure.Search.Data >= 10.1.0",
       "Newtonsoft.Json >= 13.0.3",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "System.Data.SqlClient >= 4.8.5"
@@ -6251,10 +6250,6 @@
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[6.0.0, )"
-          },
-          "Microsoft.Azure.Search.Data": {
-            "target": "Package",
-            "version": "[10.1.0, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

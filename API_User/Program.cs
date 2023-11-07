@@ -1,10 +1,10 @@
-using DAL;
-using DAL.Interface;
-using DataAccessLayer;
-using BUS;
 using BUS.Interface;
-using System.Text;
+using BUS;
+using DAL.Interface;
+using DAL;
+using DataAccessLayer;
 using Data_Model;
+using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
@@ -29,15 +29,17 @@ builder.Services.AddTransient<ISanPhamRepository, SanPhamRepository>();
 builder.Services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
 builder.Services.AddTransient<IHoaDonBanRepository, HoaDonBanRepository>();
 builder.Services.AddTransient<IHoaDonBanBusiness, HoaDonBanBusiness>();
+// Add services to the container.
 
 
+// configure strongly typed settings objects
 IConfiguration configuration = builder.Configuration;
 var appSettingsSection = configuration.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
 
 // configure jwt authentication
 var appSettings = appSettingsSection.Get<AppSettings>();
-var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+var key = Encoding.ASCII.GetBytes("Khao bi mat cua ban");
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -57,8 +59,6 @@ builder.Services.AddAuthentication(x =>
 });
 
 
-// Add services to the container.
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -66,18 +66,17 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseHttpsRedirection();
-app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
-app.Run();
 
+app.MapControllers();
+
+app.Run();

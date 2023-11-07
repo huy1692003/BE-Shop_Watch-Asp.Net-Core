@@ -1,24 +1,26 @@
 myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     // Khởi tạo   
     $scope.page=1;
-    $scope.pageSize=9;
-    $scope.txtSearchTenSanPham='';
-    $scope.txtSearchThuongHieu='';
-    $scope.txtSearchTheloai='';
-    $scope.txtSearchGiaTien='';  
+    $scope.pageSize=9;   
     $scope.listItem = [];
     $scope.totalItems = 0;  
-    $scope.objSP={} 
+    $scope.objSP={} ,
+    $scope.txtSearchTenSanPham='',
+    $scope.txtSearchTheloai='',
+    $scope.txtSearchThuongHieu='',
+    $scope.txtSearchGiaTien='',  
+
     $scope.clickSearch=()=>{
+        $scope.pageafter=false;
         $scope.searchParameters = {
             page: $scope.page,              // Set the initial page value
             pageSize: $scope.pageSize,
             tenSanPham:$scope.txtSearchTenSanPham,
-            tenThuongHieu:$scope.txtSearchThuongHieu,
-            tenTheLoai:$scope.txtSearchTheloai ,  // Set the initial page size
+            maThuongHieu:$scope.txtSearchThuongHieu==''?0:$scope.txtSearchThuongHieu,
+            maTheLoai:$scope.txtSearchTheloai==''?0:$scope.txtSearchTheloai ,  // Set the initial page size
             giatien: $scope.txtSearchGiaTien
-        };
-        $scope.getProducts();      
+        };   
+        $scope.getProducts();       
         
     }
     
@@ -29,8 +31,12 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             data: $scope.searchParameters // Send the search parameters as the request body
         }).then(function (response) {
             $scope.listItem = response.data.data;          
-            $scope.totalItems = response.data.totalItems;            
-            console.log($scope.listItem)
+            $scope.totalItems = response.data.totalItems;                      
+            if($scope.page * $scope.pageSize >= $scope.totalItems||$scope.totalItems<$scope.pageSize)
+            {
+               $scope.pageafter=true;
+            }
+            console.log($scope.totalItems)
         }).catch(function (error) {
             console.error('Lỗi:', error);
         });
@@ -88,9 +94,10 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
            console.log("Lỗi : "+error)})}
 
           
-
-// Sử dụng hàm getTheLoai bằng cách sử dụng await
-
+    $scope.screen_shadow=false;
+    $scope.editSPShow=false;
+    $scope.addSPShow=false;
+  
     $scope.getTheLoai();   
     $scope.getThuongHieu();  
         // hàm
@@ -125,18 +132,7 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         $scope.trangthai="Còn Hàng" 
        
     }
-    angular.element(document.querySelector('#fileInput')).on('change', function(e) {
-        // Lấy tệp đã chọn
-        var selectedFile = e.target.files[0];
-        // Kiểm tra xem tệp đã chọn có tồn tại không
-        if (selectedFile) {
-            $scope.imageSP = selectedFile.name; // Cập nhật biến $scope.selectedFileName với tên tệp đã chọn
-        } else {
-            $scope.imageSP = ''; // Nếu không có tệp được chọn, đặt biến $scope.selectedFileName về rỗng
-        }
 
-        $scope.$apply(); // Áp dụng các thay đổi vào phạm vi AngularJS
-    });
     // Thêm sp
     $scope.reloadSP=()=>{
         $scope.objSP={        
@@ -151,28 +147,57 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             sldaban: $scope.sldaban,
             trangthai: $scope.trangthai}  
     }
-   
+       
+    $scope.uploadImage = function () {
+        var fileInput = document.getElementById('fileInput');
+        var file = fileInput.files[0];
+        
+        if (!file) {
+            alert('Vui lòng chọn ảnh!');
+            return;
+        }
+    
+        var formData = new FormData();
+        formData.append('file', file);
+        $http({
+            method: 'POST',
+            url: 'https://localhost:44334/api/UploadFile/upload',
+            data: formData,
+            headers: { 'Content-Type': undefined }
+        })
+        .then(function (response) {
+            $scope.imageSP = '/image' + response.data.filePath;
+            alert($scope.imageSP)
+            
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    };
+    
 
-    
-    
-    $scope.addSP=()=>{            
-        $scope.reloadSP() ;             
-        console.log($scope.objSP)     
+    $scope.addSP=()=>{      
+        
+        $scope.reloadSP() ; 
         $http({
             method:"POST",
             url:'https://localhost:44334/api/SanPham/create_SP',
             data: $scope.objSP
         }).then((result)=>{
             alert("Thông báo : "+result.data);
-            $scope.getProducts();
+          
         }).catch((error)=>
                  {alert("Có lỗi khi thêm sản phẩm hãy xem lại dữ liệu đã nhập đầy đủ hay chưa ?")
                  console.log("Lỗi :" + error)})
-
+        
     }
+
     $scope.detailSP=(x)=>{
         $scope.screen_shadow=false;
     }
+
+
+    
     $scope.deleteSP = (x) => {              
         if (confirm("Bạn có chắc chắn muốn xóa")) {
             $http({
@@ -189,22 +214,12 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             console.log("Hành động xóa đã bị hủy bỏ.");
         }
     }
-    angular.element(document.querySelector('#fileInputedit')).on('change', function(e) {
-        // Lấy tệp đã chọn
-        var selectedFile = e.target.files[0];
-        // Kiểm tra xem tệp đã chọn có tồn tại không
-        if (selectedFile) {
-            $scope.imageSP = selectedFile.name; // Cập nhật biến $scope.selectedFileName với tên tệp đã chọn
-        } else {
-            $scope.imageSP = ''; // Nếu không có tệp được chọn, đặt biến $scope.selectedFileName về rỗng
-        }
-
-        $scope.$apply(); // Áp dụng các thay đổi vào phạm vi AngularJS
-    });
+  
 
     $scope.pageafter=false;
     $scope.pageprev=true;
     $scope.clickSearch();
+    
     // chuyển trang sau
     $scope.page_after=()=>{
         $scope.pageprev=false;        
@@ -223,8 +238,10 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
      $scope.page_prev=()=>{
      $scope.pageafter=false       
         $scope.page-=1;
-        if($scope.page===1){  $scope.pageprev=true;  }       
+        if($scope.page<=1){ 
+            $scope.page=1;
+             $scope.pageprev=true;  }       
         $scope.clickSearch()
      
     }
- });
+});

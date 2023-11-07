@@ -26,14 +26,18 @@ namespace BUS
         {
             return hdb_Dal.Delete_HDB(MaHD);
         }
-        public bool ConFirm_HDB(int MaHD)
+        public bool update_StatusHDB(int MaHD,int trangthai)
         {
-            return hdb_Dal.ConFirm_HDB(MaHD);
+            return hdb_Dal.update_StatusHDB(MaHD,trangthai);
         }
         public List<HoaDonBan> getHoaDonBan(out int total, int page, int pageSize, int trangthai, string time_begin, string time_end, string tentaikhoan)
         {     
             return hdb_Dal.getHoaDonBan(out total, page, pageSize, trangthai, time_begin,time_end,  tentaikhoan);
-        }    
+        }
+        public HoaDonBan getDetail_HoaDonBan(int MaHD)
+        {
+            return hdb_Dal.getDetail_HoaDonBan(MaHD);
+        }
     }
 
 }

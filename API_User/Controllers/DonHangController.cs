@@ -52,5 +52,16 @@ namespace API_User.Controllers
                 return BadRequest($"Lỗi: {ex.Message}");
             }
         }
+        [Route("getdetail_HDB/{MaHD}")]
+        [HttpPost]
+        public IActionResult GetDetaiHDB(int MaHD)
+        {
+            var obj = hdb_bus.getDetail_HoaDonBan(MaHD);
+            if(obj!=null)
+            {
+                return Ok(obj);
+            }
+            return BadRequest("Không tìm thấy đơn hàng");
+        }
     }
 }

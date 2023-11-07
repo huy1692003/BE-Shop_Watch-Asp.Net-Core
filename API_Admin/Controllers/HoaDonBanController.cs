@@ -25,15 +25,15 @@ namespace API_Admin.Controllers
             }
             return BadRequest("Hủy đơn hàng thất bại hãy thử lại !");
         }
-        [Route("ConFirm_HDB")]
+        [Route("update_StatusHDB/{MaHD},{trangthai}")]
         [HttpPut]
-        public IActionResult ConFirm_HDB(int Mahdb)
+        public IActionResult update_StatusHDB(int MaHD, int trangthai)
         {
-            if (hdb_Bus.ConFirm_HDB(Mahdb))
+            if (hdb_Bus.update_StatusHDB(MaHD,trangthai))
             {
-                return Ok("Xác nhận đơn hàng thành công");
+                return Ok(true);
             }
-            return BadRequest("Xác nhận đơn hàng thất bại hãy thử lại !");
+            return BadRequest(false);
         }
         [Route("get_HDB")]
         [HttpPost]

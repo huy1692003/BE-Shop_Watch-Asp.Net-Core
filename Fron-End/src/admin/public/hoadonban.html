@@ -1,38 +1,54 @@
 <div class="blockTable">
-    <h3 class="title_manage" style="margin-right: 44.3%;">Quản lý hóa đơn bán</h3>
-    <span class="hdb confirm hdb_active" onclick="hdb_active(this)">Chưa xác nhận</span>
-        <span class="hdb no_confirm" onclick="hdb_active(this)">Đã xác nhận</span>
+    <h3 class="title_manage" style="margin-right: 35.3%;">Quản lý hóa đơn bán</h3>
+    <span class="hdb confirm hdb_active" onclick="hdb_active(this) "ng-click="showListDH(0)">Chưa xác nhận</span>
+    <span class="hdb no_confirm" onclick="hdb_active(this)" ng-click="showListDH(1)">Đã xác nhận</span>
+    <span class="hdb cancel" onclick="hdb_active(this)" ng-click="showListDH(2)">Đã Hủy</span>
 
         <!-- Nội dung -->
     
         <table  border="1" cellspacing="0" cellpadding="5" class="table_header" style="margin-top: 2%;">
             <thead>
-                <td style="width: 3.5%;height: 19px;">Mã HĐ</td>     
-                <td style="width: 12%;" >Tên KH</td>        
-                <td style="width: 8%;">Email</td>
-                <td style="width: 7%;">Phone</td>        
+                <td style="width: 5%;height: 19px;">Mã HĐ</td>     
+                <td style="width: 16%;" >Tên KH</td>        
+                <td style="width: 15%;">Email</td>
+                <td style="width: 9%;">Phone</td>        
                 <td style="width: 10%;">Trạng thái</td>
                 <td style="width: 10%;">Thành Tiền</td>
-                <td style="width: 14%;">Chức năng</td>        
+                <td style="width: 10%;">Chức năng</td>        
             </thead>
         </table>
         <div class="table_content">
-            <table  border="1" cellspacing="0" cellpadding="5" >
+            <table  border="1" cellspacing="0" cellpadding="5"  >
                 <tr ng-repeat="x in listItem">
-                    <td style="width: 5%;height: 19px;">{{x.maSP}}</td>     
-                    <td style="width: 18%;" >{{x.tenMH}}</td>        
-                    <td style="width: 8%;">{{x.soLuongton}}</td>
-                    <td style="width: 7%;">{{x.giaBan}}</td>        
-                    <td style="width: 10%;">{{x.trangthai}}</td>
-                    <td style="width: 10%;height: 40px;"><img src="/image/{{x.image_SP}}" style="width: 70%;height:91%;"></td>
-                    <td style="width: 14%;">
-                        <button class="task" ng-click="showeditSP(x)"><i class="fa-solid fa-wrench"></i></button>
-                        <!-- <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button> -->
-                        <button class="task" ng-click="deleteSP(x) "><i class="fa-solid fa-delete-left"></i></button>
+                    <td style="width: 5%;height: 19px;">{{x.maHD}}</td>     
+                    <td style="width: 16%;" >{{x.tenKH}}</td>        
+                    <td style="width: 15%;">{{x.email}}</td>
+                    <td style="width: 9%;">{{x.sdt}}</td>
+                    <td style="width: 10%;">
+                        <span ng-if="x.trangThai === 0">Chưa xử lý</span>
+                        <span ng-if="x.trangThai === 1">Đã xử lý</span>
+                        <span ng-if="x.trangThai === 2">Đã hủy</span>
+
+                      </td>   
+                    <td style="width: 10%;">{{x.thanhTien+'đ'}}</td>
+             
+                    <td style="width: 10%;">
+                        <button class="task" style="margin-right: 3px;" ng-click="update_statusHDB(x,1)" ng-hide="hideConfirmHDB"><i class="fa-solid fa-circle-check" style="color: #31ec18;"></i></button>
+                        <button class="task" style="margin-right: 3px;" ng-click= "detailSP(x)"><i class="fa-solid fa-circle-info" style="color: #1f5151;"></i></button>
+                        <button class="task" style="margin-right: 3px;" ng-click="update_statusHDB(x,2) "><i class="fa-solid fa-delete-left"></i></button>
+                       
                     </td>  
                 </tr>
             </table>
         </div>
+
+        <!-- Chi tiết 1 hóa đơn -->
+        <div class="Screen"  ng-show="screen_shadow"></div>
+        <div class="form detailSP" ng-show="detailSPshow">
+                <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
+               
+        </div>
+           <!-- -------------------------- -->
          <div class="nextpage" style="float: right;margin-right: 3%;">
             <button ng-click="page_prev()" ng-disabled="pageprev" >Trang trước</button>
             <button ng-click="page_after()" ng-disabled="pageafter">Trang sau</button>
