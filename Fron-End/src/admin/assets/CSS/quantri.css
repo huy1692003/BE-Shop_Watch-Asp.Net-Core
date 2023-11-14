@@ -192,4 +192,18 @@ i{
  textarea{
     width: 320px;
  }
+ #setting
+ {
+   width: 200px;
+   height: 125x;
+   position:  absolute;
+   right: 24px;
+   top:35px;
+   color: white;
+   background-color: rgb(6, 79, 18);
+   line-height: 27px;
+   padding-left: 5px;
+   cursor: pointer;
+   
+ }
 

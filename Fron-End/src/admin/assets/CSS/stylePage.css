@@ -63,20 +63,23 @@ thead{
     top: 4%;
     left: 15%;
     border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .buttonExit {
     float: right;
-    position: absolute;
-    right: 7px;
-    top: 7px;
+    position: fixed;
+    right: 14%;
+    top: 1.7%;
     border: 0px;
-    border-radius: 70%; /* Để biến nút thành hình tròn */
-    margin:5px 10px 0 0;
-    width: 26px; /* Đặt chiều rộng của nút */
-    height: 26px; /* Đặt chiều cao của nút */
-    
+    border-radius: 70%;
+    margin: 5px 10px 0 0;
+    width: 26px;
+    height: 26px;
+    z-index: 99999999999;
 }
+
 .titleForm{
     color: #7e7e80;
     margin-bottom: 3%;
@@ -84,7 +87,7 @@ thead{
     top: 2%;
 }
 .buttonExit:hover{
-    background-color: black;
+   color: goldenrod;
 }
 
 .formcontent{
@@ -106,6 +109,8 @@ thead{
 .submit{
     position: absolute;
     bottom: 13px;
+    text-align: center;
+    padding-top: 5px;
     right: 13px;
     background-color: rgb(248, 79, 79);
     color: white;   
@@ -113,6 +118,7 @@ thead{
     border-radius: 5px;
     width: 60px;
     height: 35px;
+    cursor: pointer;
 }
 .submit:active{
     background-color: red;
@@ -158,7 +164,56 @@ textarea{
   background-color: blue;  
 }
 
+.list_Product_Order{
 
+}
+td{
+    font-size: 12px;
+}
+.infor_order{
+    width: 95%;
+    margin: 1% 4%;
+}
+.infor_order table td:first-child {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: left;    
+}
+.infor_order table tr{
+    height: 26px;
+}
+.infor_order table tr td:nth-child(3) {
+    text-align: left;
+    font-size: 14px;
+}
+.infor_order table tr td:nth-child(2) {
+    width: 30px;
+   
+}
+.list_Product_Order{
+    width: 89%;
+   
+    border:1px solid;
+    margin: 0 auto;
+}
+.buttonCustom {
+    display: block;
+    width: 100px;
+    border-radius: 5px;
+    height: 26px;
+    color: white;
+    font-size: 14px;
+    padding-top: 3px;
+    margin-left: 23%;
+    margin-top: 20px;
+    background-color: rgb(0, 94, 255);
+    cursor: pointer;
+    text-align: center;
+  }
+  .buttonCustom:active{
+    background-color: orangered;
+  }
+  
 
 
 

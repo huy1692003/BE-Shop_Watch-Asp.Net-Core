@@ -41,18 +41,6 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
             moTa: $scope.moTa,
             hinhAnh: $scope.hinhAnh
           }
-    angular.element(document.querySelector('#fileInput')).on('change', function(e) {
-            // Lấy tệp đã chọn
-            var selectedFile = e.target.files[0];
-            // Kiểm tra xem tệp đã chọn có tồn tại không
-            if (selectedFile) {
-                $scope.hinhAnh = selectedFile.name; // Cập nhật biến $scope.selectedFileName với tên tệp đã chọn
-            } else {
-                $scope.hinhAnh = ''; // Nếu không có tệp được chọn, đặt biến $scope.selectedFileName về rỗng
-            }
-    
-            $scope.$apply(); // Áp dụng các thay đổi vào phạm vi AngularJS
-        });
           
     
     $scope.getThuongHieu = () => {
@@ -69,18 +57,41 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
 
 
     $scope.addTH=()=>{
-        console.log($scope.hinhAnh);
-        $scope.reloadData();
-        console.log($scope.objThuongHieu);
-        $http({
-            method: "POST",
-            url: "https://localhost:44334/Create_ThuongHieu",
-            data:$scope.objThuongHieu
-        }).then((response)=>{
-          alert("Thông báo :"+response.data);
-          $scope.getThuongHieu();
-        }).catch((error)=>{
-           alert("Lỗi : "+error)})
+        var fileInput = document.getElementById('fileInput1');
+        var file = fileInput.files[0];        
+        if (!file) {
+            alert('Vui lòng chọn ảnh!');
+            
+        }   
+        else
+        {
+            var formData = new FormData();
+            formData.append('file', file);
+            $http({
+                method: 'POST',
+                url: 'https://localhost:44334/api/UploadFile/upload',
+                data: formData,
+                headers: { 'Content-Type': undefined }
+            })
+            .then(function (response) 
+            {
+                 $scope.hinhAnh = '/image' + response.data.filePath;
+                 console.log($scope.hinhAnh)
+                 $scope.reloadData();       
+                 $http({
+                     method: "POST",
+                     url: "https://localhost:44334/Create_ThuongHieu",
+                     data:$scope.objThuongHieu
+                 }).then((response)=>{
+                   alert("Thông báo :"+response.data);
+                   $scope.getThuongHieu();
+                 }).catch((error)=>{
+                    alert("Lỗi : "+error)})                
+                 
+            })     
+         
+         };
+       
     }  
 
     $scope.deleteTH = (x) => {              
@@ -110,18 +121,7 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
         
        
     }
-    angular.element(document.querySelector('#fileInputedit')).on('change', function(e) {
-        // Lấy tệp đã chọn
-        var selectedFile = e.target.files[0];
-        // Kiểm tra xem tệp đã chọn có tồn tại không
-        if (selectedFile) {
-            $scope.hinhAnh = selectedFile.name; // Cập nhật biến $scope.selectedFileName với tên tệp đã chọn
-        } else {
-            $scope.hinhAnh = ''; // Nếu không có tệp được chọn, đặt biến $scope.selectedFileName về rỗng
-        }
-
-        $scope.$apply(); // Áp dụng các thay đổi vào phạm vi AngularJS
-    });
+   
 
     $scope.editTH=()=>{
         

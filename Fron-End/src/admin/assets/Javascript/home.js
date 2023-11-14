@@ -1,17 +1,23 @@
 var myAdmin=angular.module("myAdmin",['ngRoute'])
 myAdmin.controller("homeCtrl",($scope,$location)=>{
-   var currentDate = new Date();
-   var daysOfWeek = ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'];
-   var dayOfWeek = daysOfWeek[currentDate.getUTCDay()]; 
-   // Lấy ngày
-   var dayOfMonth = currentDate.getUTCDate(); 
-   // Lấy tháng
-   var monthNames = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
-   var month = monthNames[currentDate.getUTCMonth()]; 
-   // Lấy năm
-   var year = currentDate.getUTCFullYear(); 
-   // Gán vào biến time
-   $scope.timenow = `${dayOfWeek}, ${dayOfMonth} ${month} ${year}`;
+   $scope.user=JSON.parse(localStorage.getItem("user"))
+   console.log($scope.user)
+   $scope.clickSetting=function()
+   {
+      $scope.showSetting=$scope.showSetting==false?true:false;
+      console.log($scope.showSetting)
+   }
+   $scope.logout=function()
+   {
+      var check=confirm("Bạn có chắc chắn muốn đăng xuất không ?")
+      if(check)
+      {
+      $scope.user=null;
+      localStorage.removeItem("user")
+      location.href='./login.html'
+      }
+   }
+   
  
 
   
@@ -71,3 +77,8 @@ function resetForm(a)
   a.reset()
 }
 
+var user=localStorage.getItem("user")
+if(user==null)
+{
+   location.href="./login.html"
+}

@@ -1,6 +1,6 @@
 myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
     $scope.page = 1;
-    $scope.pageSize = 10;
+
     $scope.txtSearchTrangThai = 0;
     $scope.txtSearchtime_begin = '';
     $scope.txtSearchtime_end = '';
@@ -47,11 +47,7 @@ myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
             }           
                
     }
-    $scope.detailSP=(x)=>
-    {
-       $scope.screen_shadow=true;
-       $scope.detailSPshow=true;
-    }
+   
 
     $scope.exitForm=()=>{
        
@@ -67,6 +63,11 @@ myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
         console.log($scope.txtSearchTrangThai);
         $scope.clickSearch();          
         x==0?$scope.hideConfirmHDB=false:$scope.hideConfirmHDB=true
+        $scope.hideCancelHDB=false
+        if(Number(x)==2)
+        {
+            $scope.hideCancelHDB=true
+        }
         
         
 
@@ -110,6 +111,21 @@ myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
 
     // Khởi tạo tìm kiếm khi controller được load
     $scope.clickSearch();
+
+    $scope.getDetail_oderByID=(x)=>
+    {        
+        $scope.screen_shadow=true;
+        $scope.detailSPshow=true;        
+        $http(
+            {
+                method:"POST",
+                url:"https://localhost:44334/api/HoaDonBan/getdetail_HDB/"+x.maHD
+            }
+        ).then(function(response){
+          $scope.inforHDB=response.data;
+          console.log($scope.inforHDB)          
+        })
+    }
 });
 function hdb_active(x)
 {

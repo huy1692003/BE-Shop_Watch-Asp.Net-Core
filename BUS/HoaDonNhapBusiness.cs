@@ -11,34 +11,32 @@ using DAL.Interface;
 
 namespace BUS
 {
-    public class HoaDonNhapBusiness : INhaCungCapBusiness
+    public class HoaDonNhapBusiness : IHoaDonNhapBusiness
     {
-        private INhaCungCapRepository _res;
-        public HoaDonNhapBusiness(INhaCungCapRepository res)
+        private IHoaDonNhapRepository hdn_dal;
+        public HoaDonNhapBusiness(IHoaDonNhapRepository repository)
         {
-            _res = res;
+            hdn_dal= repository;
         }
-
-        public List<NhaCungCap> getALL_NCC()
+        public bool create_HDN(HoaDonNhap HDN)
         {
-            return _res.getALL_NCC();
-
+            return hdn_dal.create_HDN(HDN);
         }
-        public NhaCungCap GetNCC_byID(int MaNCC)
+        public HoaDonNhap getDetail_HDN_byID(int Ma_HDN)
         {
-            return _res.GetNCC_byID(MaNCC);
+            return hdn_dal.getDetail_HDN_byID(Ma_HDN);
         }
-        public bool Create_NCC(NhaCungCap ncc)
+        public bool update_HDN(HoaDonNhap HDN)
         {
-            return _res.Create_NCC(ncc);
+            return hdn_dal.update_HDN(HDN);
         }
-        public bool Delete_NCC(string MaNCC)
+        public bool delete_HDN(int MaHDN)
         {
-            return _res.Delete_NCC(MaNCC);
+            return hdn_dal.delete_HDN(MaHDN);
         }
-        public bool Update_NCC(NhaCungCap model)
+        public List<HoaDonNhap> getListHDN(out int total, int page, int pageSize, string time_begin, string time_end, string tentaikhoan)
         {
-            return _res.Update_NCC(model);
+            return hdn_dal.getListHDN(out total, page, pageSize, time_begin, time_end, tentaikhoan);
         }
     }
 

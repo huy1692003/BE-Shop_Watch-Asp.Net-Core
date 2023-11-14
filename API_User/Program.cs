@@ -29,6 +29,9 @@ builder.Services.AddTransient<ISanPhamRepository, SanPhamRepository>();
 builder.Services.AddTransient<ISanPhamBusiness, SanPhamBusiness>();
 builder.Services.AddTransient<IHoaDonBanRepository, HoaDonBanRepository>();
 builder.Services.AddTransient<IHoaDonBanBusiness, HoaDonBanBusiness>();
+builder.Services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
+builder.Services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
+
 // Add services to the container.
 
 

@@ -390,7 +390,7 @@ BEGIN
     END;
 END;
 
-EXEC sp_search_sanpham @page_size=1,@page_index=1 ,@ten_sanpham = '',    @gia_tien = '',    @ma_theloai ='',    @ma_thuonghieu  = 3
+EXEC sp_search_sanpham @page_size=0,@page_index=1 ,@ten_sanpham = '',    @gia_tien = '',    @ma_theloai ='',    @ma_thuonghieu  = ''
 
 
 ----------Thủ tục bảng Hóa Đơn Bán and Chi tiết hóa đơn bán
@@ -404,12 +404,13 @@ alter proc sp_CreateDonHangBan
     @DiaChiGiaoHang NVARCHAR(350),
     @ThoiGianGiaoHang DATETIME,
 	@tentaikhoan nvarchar(50),
+	@methodPay nvarchar(100),
 	@list_json_chitietHDB NVARCHAR(MAX)
 	as
 begin
 		----Tạo hóa đơn
-		insert into HoaDonBan(TrangThai,NgayTao,TenKH,Diachi,Email,SDT,DiaChiGiaoHang,ThoiGianGiaoHang,TenTaiKhoan)
-		values(@TrangThai,@NgayTao,@TenKH,@Diachi,@Email,@SDT,@DiaChiGiaoHang,@ThoiGianGiaoHang,@tentaikhoan)
+		insert into HoaDonBan(TrangThai,NgayTao,TenKH,Diachi,Email,SDT,DiaChiGiaoHang,ThoiGianGiaoHang,TenTaiKhoan,methodPay)
+		values(@TrangThai,@NgayTao,@TenKH,@Diachi,@Email,@SDT,@DiaChiGiaoHang,@ThoiGianGiaoHang,@tentaikhoan,@methodPay)
 
 		----Lấy mã hóa hơn vừa tạo xong
 		declare @MaHoaDon int 
@@ -419,11 +420,12 @@ begin
 		---Thêm chi tiết hóa đơn nhập
 		if(@list_json_chitietHDB is not null)
 		begin
-			insert into ChiTietHoaDonBan(MaHD,MaSP,imageSP,soLuong,giaBan,tongtien)
+			insert into ChiTietHoaDonBan(MaHD,MaSP,imageSP,tenSP,soLuong,giaBan,tongtien)
 			select
 			@MaHoaDon,
 			JSON_VALUE(l.value,'$.maSP'),
 			JSON_VALUE(l.value,'$.imageSP'),
+			JSON_VALUE(l.value,'$.tenSP'),
 			JSON_VALUE(l.value,'$.soLuong'),
 			JSON_VALUE(l.value,'$.giaBan'),
 			cast(JSON_VALUE(l.value,'$.soLuong')as int)*CAST(JSON_VALUE(l.value,'$.giaBan')as float)
@@ -432,7 +434,7 @@ begin
 		---Cập nhật giá tiền tất cả của hóa đơn
 		---lấy tổng tiền tất cả
 		declare @ThanhTien float
-		select @ThanhTien=(select SUM(ct.tongtien) from ChiTietHoaDonBan ct where ct.MaHD=@MaHoaDon)
+		select @ThanhTien=(select SUM(ct.tongTien) from ChiTietHoaDonBan ct where ct.MaHD=@MaHoaDon)
 		----Cập nhật
 		Update HoaDonBan 
 		set HoaDonBan.ThanhTien=@ThanhTien
@@ -540,14 +542,17 @@ BEGIN
         dh.Diachi,
         dh.Email,
         dh.SDT,
+		dh.ThanhTien,
         dh.DiaChiGiaoHang,
         dh.ThoiGianGiaoHang,
         dh.TenTaiKhoan,
+		dh.methodPay,
         (
             SELECT
 			    ct.MaChiTietHD,
 				ct.MaHD,
                 ct.MaSP,
+				ct.tenSP,
 				ct.imageSP,
                 ct.SoLuong,
                 ct.GiaBan,
@@ -559,8 +564,275 @@ BEGIN
     FROM HoaDonBan dh
     WHERE dh.MaHD = @MaHD;
 END
+
+
 alter table ChiTietHoaDonBan
-add imageSP VaRCHAR(300)
+alter column tenSP nvarchar(300)
+update ChiTietHoaDonBan
+set tenSP =N'Đồng Hồ Nam'
+
+----Update hoadonban and chitiet
+alter proc sp_updateHDB  
+    @maHD int,
+    @TenKH NVARCHAR(50),    
+    @Diachi NVARCHAR(250),
+    @Email NVARCHAR(50),
+    @SDT NVARCHAR(50),
+    @DiaChiGiaoHang NVARCHAR(350),   
+	@methodPay NVARCHAR(100),
+	@list_json_chitietHDB NVARCHAR(MAX)
+	as
+begin
+        ------Cập nhật thông tin hóa đơn bán
+        update HoaDonBan 
+		set TenKH=@TenKH,Diachi=@Diachi,Email=@Email,SDT=@SDT,DiaChiGiaoHang=@DiaChiGiaoHang,methodPay=@methodPay
+		where HoaDonBan.MaHD=@maHD
+		---Thêm chi tiết hóa đơn nhập nếu trong bảng chi tiết chưa có
+		IF (@list_json_chitietHDB IS NOT NULL)
+			BEGIN
+				-- Bước 1: Trích xuất dữ liệu từ JSON và lưu vào bảng tạm #UpdatedDetails
+				CREATE TABLE #UpdatedDetails (
+					maSP INT,
+					imageSP NVARCHAR(MAX),
+					tenSP NVARCHAR(100),
+					soLuong INT,
+					giaBan FLOAT,
+					tongTien FLOAT
+				)
+
+				INSERT INTO #UpdatedDetails (maSP, imageSP, tenSP, soLuong, giaBan, tongTien)
+				SELECT
+					JSON_VALUE(l.value, '$.maSP'),
+					JSON_VALUE(l.value, '$.imageSP'),
+					JSON_VALUE(l.value, '$.tenSP'),
+					CAST(JSON_VALUE(l.value, '$.soLuong') AS INT),
+					CAST(JSON_VALUE(l.value, '$.giaBan') AS FLOAT),
+					CAST(JSON_VALUE(l.value, '$.soLuong') AS INT) * CAST(JSON_VALUE(l.value, '$.giaBan') AS FLOAT)
+				FROM OPENJSON(@list_json_chitietHDB) AS l
+
+				-- Bước 2: Thêm chi tiết mới hoặc cập nhật chi tiết đã tồn tại
+				-- Cập nhật chi tiết hóa đơn bán
+				UPDATE ct
+				SET ct.imageSP = u.imageSP,
+					ct.tenSP = u.tenSP,
+					ct.soLuong = u.soLuong,
+					ct.giaBan = u.giaBan,
+					ct.tongTien = u.tongTien
+				FROM ChiTietHoaDonBan ct
+				INNER JOIN #UpdatedDetails u ON ct.maSP = u.maSP
+				WHERE ct.MaHD = @maHD
+
+				-- Thêm chi tiết hóa đơn bán mới
+				INSERT INTO ChiTietHoaDonBan (MaHD, maSP, imageSP, tenSP, soLuong, giaBan, tongTien)
+				SELECT @maHD, maSP, imageSP, tenSP, soLuong, giaBan, tongTien
+				FROM #UpdatedDetails
+				WHERE maSP NOT IN (SELECT maSP FROM ChiTietHoaDonBan WHERE MaHD = @maHD)
+
+				-- Bước 3: Xóa các chi tiết không có trong danh sách cập nhật
+				DELETE FROM ChiTietHoaDonBan
+				WHERE MaHD = @maHD AND maSP NOT IN (SELECT maSP FROM #UpdatedDetails)
+
+				-- Bước 4: Xóa bảng tạm
+				DROP TABLE #UpdatedDetails
+			END
+		---Cập nhật giá tiền tất cả của hóa đơn
+		---lấy tổng tiền tất cả
+		declare @ThanhTien float
+		select @ThanhTien=(select SUM(ct.tongTien) from ChiTietHoaDonBan ct where ct.MaHD=@maHD)
+		----Cập nhật
+		Update HoaDonBan 
+		set HoaDonBan.ThanhTien=@ThanhTien
+	    where HoaDonBan.MaHD=@maHD
+end
+
+-- Ví dụ: Chạy thủ tục lưu trữ sp_updateHDB với các tham số tương ứng
+EXEC sp_updateHDB
+    @maHD = 1, -- Thay thế 123 bằng giá trị thực tế của maHD
+    @TenKH = N'Tên Khách Hàng', -- Thay thế 'Tên Khách Hàng' bằng giá trị thực tế của TenKH
+    @Diachi = N'Địa Chỉ', -- Thay thế 'Địa Chỉ' bằng giá trị thực tế của Diachi
+    @Email = N'example@email.com', -- Thay thế 'example@email.com' bằng giá trị thực tế của Email
+    @SDT = N'1234567890', -- Thay thế '1234567890' bằng giá trị thực tế của SDT
+    @DiaChiGiaoHang = N'Địa Chỉ Giao Hàng', -- Thay thế 'Địa Chỉ Giao Hàng' bằng giá trị thực tế của DiaChiGiaoHang
+    @list_json_chitietHDB = N'[{"maSP": 107, "imageSP": "url", "tenSP": "Sản phẩm 1", "soLuong": 12, "giaBan": 20000}]' -- Thay thế JSON này bằng dữ liệu thực tế.
+
+	
+-----Thêm hóa đơn nhập and chi tiết hóa đơn nhập
+create proc sp_CreateHDN
+   @MaNCC int,
+   @TenTK nvarchar(200),
+   @GhiChu  nvarchar(Max),
+   @methodPay nvarchar(50),
+   @ngaynhap datetime ,
+   @list_json_chitietHDN NVARCHAR(MAX)
+	as
+begin
+		----Tạo hóa đơn
+		insert into HoaDonNhap(MaNCC,TenTaiKhoan,GhiChu,methodPay,NgayNhap)
+		values(@MaNCC,@TenTK,@GhiChu,@methodPay,@ngaynhap)
+		----Lấy mã hóa hơn vừa tạo xong
+		declare @MaHoaDon int 
+		set @MaHoaDon=SCOPE_IDENTITY();
+		declare @Tongtien Float;
+
+		---Thêm chi tiết hóa đơn nhập
+		if(@list_json_chitietHDN is not null)
+		begin
+			insert into ChiTietHoaDonNhap(MaHDN,MaSP,SoLuong,GiaNhap,TongTien)
+			select
+			@MaHoaDon,
+			JSON_VALUE(l.value,'$.maSP'),			
+			JSON_VALUE(l.value,'$.soLuong'),
+			JSON_VALUE(l.value,'$.giaNhap'),
+			cast(JSON_VALUE(l.value,'$.soLuong')as int)*CAST(JSON_VALUE(l.value,'$.giaNhap')as float)
+			from openjson(@list_json_chitietHDN) as l
+		end
+		---Cập nhật giá tiền tất cả của hóa đơn
+		---lấy tổng tiền tất cả
+		declare @ThanhTien float
+		select @ThanhTien=(select SUM(ct.TongTien) from ChiTietHoaDonNhap ct where ct.MaHDN=@MaHoaDon)
+		----Cập nhật
+		Update HoaDonNhap 
+		set HoaDonNhap.Tongtien=@ThanhTien
+	    where HoaDonNhap.MaHD=@MaHoaDon
+end
 
 
+------Update hóa đơn nhập and chitiet
+alter proc sp_updateHDN
+    @maHDN int,
+    @MaNCC int, 
+    @GhiChu  nvarchar(Max),
+    @methodPay nvarchar(50), 
+	@list_json_chitietHDN NVARCHAR(MAX)
+	as
+begin
+        ------Cập nhật thông tin hóa đơn bán
+        update HoaDonNhap
+		set MaNCC=@MaNCC,GhiChu=@GhiChu,methodPay=@methodPay
+		where HoaDonNhap.MaHD=@maHDN
+		---Thêm chi tiết hóa đơn nhập nếu trong bảng chi tiết chưa có
+		IF (@list_json_chitietHDN IS NOT NULL)
+			BEGIN
 
+			
+				-- Bước 1: Trích xuất dữ liệu từ JSON và lưu vào bảng tạm #UpdatedDetails
+				CREATE TABLE #UpdatedDetails (
+					maSP INT,					
+					soLuong INT,
+					giaNhap FLOAT,
+					tongTien FLOAT
+				)
+
+				INSERT INTO #UpdatedDetails (maSP, soLuong, giaNhap, tongTien)
+				SELECT
+					JSON_VALUE(l.value, '$.maSP'),					
+					CAST(JSON_VALUE(l.value, '$.soLuong') AS INT),
+					CAST(JSON_VALUE(l.value, '$.giaNhap') AS FLOAT),
+					CAST(JSON_VALUE(l.value, '$.soLuong') AS INT) * CAST(JSON_VALUE(l.value, '$.giaNhap') AS FLOAT)
+				FROM OPENJSON(@list_json_chitietHDN) AS l
+
+				-- Bước 2: Thêm chi tiết mới hoặc cập nhật chi tiết đã tồn tại
+				-- Cập nhật chi tiết hóa đơn bán
+				UPDATE ct
+				SET
+					ct.SoLuong = u.soLuong,
+					ct.GiaNhap = u.giaNhap,
+					ct.tongTien = u.tongTien
+				FROM ChiTietHoaDonNhap ct
+				INNER JOIN #UpdatedDetails u ON ct.MaSP = u.maSP
+				WHERE ct.MaHDN = @maHDN
+
+				-- Thêm chi tiết hóa đơn bán mới
+				insert into ChiTietHoaDonNhap(MaHDN,MaSP,SoLuong,GiaNhap,TongTien)
+				select @MaHDN,s.maSP,s.soLuong,s.giaNhap,s.tongTien
+				FROM #UpdatedDetails as s
+				WHERE s.maSP NOT IN (SELECT MaSP FROM ChiTietHoaDonNhap WHERE MaHDN = @maHDN)
+
+				-- Bước 3: Xóa các chi tiết không có trong danh sách cập nhật
+				DELETE FROM ChiTietHoaDonNhap
+				WHERE MaHDN = @maHDN AND MaSP NOT IN (SELECT maSP FROM #UpdatedDetails)
+
+				-- Bước 4: Xóa bảng tạm
+				DROP TABLE #UpdatedDetails
+			END
+		
+		---Cập nhật giá tiền tất cả của hóa đơn
+		---lấy tổng tiền tất cả
+		declare @ThanhTien float
+		select @ThanhTien=(select SUM(ct.TongTien) from ChiTietHoaDonNhap ct where ct.MaHDN=@maHDN)
+		----Cập nhật
+		Update HoaDonNhap 
+		set HoaDonNhap.Tongtien=@ThanhTien
+	    where HoaDonNhap.MaHD=@maHDN
+end
+  
+  ------Thủ túc lấy về chi tiết hóa đơn nhập
+  exec sp_getDetail_HDN 3
+  create proc sp_getDetail_HDN
+  @maHDN int
+  as
+  begin
+  select * ,(select * from ChiTietHoaDonNhap as n where n.MaHDN=@maHDN for json auto ) as listchitiethdn from HoaDonNhap where MaHD=@maHDN
+  end
+
+  ---thủ tục xóa hóa đơn nhập by id
+  exec sp_DeleteHDN 5
+  alter proc sp_DeleteHDN 
+  @maHDN int
+  as
+  begin
+  delete HoaDonNhap where MaHD=@maHDN
+  end
+  ------thủ tục lấy danh sách hóa đơn nhập và phân trang
+  exec sp_GetHoaDonNhap 1,5,'2002-09-01','',''
+  create PROCEDURE sp_GetHoaDonNhap
+    @page_index INT,
+    @page_size INT,   
+    @searchTime_begin DATE,
+    @searchTime_end DATE,
+    @tentaikhoan VARCHAR(250)
+AS
+BEGIN
+    DECLARE @RecordCount INT;
+    IF (@searchTime_begin != '' AND @searchTime_end = '')
+    BEGIN
+        SELECT @searchTime_end = DATEADD(DAY, 1, GETDATE()); -- Add 1 day to the current date
+    END
+    SET NOCOUNT ON;
+    IF @page_size = 0
+    BEGIN
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY MaHD ASC) AS RowNumber, *
+        FROM HoaDonNhap AS h
+        WHERE          
+			 (@tentaikhoan = '' OR h.TenTaiKhoan = @tentaikhoan)
+            AND (
+                (h.NgayNhap BETWEEN CONVERT(DATE, @searchTime_begin) AND CONVERT(DATE, @searchTime_end))
+                OR (@searchTime_begin = '' AND @searchTime_end = '')
+            )
+    END
+    ELSE
+    BEGIN
+        SELECT ROW_NUMBER() OVER (ORDER BY MaHD ASC) AS RowNumber, *
+        INTO #Results
+        FROM HoaDonNhap AS h
+        WHERE          
+			  (@tentaikhoan = '' OR h.TenTaiKhoan = @tentaikhoan)
+            AND (
+                (h.NgayNhap BETWEEN CONVERT(DATE, @searchTime_begin) AND CONVERT(DATE, @searchTime_end))
+                OR (@searchTime_begin = '' AND @searchTime_end = '')
+            )
+
+        SELECT @RecordCount = COUNT(*)
+        FROM #Results;
+        
+        SELECT *, @RecordCount AS RecordCount
+        FROM #Results
+        WHERE
+            RowNumber BETWEEN (@page_index - 1) * @page_size + 1
+            AND ((@page_index - 1) * @page_size + 1) + @page_size - 1
+            OR @page_index = -1;
+
+        DROP TABLE #Results;
+    END
+END;

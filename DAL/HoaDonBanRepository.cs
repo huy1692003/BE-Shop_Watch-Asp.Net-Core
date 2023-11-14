@@ -1,6 +1,7 @@
 ﻿using DAL.Interface;
 using Data_Model;
 using DataAccessLayer;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -27,7 +28,7 @@ namespace DAL
                     "@TrangThai", 0,
                     "@NgayTao", DateTime.Now,
                     "@TenKH", hdb.TenKH,
-                    "@Diachi", hdb.DiaChi,
+                    "@Diachi", hdb.Diachi,
                     "@Email", hdb.Email,
                     "@SDT", hdb.SDT,
                     "@DiaChiGiaoHang", hdb.DiaChiGiaoHang,
@@ -118,6 +119,30 @@ namespace DAL
             catch (Exception ex) { throw ex; }
 
         }
+        public bool updateDetail_HDB(HoaDonBanUpdate a)
+        {
+   
+            string msgError = "";
+            try
+            {
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_updateHDB",
+                        "@maHD", a.MaHD,
+                        "@TenKH", a.TenKH,
+                        "@Diachi", a.Diachi,
+                        "@Email", a.Email,
+                        "@SDT", a.SDT,
+                        "@DiaChiGiaoHang", a.DiaChiGiaoHang,
+                        "@methodPay", a.methodPay,
+                        "@list_json_chitietHDB", a.ChiTietHoaDonBan);
+
+                if (!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError + dt.ToString());
+                }
+                return string.IsNullOrEmpty(msgError) ? true : false;
+            }
+            catch (Exception ex) { throw ex; }
+        }    
     }
 
 }

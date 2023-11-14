@@ -14,9 +14,12 @@
        </select>       
         <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập giá tiền " ng-model="txtSearchGiaTien">
         <button style="width: 90px;height: 30px;border-radius: 5px;cursor: pointer;" ng-click="clickSearch()">Search</button>
+        <div style="margin: 8px 2%;display: inline-block;float: right;"><span style="color: rgb(150, 148, 148);font-size: 16px;">Showing </span><input type="number" value="8" ng-model="pageSize" ng-change="clickSearch()" style="width: 50px;height: 20px;"></div>
       
 </div>
+
 <table  border="1" cellspacing="0" cellpadding="5" class="table_header">
+    
     <thead>
         <td style="width: 5%;height: 19px;">Mã SP</td>     
         <td style="width: 18%;" >Tên sản phẩm</td>        
@@ -44,7 +47,7 @@
         </tr>
     </table>
 </div>
- <div class="nextpage" style="float: right;margin-right: 3%;">
+ <div class="nextpage" style="float: right;margin-right: 3%;;">
     <button ng-click="page_prev()" ng-disabled="pageprev" >Trang trước</button>
     <button ng-click="page_after()" ng-disabled="pageafter">Trang sau</button>
  </div>
@@ -60,15 +63,9 @@
         <div style="margin-top:2%;" >
                      <h4 class="title_info">Thông tin sản phẩm</h4>
                     <label class="titlePrp">Tên Sản Phẩm</label>
-                    <input type="text" placeholder="  Ví dụ : Đồng hồ Rolex" ng-model="TenSP">
-                
-                        <input type="file" id="fileInput">
-                        <img src="{{imageSP}}">
-                        <button ng-click="uploadImage()"> Tải ảnh lên</button>
-                    
+                    <input type="text" placeholder="  Ví dụ : Đồng hồ Rolex" ng-model="TenSP">              
+                         
                     <br>
-                    
-              
                     <label class="titlePrp" >Thương hiệu</label>
                     <select ng-model="MaTH">
                         <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> - Chọn thương hiệu -</option>
@@ -82,19 +79,11 @@
                     </select> <br>
                     <label class="titlePrp">Giá Bán</label>
                     <input type="number" placeholder=" Ví dụ : 10000" ng-model="giaBan"><br>
-
-                    <label class="titlePrp">Số lượng</label>
-                    <input type="number" placeholder="  Ví dụ : 10000" ng-model="soLuongton"><br>
-
-                    
-                    
-
-                      
-
                     <label class="titlePrp">Mô tả</label>
-                    <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="Mota"></textarea>
+                    <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="Mota"></textarea><br>
+                    <span>Chọn ảnh sản phẩm</span><input type="file" id="fileInput"> 
                         
-                    <button type="submit" class="submit" ng-click="addSP()">Lưu</button>
+                    <span type="submit" class="submit" ng-click="addSP()">Lưu</span>
                 </div>
     </form>
    </div>

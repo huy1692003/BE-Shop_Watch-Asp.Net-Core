@@ -1,7 +1,7 @@
 myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     // Khởi tạo   
     $scope.page=1;
-    $scope.pageSize=9;   
+    $scope.pageSize=8;   
     $scope.listItem = [];
     $scope.totalItems = 0;  
     $scope.objSP={} ,
@@ -140,56 +140,50 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             maTH: $scope.MaTH,
             tenMH: $scope.TenSP,
             maLoai: $scope.maLoai,
-            soLuongton: $scope.soLuongton,
+            soLuongton: 0,
             giaBan: $scope.giaBan,
             image_SP: $scope.imageSP,
             mota: $scope.Mota,
             sldaban: $scope.sldaban,
             trangthai: $scope.trangthai}  
-    }
-       
-    $scope.uploadImage = function () {
+    }     
+
+    $scope.addSP=()=>{              
         var fileInput = document.getElementById('fileInput');
-        var file = fileInput.files[0];
-        
+        var file = fileInput.files[0];        
         if (!file) {
             alert('Vui lòng chọn ảnh!');
-            return;
-        }
-    
-        var formData = new FormData();
-        formData.append('file', file);
-        $http({
-            method: 'POST',
-            url: 'https://localhost:44334/api/UploadFile/upload',
-            data: formData,
-            headers: { 'Content-Type': undefined }
-        })
-        .then(function (response) {
-            $scope.imageSP = '/image' + response.data.filePath;
-            alert($scope.imageSP)
             
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    };
-    
-
-    $scope.addSP=()=>{      
-        
-        $scope.reloadSP() ; 
-        $http({
-            method:"POST",
-            url:'https://localhost:44334/api/SanPham/create_SP',
-            data: $scope.objSP
-        }).then((result)=>{
-            alert("Thông báo : "+result.data);
-          
-        }).catch((error)=>
-                 {alert("Có lỗi khi thêm sản phẩm hãy xem lại dữ liệu đã nhập đầy đủ hay chưa ?")
-                 console.log("Lỗi :" + error)})
-        
+        }   
+        else
+        {
+            var formData = new FormData();
+            formData.append('file', file);
+            $http({
+                method: 'POST',
+                url: 'https://localhost:44334/api/UploadFile/upload',
+                data: formData,
+                headers: { 'Content-Type': undefined }
+            })
+            .then(function (response) 
+            {
+                 $scope.imageSP = '/image' + response.data.filePath;
+                 $scope.reloadSP() ; 
+                 $http({
+                     method:"POST",
+                     url:'https://localhost:44334/api/SanPham/create_SP',
+                     data: $scope.objSP
+                 }).then((result)=>{
+                     alert("Thông báo : "+result.data);
+                   
+                 }).catch((error)=>
+                          {alert("Có lỗi khi thêm sản phẩm hãy xem lại dữ liệu đã nhập đầy đủ hay chưa ?")
+                          console.log("Lỗi :" + error)})
+                 
+            })     
+         
+         };
+       
     }
 
     $scope.detailSP=(x)=>{

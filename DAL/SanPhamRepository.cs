@@ -33,7 +33,10 @@ namespace DAL
                     );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
+                if (pageSize != 0)
+                {
+                    if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
+                }
                 return dt.ConvertTo<SanPham>().ToList();
             }
             catch (Exception ex)

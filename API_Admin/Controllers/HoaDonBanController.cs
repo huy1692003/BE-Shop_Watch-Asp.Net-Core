@@ -35,6 +35,16 @@ namespace API_Admin.Controllers
             }
             return BadRequest(false);
         }
+        [Route("update_detailHDB")]
+        [HttpPut]
+        public IActionResult update_detailHDB(HoaDonBanUpdate a)
+        {
+            if (hdb_Bus.updateDetail_HDB(a))
+            {
+                return Ok(true);
+            }
+            return BadRequest(false);
+        }
         [Route("get_HDB")]
         [HttpPost]
         public IActionResult get_HDB([FromBody] Dictionary<string,object> d)
@@ -62,6 +72,18 @@ namespace API_Admin.Controllers
             {
                 return BadRequest($"Lỗi: {ex.Message}");
             }
+
+        }
+        [Route("getdetail_HDB/{MaHD}")]
+        [HttpPost]
+        public IActionResult GetDetaiHDB(int MaHD)
+        {
+            var obj = hdb_Bus.getDetail_HoaDonBan(MaHD);
+            if (obj != null)
+            {
+                return Ok(obj);
+            }
+            return BadRequest("Không tìm thấy đơn hàng");
         }
     }
 }

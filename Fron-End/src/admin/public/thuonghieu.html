@@ -1,7 +1,7 @@
 <div class="blockTable">
     <h3 class="title_manage">Quản lý thương hiệu</h3>
     <button class="addnew" ng-click="showAddTH()"> Thêm mới</button> 
-    <table  border="1" cellspacing="0" cellpadding="5" class="table_header">
+    <table  border="1" cellspacing="0" cellpadding="5" class="table_header" style="margin-top: 2%;">
         <thead>
             <td style="width: 5%;height: 19px;">Mã TH</td>     
             <td style="width: 18%;" >Tên thương hiệu</td>        
@@ -14,7 +14,7 @@
             <tr ng-repeat="x in listTH">
                    <td style="width: 5%;height: 19px;">{{x.maTH}}</td>     
                    <td style="width: 18%;" >{{x.tenThuongHieu}}</td>        
-                   <td style="width: 8%;padding:3px;"><img src="/image/{{x.hinhAnh}}" style="width: 80px;height: 40px;" alt="error"></td>         
+                   <td style="width: 8%;padding:3px;"><img src="{{x.hinhAnh}}" style="width: 80px;height: 40px;" alt="error"></td>         
                   
                    <td style="width: 14%;">
                     <button class="task" ng-click="showeditSP(x)"><i class="fa-solid fa-wrench"></i></button>
@@ -40,12 +40,12 @@
                         <input type="text" ng-model="tenThuongHieu" placeholder=" Ví dụ : Dior" >  <br>                                 
                                                                  
                          <label class="titlePrp">Mô tả</label>
-                        <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="moTa"></textarea> <br>
+                        <textarea placeholder="Ví dụ : Thương hiệu xuất xứ tại USA ,..." ng-model="moTa"></textarea> <br>
                         <label class="titlePrp">Ảnh</label>
-                        <input type="file" ng-model="imageFile" id="fileInput"> <br>
-                        <img src="/image/{{hinhAnh}}" alt="errr" style="width: 200px;height: 100px; margin-left: 23%;border: 1px solid;">              
+                        <input type="file" id="fileInput1"> <br>
+                     
                             
-                        <button type="submit" class="submit" ng-click="addTH()">Lưu</button>
+                        <span type="submit" class="submit" ng-click="addTH()">Lưu</span>
                     </div>
         </form>
        </div>
@@ -62,8 +62,8 @@
                          <label class="titlePrp">Mô tả</label>
                         <textarea placeholder="Ví dụ : Sản phẩm xuất xứ tại USA ,..." ng-model="moTa"></textarea> <br>
                         <label class="titlePrp">Ảnh</label>
-                        <input type="file"  id="fileInputedit"> <br>
-                        <img src="/image/{{hinhAnh}}" alt="errr" style="width: 200px;height: 100px; margin-left: 23%;border: 1px solid;">              
+                        <input type="file"  id="fileInput2"> <br>
+                      
                             
              
                        

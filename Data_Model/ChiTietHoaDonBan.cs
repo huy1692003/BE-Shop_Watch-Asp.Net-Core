@@ -6,6 +6,8 @@
         public int MaHD { get; set; }
         public int MaSP { get; set; }
         public string? imageSP { get; set; }
+        public string? tenSP { get; set; }
+
         public int SoLuong { get; set; }
         public float GiaBan { get; set; }
         public float TongTien { get; set; }

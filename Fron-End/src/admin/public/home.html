@@ -45,9 +45,21 @@
         </div>
         <!-- Nội dung phải---header -->
         <div class="content_right">
-            <div class="header_top">
-               <p style="float: right;margin-right: 20px;margin-top: 6px;">{{timenow}}</p>
+            <div class="header_top" style="background-color: #222D32;color: white;position: relative;">
+                
+               <span style="float: right;padding-bottom: 5px;"ng-if="user!=null">
+                Xin chào {{user.taikhoan}} 
+                <button style="border: none;background-color: #222D32" ng-click="clickSetting()">
+                    <i class="fa-solid fa-gear" style="color: #0860f7;background-color: #222D32;"></i>
+                    
+                </button>
+               </span>
+               <div id="setting" ng-init="showSetting=false" ng-show="showSetting">
+                <span>Thông tin tài khoản</span><br>
+                <span>Đổi mật khẩu</span><br>
+                <span ng-click="logout()">Đăng xuất</span><br>
             </div>
+        </div>
         <!-- Nội dung phải---content -->
         <div ng-view style="width: 99%;height: 92.6%;margin-left: 3px;margin-top: 8px;">
         
@@ -66,4 +78,5 @@
 <script src="../assets/Javascript/loaitaikhoan.js"></script> 
 <script src="../assets/Javascript/hoadonban.js"></script> 
 <script src="../assets/Javascript/hoadonnhap.js"></script> 
+<script src="../assets/Javascript/thongke.js"></script> 
 </html>

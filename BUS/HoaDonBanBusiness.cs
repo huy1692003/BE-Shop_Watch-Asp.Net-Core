@@ -38,6 +38,10 @@ namespace BUS
         {
             return hdb_Dal.getDetail_HoaDonBan(MaHD);
         }
+        public bool updateDetail_HDB(HoaDonBanUpdate a)
+        {
+            return hdb_Dal.updateDetail_HDB( a);
+        }
     }
 
 }

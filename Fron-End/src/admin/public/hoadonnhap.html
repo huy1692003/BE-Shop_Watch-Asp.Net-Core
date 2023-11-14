@@ -1,53 +1,149 @@
-<!DOCTYPE html>
-<html ng-app="myApp">
-<head>
-    <title>Tải tệp lên</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
-    <script>
-        var myApp = angular.module('myApp', []);
+<div class="blockTable">
+    <h3 class="title_manage" style="margin-right: 35.3%;margin-bottom: 1.5%;">Quản lý hóa đơn nhâp</h3>
+        <button class="addnew" ng-click="formAddHDN()"> Thêm mới</button> 
+        <div style="position: relative;bottom: 5px;left: 2%;"><span style="color: rgb(150, 148, 148);font-size: 12px">Showing </span><input type="number" value="10" ng-model="pageSize" style="width: 45px;height: 20px; font-size: 12px;"></div>
+        
+   
 
-        myApp.controller('MyController', ['$scope', '$http', function ($scope, $http) {
-            $scope.upload = function () {
-                var fd = new FormData();
-                fd.append('file', $scope.myFile);
-                var req = {
-                    method: 'POST',
-                    url: 'https://localhost:44334/api/UploadFile/upload',
-                    headers: {
-                        'Content-Type': undefined
-                    },
-                    data: fd
-                };
+        <!-- Nội dung -->
+         
+        <table  border="1" cellspacing="0" cellpadding="5" class="table_header" >
+            <thead>
+                <td style="width: 5%;height: 19px;">Mã HĐ</td>     
+                <td style="width: 10%;" >Mã NCC</td>        
+                <td style="width: 17%;">Tên TK Nhập</td>
+                <td style="width: 12%;">Ngày Nhập</td>        
+                <td style="width: 10%;">Ghi chú</td>
+                <td style="width: 10%;">Tổng tiền</td>
+                <td style="width: 15%;">Chức năng</td>        
+            </thead>
+        </table>
+        <div class="table_content">
+            <table  border="1" cellspacing="0" cellpadding="5"  >
+                
+                <tr ng-repeat="x in listItem">
+                    <td style="width: 5%;height: 19px;">{{x.maHD}}</td>     
+                    <td style="width: 10%;" >{{x.maNCC}}</td>        
+                    <td style="width: 17%;">{{x.tenTaiKhoan}}</td>
+                    <td style="width: 12%;">{{x.ngayNhap|date :'dd/MM/yyyy'}}</td>        
+                    <td style="width: 10%;">{{x.ghiChu}}</td>
+                    <td style="width: 10%;">{{x.tongtien|number}}đ</td>
+                    <td style="width: 15%;">
+                        <button title="Chỉnh sửa đơn hàng" class="task" style="margin-right: 3px;" ng-click="formEditHDN(x)" ng-hide="hideConfirmHDB"><i class="fa-solid fa-pen-to-square" style="color: #146ebe;"></i></button>
+                        <button title="Xem chi tiết đơn hàng" class="task" style="margin-right: 3px;" ng-click= "getDetail_oderByID(x)"><i class="fa-solid fa-circle-info" style="color: #3dd857;"></i></button>
+                        <button title="Xóa đơn hàng" class="task" style="margin-right: 3px;" ng-click="update_statusHDB(x,2) "ng-hide="hideCancelHDB"><i class="fa-solid fa-delete-left" style="color: red;"></i></button>
+                    </td>   
+                </tr>
+            </table>
+        </div>
 
-                $http(req)
-                    .then(function (result) {
-                        console.log(result);
-                    });
-            };
-        }]);
+        <!-- Form thêm mới hóa đơn -->
+        <div class="Screen" ng-init="screen_shadow=false" ng-show="screen_shadow"></div>
+        <div class="form AddHDN" ng-init="formHDNShow=false" ng-show="formHDNShow" style=" width: 85%;left: 10%;">  
+            <form class="formcontent" onsubmit="resetForm(this)" style="margin-top: 0;" >
+                <style>
+                    .titlePrp{
+                       font-size: 14px;
+                    }
+                    input,select{
+                        width: 250px;
+                    }
+                </style>
+                <h2 class="titleForm">{{titleForm}}</h2>
+                <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;right: 4%;cursor: pointer;" ng-click="exitForm()" type="submit"></div>
+                <div style="display: flex; ;">
+                    <!-- Khung nhập thông tin đơn hàng -->
+                        <div style="margin-top: 2%;" >
+                                    <h4 class="title_info" style="margin-top: 20px;">Thông tin hóa đơn</h4> 
+                                    <label class="titlePrp">Nhà cung cấp</label>
+                                    <select ng-model="maNCC">
+                                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>- Chọn nhà cung cấp -</option>
+                                        <option ng-repeat="o in listNCC" value={{o.maNCC}}>{{o.tenNCC}}</option>
+                                    
+                                    </select> <br>
+                                    <label class="titlePrp">Ngày tạo</label>
+                                    <input type="date" ng-model="ngayNhap"><br>
+                                    
+                                    <label class="titlePrp">Tổng tiền</label>
+                                    <input type="text" ng-init="tongtien=0"ng-model="tongtien"><br>
+                                    <label class="titlePrp">Phương thức thanh toán </label>
+                                    <select ng-model="methodPay">
+                                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>- Chọn phương thức thanh toán -</option>
+                                        <option value="1">Thanh toán khi nhận hàng</option>
+                                        <option value="2">Momo</option>
+                                        <option value="3">Tài khoản ngân hàng</option>
+                                    </select> <br>
 
-        myApp.directive('fileModel', ['$parse', function ($parse) {
-            return {
-                restrict: 'A',
-                link: function (scope, element, attrs) {
-                    var model = $parse(attrs.fileModel);
-                    var modelSetter = model.assign;
 
-                    element.bind('change', function () {
-                        scope.$apply(function () {
-                            modelSetter(scope, element[0].files[0]);
-                        });
-                    });
-                }
-            };
-        }]);
-    </script>
-</head>
-<body>
-    <div ng-controller="MyController">
-        <h1>Tải tệp lên</h1>
-        <input type="file" file-model="myFile" />
-        <button ng-click="upload()">Tải tệp lên</button>
-    </div>
-</body>
-</html>
+                                    
+                        </div>
+                        <!-- Khung chọn sản phẩm -->
+                        <div style=" width: 500px;height:215px;margin:0 0 0 7%;">
+                            <h4 class="title_info" style="margin-top: 20px;margin-left: 10%;">Chọn sản phẩm</h4> 
+                            <label style="margin-left: 10%;">Sản phẩm</label>
+                            <br>
+                            <select style="margin-left: 10%;" ng-model="product">
+                            <option value="" selected>Chọn sản phẩm</option>
+                            <option ng-repeat="x in listSP" value="{{x.maSP}}">Mã SP :{{x.maSP}} | {{x.tenMH}}</option>
+                            </select>
+                            <br>
+                            <label style="margin-left: 10%;">Số lượng</label><br>
+                            <input style="margin-left: 10%;" type="number" placeholder="Nhập số lượng" ng-model="soLuong"><br>
+                            <label style="margin-left: 10%;">Giá nhập</label><br>
+                            <input style="margin-left: 10%;" type="number" placeholder="Nhập giá nhập" ng-model="giaNhap"><br>
+
+                            <span class="buttonCustom" ng-click="themSP()">Thêm SP </span>
+                        </div>
+                 </div>
+                 <!-- Hiển thị danh sách sản phẩm đã chọn -->
+                 <div style="margin-top: 5%; margin-left: 8%;height:auto;overflow-y: auto;width: 70%;">
+                    <table  border="1" cellspacing="0" cellpadding="5" >
+                       
+                        <tr style="height: 20px;color: white;background-color: rgb(0, 119, 255);">
+                            <td style="height: 15px;">Mã SP</td>                            
+                            <td>Sl nhập</td>
+                            <td>Giá nhập</td>
+                            <td>Tổng tiền</td>
+                            <td>Chức năng</td>
+                        </tr>
+                         
+                        <tr ng-repeat="x in listSPSelect" style="color: black;">
+                            <td style="height: 15px;">{{x.maSP}}</td>                            
+                            <td>{{x.soLuong}} cái</td>
+                            <td>{{x.giaNhap}} đ</td>
+                            <td>{{x.tongTien}}</td>
+                            <td><i class="fa-solid fa-square-minus" style="color: #e01a1a;" ng-click="deleteSP_ctdh($index)"></i></td>
+                        </tr>
+                      
+                        
+                     </table>
+                     <h4 style="color: red;margin-left: 2%;" ng-if="listSPSelect.length==0">Hiện bạn chưa chọn sản phẩm nào</h4>
+                 </div>
+                 <button type="submit" class="submit" ng-click="saveHDN()">Lưu</button>
+            </form>
+           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         <div class="nextpage" style="float: right;margin-right: 3%;">
+            <button ng-click="page_prev()" ng-disabled="pageprev" >Trang trước</button>
+            <button ng-click="page_after()" ng-disabled="pageafter">Trang sau</button>
+         </div>
+    
+    
+</div>
+    

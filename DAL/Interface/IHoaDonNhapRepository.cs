@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace DAL.Interface
 {
-    internal interface IHoaDonNhapRepository
+    public interface IHoaDonNhapRepository
     {
-        bool Create_HDN(HoaDonNhap HDN);
-        HoaDonNhap GetHDN_byID(int Ma_HDN);
-        bool Update_HDN(HoaDonNhap HDN);
-        bool Delete_HDN(string MaHDN);
+        bool create_HDN(HoaDonNhap HDN);
+        HoaDonNhap getDetail_HDN_byID(int Ma_HDN);
+        bool update_HDN(HoaDonNhap HDN);
+        bool delete_HDN(int MaHDN);
+        List<HoaDonNhap> getListHDN(out int total, int page, int pageSize ,string time_begin, string time_end, string tentaikhoan);
     }
 }
