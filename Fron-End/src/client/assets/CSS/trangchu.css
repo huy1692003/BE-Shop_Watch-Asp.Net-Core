@@ -7,7 +7,7 @@
 #header{
     background-color:black;
     width: 100%;
-    height: 98px;
+    height: px;
     position: relative;
     display: flex;
     
@@ -38,6 +38,7 @@
     
   
 }
+
 #search{       
     width: 30%;
     height: 34px;  
@@ -431,7 +432,7 @@
 }
 .containersp .boxsp img:hover{
     width: 92%;
-    height: 79%;
+    height: 78%;
 
 }
 .containersp .boxsp .titlettsp{
@@ -468,8 +469,8 @@
     border-radius: 5px;
     width: 40px;
     height: 18px;
-    padding-top: 2px;
-    font-size: 14px;
+    
+    font-size: 13px;
     margin-left: 10px;
     
 }
@@ -517,7 +518,7 @@
 .footer{
     background-color:#796752;	
 	width: 100%;
-    
+   display: block;
     margin-top: 40px;
     border-radius: 6px;
     padding: 20px 20px 20px 22px;

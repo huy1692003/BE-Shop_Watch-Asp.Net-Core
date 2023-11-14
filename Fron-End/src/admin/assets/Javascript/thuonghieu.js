@@ -124,18 +124,42 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
    
 
     $scope.editTH=()=>{
-        
-        console.log($scope.objThuongHieu);
-        $scope.reloadData();
-        $http({
-            method: "PUT",
-            url: "https://localhost:44334/Update_ThuongHieu",
-            data:$scope.objThuongHieu
-        }).then((response)=>{
-          alert("Thông báo :"+response.data);
-          $scope.getThuongHieu();
-        }).catch((error)=>{
-           alert("Lỗi : "+error)})
+        var fileInput = document.getElementById('fileInput2');
+        var file = fileInput.files[0];        
+        if (!file) {
+            alert('Vui lòng chọn ảnh!');
+            
+        }   
+        else
+        {
+            var formData = new FormData();
+            formData.append('file', file);
+            $http({
+                method: 'POST',
+                url: 'https://localhost:44334/api/UploadFile/upload',
+                data: formData,
+                headers: { 'Content-Type': undefined }
+            })
+            .then(function (response) 
+            {
+                 $scope.hinhAnh = '/image' + response.data.filePath;
+                 $scope.reloadData();
+                 $http({
+                     method: "PUT",
+                     url: "https://localhost:44334/Update_ThuongHieu",
+                     data:$scope.objThuongHieu
+                 }).then((response)=>{
+                   alert("Thông báo :"+response.data);
+                   $scope.getThuongHieu();
+                 }).catch((error)=>{
+                    alert("Lỗi : "+error)})                
+                 
+            })     
+         
+         };
+       
+       
+      
     }
 })
     

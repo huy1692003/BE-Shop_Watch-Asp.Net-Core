@@ -102,14 +102,39 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     $scope.getThuongHieu();  
         // hàm
     $scope.editSP=()=>{    
-          
+        var img=document.getElementById("fileInputedit")
+        var dataImg=img.files[0]
         $scope.reloadSP();
-        console.log($scope.objSP)   
-        $http({
-            method:"PUT",
-            url:"https://localhost:44334/api/SanPham/UpdateSP_Info",
-            data:$scope.objSP
-        }).then((response)=>{alert("Thông báo :"+response.data),$scope.getProducts()}).catch((error)=>{alert("Thông báo :" + error.data)})    
+        console.log(dataImg)   
+        if(dataImg)
+        {
+            var formData = new FormData();
+            formData.append('file', dataImg);
+            $http({
+                method: 'POST',
+                url: 'https://localhost:44334/api/UploadFile/upload',
+                data: formData,
+                headers: { 'Content-Type': undefined }
+            }).then(function(response)
+            {
+                $scope.imageSP='/image'+response.data.filePath
+                $scope.reloadSP();
+                $http({
+                    method:"PUT",
+                    url:"https://localhost:44334/api/SanPham/UpdateSP_Info",
+                    data:$scope.objSP
+                }).then((response)=>{alert("Thông báo :"+response.data),$scope.getProducts()}).catch((error)=>{alert("Thông báo :" + error)})  
+
+            })
+        }
+        else
+        {
+            $http({
+                method:"PUT",
+                url:"https://localhost:44334/api/SanPham/UpdateSP_Info",
+                data:$scope.objSP
+            }).then((response)=>{alert("Thông báo :"+response.data),$scope.getProducts()}).catch((error)=>{alert("Thông báo :" + error)})  
+        }  
         
     }
     $scope.showAddSP=()=>{
@@ -118,12 +143,13 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         console.log($scope.listTheLoai)  
     }
     $scope.showeditSP=(x)=>{
+        console.log(x)
         $scope.screen_shadow=true;
         $scope.editSPShow=true; 
         $scope.MaSP=x.maSP;
         $scope.TenSP=x.tenMH;
-        $scope.MaTH=null;
-        $scope.maLoai=null;
+        $scope.MaTH=x.maTH;
+        $scope.maLoai=x.maLoai;
         $scope.giaBan=x.giaBan;
         $scope.imageSP=x.image_SP;
         $scope.Mota=x.mota;

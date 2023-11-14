@@ -1,6 +1,43 @@
 myApp.controller("trangchuCtrl",function($scope,$http)
 {
+ 
+  $scope.getProduct = function(x) {
+    return $http({
+      method: "POST",
+      url: "https://localhost:44329/api/SanPham/search_SP",
+      data: {
+        page: 1,
+        pageSize: 12,
+        maTheLoai: x
+      }
+    }).then(function(response) {
+      return response.data.data;
+    }).catch(function(error) {
+      console.log(error);
+      return []; // Trả về một giá trị mặc định hoặc thực hiện xử lý lỗi khác tùy thuộc vào yêu cầu của bạn.
+    });
+  };
   
+    
+  
+
+  // Đồng hồ nam
+  $scope.getProduct(17).then(function(result) {
+    $scope.listSP_Nam=result;
+    console.log(result)
+  })
+  // Đồng hồ nữ
+  $scope.getProduct(18).then(function(result) {
+    $scope.listSP_Nu=result;
+    console.log(result)
+  })
+  // Đồng hồ đôi
+  $scope.getProduct(3).then(function(result) {
+    $scope.listSP_Doi=result;
+    console.log(result)
+  })
+  
+ 
 })
   
 
@@ -50,19 +87,19 @@ var sp=0
  var phantu3={classsp:".linkadmsp3",linkimg:".anhdmsp3"}
  var listphantu=[phantu1,phantu2,phantu3]
 var j=0;
-setInterval(function delayanh()
-{ document.querySelector(`${listphantu[j].classsp}`).href=listdmsp[sp].linkhref;
-  document.querySelector(`${listphantu[j].linkimg}`).src=listdmsp[sp].linkanh;  
-  j++;
-  sp++;
-  if(j>2){j=0}
-  if(sp>3){sp=0}
-},1500)
-// ...................................
-var a=document.querySelectorAll('.gia')
-for (var x of a) {
-  x.innerText=parseFloat(x.innerText).toLocaleString("de-DE")+"đ"
-}
+// setInterval(function delayanh()
+// { document.querySelector(`${listphantu[j].classsp}`).href=listdmsp[sp].linkhref;
+//   document.querySelector(`${listphantu[j].linkimg}`).src=listdmsp[sp].linkanh;  
+//   j++;
+//   sp++;
+//   if(j>2){j=0}
+//   if(sp>3){sp=0}
+// },1500)
+// // ...................................
+// var a=document.querySelectorAll('.gia')
+// for (var x of a) {
+//   x.innerText=parseFloat(x.innerText).toLocaleString("de-DE")+"đ"
+// }
 // .....................................
 
 

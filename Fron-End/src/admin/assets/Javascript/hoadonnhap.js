@@ -12,6 +12,7 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
     $scope.pageprev = true;
     
     $scope.clickSearch = () => {
+        $scope.pageafter=false;
         $scope.searchParameters = {
             page: $scope.page,
             pageSize: $scope.pageSize,            
@@ -29,7 +30,10 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
         $scope.screen_shadow=false;
         
         $scope.formHDNShow=false;
-        $scope.listSPSelect=[]
+        $scope.listSPSelect=[];
+        $scope.maNCC=null;
+        $scope.methodPay=null;
+        $scope.tongtien=0
     }
 
     $scope.getHoaDons = () => {
@@ -40,10 +44,10 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
         }).then((response) => {
             $scope.listItem = response.data.data;
             $scope.totalItems = response.data.totalItems 
-            
-            if($scope.totalItems<=$scope.pageSize)
+            console.log($scope.totalItems)
+            if($scope.page * $scope.pageSize >= $scope.totalItems||$scope.totalItems<$scope.pageSize)
             {
-              $scope.pageafter=true
+               $scope.pageafter=true;
             }
         }).catch((error) => {
             console.error('Lỗi:', error);
@@ -58,7 +62,7 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
             } // Send the search parameters as the request body
         }).then(function (response) {
             $scope.listSP = response.data.data;   
-            console.log($scope.listSP)
+         
         }).catch(function (error) {
             console.error('Lỗi:', error);
         });
@@ -178,8 +182,9 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
     $scope.maHD=0;
     $scope.formEditHDN=(x)=>{
         $scope.maHD=x.maHD
+        $scope.maNCC=x.maNCC
         $scope.screen_shadow=true;
-        $scope.formHDNShow=true;
+        $scope.formHDNShow=true;        
         $scope.titleForm="Cập nhật hóa đơn nhập";        
         
         $http({
@@ -216,12 +221,34 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
             }
         ).then(function(){       
                 alert("Thành công :)))")
-                $scope.listItem();
+                $scope.clickSearch()
               }
         ).catch(function(error){
             alert("Thất bại :((((")
             console.log(error);
         })
+    }
+    $scope.deleteHDN=function(maHDN)
+    {
+        var check=confirm("Bạn có chấc muốn xóa đơn hàng này không ?")
+        if(check)
+        {
+            $http(
+                {
+                    method:"DELETE",
+                    url:"https://localhost:44334/api/HoaDonNhap/delete_HDN/"+maHDN
+                }
+            )
+            .then(function()
+            {
+                alert("Xóa thành công hóa đơn !")
+                $scope.getHoaDons()
+            })
+            .catch(function(error)
+            {
+                console.log(error)
+            })
+        }
     }
 
 });

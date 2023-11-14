@@ -94,29 +94,27 @@
         <div class="fa-solid fa-circle-xmark buttonExit" style="color: #e23428; font-size: 30px;" ng-click="exitForm()" type="submit"></div>
         <div style="margin-top:2%;" >
                      <h4 class="title_info">Thông tin sản phẩm</h4>
-                    <label class="titlePrp">Mã Sản Phẩm</label>
-                    <input type="text" ng-model="MaSP" ng-disabled="true"><br> 
+                    <label class="titlePrp">Mã Sản Phẩm</label>  
+                    <input type="text" ng-model="MaSP" ng-disabled="true">   <img src="{{imageSP}}" style="width: 100px;height: 120px;position: absolute;right: 100px;" alt=" error">         <br> 
                     <label class="titlePrp">Tên Sản Phẩm</label>
-                    <input type="text" ng-model="TenSP"><br>          
+                    <input type="text" ng-model="TenSP"><br>            
+                 
               
-                    <label class="titlePrp" >Thương hiệu</label>
-                    <select ng-model="MaTH">
+                    <label class="titlePrp">Thương hiệu</label>
+                    <select ng-model="MaTH" ng-options="th.maTH as th.tenThuongHieu for th in listTH">
                         <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected> - Chọn thương hiệu -</option>
-                        <option ng-repeat="th in listTH" value={{th.maTH}}>{{th.tenThuongHieu}}</option></select>                   
                     </select> <br>
-
                     <label class="titlePrp">Thể Loại</label>
-                    <select ng-model="maLoai">
-                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>- Chọn thể loại -</option>
-                        <option ng-repeat="tl in listTheLoai" value={{tl.maLoai}}>{{tl.tenLoai}}</option>
+                    <select ng-model="maLoai" ng-options="x.maLoai as x.tenLoai for x in listTheLoai">
+                        <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>- Chọn thể loại -</option>                        
                     </select> <br>
                     <label class="titlePrp">Giá Bán</label>
                     <input type="number"  ng-model="giaBan"><br>
 
                     <label class="titlePrp">Số lượng</label>
                     <input type="number"  ng-model="soLuongton"><br>
-
-                    <label class="titlePrp">Ảnh</label>
+                   
+                    <label class="titlePrp">Ảnh mới</label>
                     <input type="file"  id="fileInputedit"> <br>
                     
                     <label class="titlePrp">Mô tả</label>
