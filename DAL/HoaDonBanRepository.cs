@@ -34,6 +34,7 @@ namespace DAL
                     "@DiaChiGiaoHang", hdb.DiaChiGiaoHang,
                     "@ThoiGianGiaoHang", DateTime.Now.AddDays(2),
                     "@tentaikhoan", hdb.TenTaiKhoan,
+                    "@methodPay",hdb.methodPay,
                     "@list_json_chitietHDB", hdb.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(hdb.ChiTietHoaDonBan) : null);
                 if (!string.IsNullOrEmpty(msgError))
                 {

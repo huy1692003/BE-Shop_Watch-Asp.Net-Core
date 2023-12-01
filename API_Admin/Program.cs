@@ -31,6 +31,9 @@ builder.Services.AddTransient<IHoaDonBanRepository, HoaDonBanRepository>();
 builder.Services.AddTransient<IHoaDonBanBusiness, HoaDonBanBusiness>();
 builder.Services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
 builder.Services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
+builder.Services.AddTransient<IThongKeRepository, ThongKeRepository>();
+builder.Services.AddTransient<IThongkeBusiness,ThongkeBusiness>();
+
 
 
 IConfiguration configuration = builder.Configuration;

@@ -41,16 +41,17 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
             moTa: $scope.moTa,
             hinhAnh: $scope.hinhAnh
           }
-          
+          console.log($scope.user)
     
     $scope.getThuongHieu = () => {
         $http({
               method: "GET",
-              url: "https://localhost:44334/getALL_ThuongHieu"
+              url: "http://localhost:8888/ThuongHieu/getALL_ThuongHieu",
+              headers: { "Authorization": 'Bearer ' + $scope.user.token }
           }).then((response)=>{
              $scope.listTH=response.data;
           }).catch((error)=>{
-             console.log("Lỗi : "+error)})
+             console.log("Lỗi : "+error.data)})
             }
 
     $scope.getThuongHieu();
@@ -69,7 +70,7 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
             formData.append('file', file);
             $http({
                 method: 'POST',
-                url: 'https://localhost:44334/api/UploadFile/upload',
+                url: 'http://localhost:8888/ThuongHieu/api/UploadFile/upload',
                 data: formData,
                 headers: { 'Content-Type': undefined }
             })
@@ -80,8 +81,9 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
                  $scope.reloadData();       
                  $http({
                      method: "POST",
-                     url: "https://localhost:44334/Create_ThuongHieu",
-                     data:$scope.objThuongHieu
+                     url: "http://localhost:8888/ThuongHieu/Create_ThuongHieu",
+                     data:$scope.objThuongHieu,
+                     headers: { "Authorization": 'Bearer ' + $scope.user.token }
                  }).then((response)=>{
                    alert("Thông báo :"+response.data);
                    $scope.getThuongHieu();
@@ -98,7 +100,8 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
         if (confirm("Bạn có chắc chắn muốn xóa")) {
             $http({
                 method: "DELETE",
-                url: 'https://localhost:44334/Delete_ThuongHieu_byID/' + x.maTH
+                url: 'http://localhost:8888/ThuongHieu/Delete_ThuongHieu_byID/' + x.maTH,
+                headers: { "Authorization": 'Bearer ' + $scope.user.token }
             }).then((result) => {
                 alert("Thông báo: " + result.data);
                 $scope.getThuongHieu();
@@ -127,16 +130,26 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
         var fileInput = document.getElementById('fileInput2');
         var file = fileInput.files[0];        
         if (!file) {
-            alert('Vui lòng chọn ảnh!');
-            
-        }   
+           
+            $http({
+                     method: "PUT",
+                     url: "http://localhost:8888/ThuongHieu/Update_ThuongHieu",
+                     headers: { "Authorization": 'Bearer ' + $scope.user.token },
+                     data:$scope.objThuongHieu
+                 }).then((response)=>{
+                   alert("Thông báo :"+response.data);
+                   $scope.getThuongHieu();
+                 }).catch((error)=>{
+                    alert("Lỗi : "+error)})             
+                             
+         }   
         else
         {
             var formData = new FormData();
             formData.append('file', file);
             $http({
                 method: 'POST',
-                url: 'https://localhost:44334/api/UploadFile/upload',
+                url: 'http://localhost:8888/ThuongHieu/api/UploadFile/upload',
                 data: formData,
                 headers: { 'Content-Type': undefined }
             })
@@ -146,7 +159,8 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
                  $scope.reloadData();
                  $http({
                      method: "PUT",
-                     url: "https://localhost:44334/Update_ThuongHieu",
+                     url: "http://localhost:8888/ThuongHieu/Update_ThuongHieu",
+                     headers: { "Authorization": 'Bearer ' + $scope.user.token },
                      data:$scope.objThuongHieu
                  }).then((response)=>{
                    alert("Thông báo :"+response.data);

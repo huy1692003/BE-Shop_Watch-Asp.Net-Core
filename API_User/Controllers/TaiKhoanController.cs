@@ -18,7 +18,7 @@ namespace API_User.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] AuthenticateModel user)
         {
-            var tk = tk_Bus.Login(user.Username, user.Password);
+            var tk = tk_Bus.Login(user.Username, user.Password,user.role);
             if (tk != null)
             {
                 return Ok(new { taikhoan = tk.TenTaiKhoan, email = tk.Email, tk.Token });

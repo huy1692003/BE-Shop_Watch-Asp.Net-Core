@@ -1,207 +1,4 @@
-*{
-    margin: 0;padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-#header{
-    background-color:black;
-    width: 100%;
-    height: 98px;
-    position: relative;
-    display: flex;
-    
-   
-}
-.logos{
-    width: 18%;
-    height:78%;
-    margin-left: 70px;
-}
-#logo{
-    
-    width: 100%;
-    height:100%;
-    margin-left: 70px;
-    color: #f2ebeb;
-    text-align: center;
-    font-size: 30px;
-    padding-top: 30px;
-    font-weight: bold;
-    border-bottom: 3px solid white;
-    
-  
-}
-#search{       
-    width: 30%;
-    height: 34px;  
-    margin-top: 40px;
-    border-radius: 24px;
-    margin-left: 15%;
-    border: #faf2f2;
-    align-items: center;
-    position: relative;
-   
-    
-}
-#search>input{     
-    width: 87%;    
-    height: 99%;
-    font-size: 15px;
-    border-radius: 24px ;
-    background-color: #252525;
-    color: white;
-    position: relative;      
-    padding-left: 20px; 
-    border: 0;
-    
-}
-#buttonsearch{
-    background-color:#252525;
-    width: 14%;
-    height: 20px;   
-    position: absolute;
-    border: none;
-    top:18%;
-    right:16%;
-    cursor: pointer;
-    
-}
-#lienhe_giohang{         
-    width: 38%;
-    height: 40px;
-    position: relative;   
-    display: flex; 
-    top: 40px;
-    margin-left: 30px;
-}
-#diadiem{
-    position: absolute;
-    left: 45%;
-    
-   
-}
-.sldh{
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    background-color:white;
-    color: red;
-    position: absolute;
-    left:15.8%;
-    bottom: 70%;
-    padding:1%;
-    text-align: center;
-    border:1px solid black;
-    font-size: 14px;
-    
-}
-.phonenumber{
-     text-align: left;
-     font-size: 16px;
-     position:absolute;
-     left:37px;
-     color:white;
-}
-.phonenumber:hover{color:gold;}
 
-#giohang{
-    width: 120px;
-    height: 35px;
-    position: absolute;
-    display: flex;
-    right: 60px;
-    
-    
-}
-#giohang>button{
-    font-size: 19px;
-    color: aliceblue;
-    background-color:transparent;
-    border: 0;
-    cursor: pointer;
-    position: relative;
-    
-}
-
-#giohang>button:hover{
-    color: gold;
-}
-.menu{
-    width: 100%;
-    height: 45px;
-    background-color:#796752;
-  
-    display: flex;
-    padding-right: 20px;
-    
-}
-.home{    
-    
-     margin-bottom: 3px;
-     margin: 10px 20px 1.4px 80px;
-}
-.menu1{
-   
-    
-    font-size: 15px;
-    display: flex;
-    width: 100%;
-
-    
-  
-}
-
-
-/* menu cấp 2 */
-.menu2{
-    display: none;
-    position: absolute;
-    width: 300px;
-    background-color: #695640c8;
-    border-top: 1px solid white;
-    top:45px;
-    padding: 10px;
-    color: #f2ebeb;
-    border-radius:0px 0px 5px 5px;
-}
-.menu2>li{
-    font-size: 17px;
-    text-align: left;
-    
-}
-.menu1>li{
-    list-style-type: none;     
-    text-align: center;
-    line-height: 30px;
-    padding-top: 9px;
-    position: relative;
-    width: 14%;
-    
-}
-.menu1>li:hover .menu2{
-    display: block;
-}
-.menu1>li>a{     
-        
-     text-decoration: none;
-     text-transform: uppercase;
-     color: white;
-   
-     
-}
-.menu1>li>a:hover{
-    padding-bottom: 10px;
-    border-bottom:2px solid white ;
-    
-}
-.menu1>li:hover>a{
-    color: black;
-    
-}
-.menu2>li:hover{
-    color:rgb(185, 49, 49);
-}
 /* Phần Thân */
 a{
     text-decoration: none;
@@ -226,6 +23,15 @@ a{
 
     
 }
+::-webkit-scrollbar{
+    width: 7px;
+    
+ }
+ ::-webkit-scrollbar-thumb{
+    background-color: grey;
+    border-radius: 4px;
+    height: 20px;
+ }
 .kengang2 .title3{
     width: 17%;
     font-size: 26px;
@@ -242,7 +48,7 @@ a{
 }
 .chitietgh{
     max-width: 1200px;
-    height: auto;
+    height: 950px;
     margin: auto;
     margin-top: 20px;
     border: 1px solid;
@@ -252,7 +58,7 @@ a{
 }
 .container_left{
     width: 50%;
-    height: auto;  
+    height: 600px;  
     padding: 15px;
 }
 .formdonhang{
@@ -296,35 +102,14 @@ label{
 }
 .container_right{
     margin-left: 30px;
-    width: 44%;
-    height: auto;
+    width: 48%;
+    height: 900px;
     background-color:#EFEFEF;
     padding-top: 15px;
     border-radius: 7px;
     
 }
-#listsp{
-    border-radius: 5px;
-    width: 100%;
-    height: auto;
-   
-}
-.sanpham{
-    padding: 15px;
-    position: relative;
-    border-bottom: 1px solid;
-    line-height: 30px;
 
-}
-.anhsp{
-   margin-top: 8px;
-    width: 120px ;
-    height: 60px;
-    position: absolute;
-    top: 8px;
-    right: 10px;
-    border: 1px solid;
-}
 .deletesp{
     position: absolute;
     background-color: rgb(185, 49, 49);  
@@ -371,74 +156,66 @@ label{
   font-size: 20px;
   color: red;
 }
-.tensp{
-    font-weight: bold;
+#listsp{
+    width: 98%;
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
-
-
-/* Phần cuối */
-#footer{
-    background-color:#796752;	
-	width: 100%;
-    
-    margin-top: 40px;
-    border-radius: 6px;
-    padding: 20px 20px 20px 22px;
-    
-}
-.logo{
-    display: inline-block;
-    margin-top: 38px;
-    margin-left: 20px;
-    width: 390px;
-    height: 230px;
-    border-radius: 9px;
-    margin-right: 80px;
-    
-}
-.logo>img{
-    
-    display: inline-block;
-    width: 100%;
-    height: 92%;
-    border-radius: 15px;
-}
-.noidung{
-    
-    display: inline-block;
-    width: 390px;
-    height: 250px;
-    text-align: center;
+.sanphamCart{
+    width: 94%;
+    height: 100px;
    
+    border-bottom: 1px solid;
+    margin-bottom: 13px;
+    margin-left: 10px;
 }
-li{list-style: none;}
-.noidung>ul>li{
-    text-align: left;
-    font-size: 19px;
-    color: #f2ebeb;
-    line-height: 35px;
-}
-.noidung>ul>li:hover{
-    color: gold;
-    cursor: pointer;
-}
-.noidung>ul>li>a{
-    text-decoration: none;
-    font-size: 28px;
-    color: gold;
+.tenspCart{
+    width: 100%;
+    height: 30px;
+    font-size: 17px;
     font-weight: bold;
+    margin-bottom: 5px;
+    display: inline-block;
 }
-.noidung>ul>li>a:hover{color: black;}
-.ndend{
-    display: block;
-    width: 1100px;
-    margin: auto;
-    height: 80px;
-    color: white;
-    font-size: 14px;
-    text-align: center;
+.anhspCart{
+   
+    width: 120px;
+    height: 74px;    
+    border: 1px solid;
+}
+.title_table_cart
+{
+    width: 100%;
+    box-shadow: 1px gray;
+}
+table{
+    border-collapse: collapse;
+    
+}
+.content_Cart table tr td{
+    border: 1px solid white;
+}
+.content_inforUser
+{
     margin: 0 auto;
-    margin-top: 30px;
-    border-top: 1px solid black;
-    padding-top: 25px;
+    width: 90%;
+    margin-top: 40px;
 }
+.content_inforUser p{
+    font-size: 27px;
+}
+.content_inforUser form label
+{
+    width: 20%;
+    font-size: 18px;
+}
+.content_inforUser form input,select
+{
+    width: 50%;
+    font-size: 14px;
+    height: 30px;
+    margin-bottom: 9px;
+    padding-left: 5px;
+}
+

@@ -20,7 +20,7 @@ namespace API_User.Controllers
             bool check=hdb_bus.Create_HDB(hdb);
             if (check)
             {
-                return Ok(new { Message = "Tạo đơn hàng thành công", DonHang = hdb });
+                return Ok("Tạo đơn hàng thành công");
             }
             return BadRequest("Tạo đơn hàng thất bại hãy thử lại");
         }
@@ -62,6 +62,16 @@ namespace API_User.Controllers
                 return Ok(obj);
             }
             return BadRequest("Không tìm thấy đơn hàng");
+        }
+        [Route("update_statusHDB/{MaHD},{trangthai}")]
+        [HttpPut]
+        public IActionResult update_StatusHDB(int MaHD, int trangthai)
+        {
+            if (hdb_bus.update_StatusHDB(MaHD, trangthai))
+            {
+                return Ok(true);
+            }
+            return BadRequest(false);
         }
     }
 }

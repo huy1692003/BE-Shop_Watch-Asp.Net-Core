@@ -39,7 +39,8 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
     $scope.getHoaDons = () => {
         $http({
             method: 'POST',
-            url: 'https://localhost:44334/api/HoaDonNhap/getList_HDN',
+            url: 'http://localhost:8888/HoaDonNhap/getList_HDN',
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
             data: $scope.searchParameters
         }).then((response) => {
             $scope.listItem = response.data.data;
@@ -56,7 +57,8 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
     $scope.getProducts = function () {
         $http({
             method: 'POST',
-            url: 'https://localhost:44334/api/SanPham/search_SP',
+            url: 'http://localhost:8888/SanPham/search_SP',
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
             data: {
                 pageSize:0
             } // Send the search parameters as the request body
@@ -150,7 +152,8 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
     $scope.getNCC = () => {
         $http({
               method: "GET",
-              url: "https://localhost:44334/api/NhaCungCap/getALL_NCC"
+              url: "http://localhost:8888/NCC/getALL_NCC",
+              headers: { "Authorization": 'Bearer ' + $scope.user.token }
           }).then((response)=>{
              $scope.listNCC=response.data;
           
@@ -167,7 +170,8 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
         $http(
             {
                 method:"POST",
-                url:"https://localhost:44334/api/HoaDonBan/getdetail_HDB/"+x.maHD
+                url:"http://localhost:8888/HoaDonBan/getdetail_HDB/"+x.maHD,
+                headers: { "Authorization": 'Bearer ' + $scope.user.token }
             }
         ).then(function(response){
           $scope.inforHDB=response.data;
@@ -189,7 +193,8 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
         
         $http({
             method:"POST",
-            url:"https://localhost:44334/api/HoaDonNhap/getDetail_HDN/"+x.maHD
+            url:"http://localhost:8888/HoaDonNhap/getDetail_HDN/"+x.maHD,
+            headers: { "Authorization": 'Bearer ' + $scope.user.token }
         }).then(function(response)
         {
            var obj=response.data
@@ -216,7 +221,8 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
         $http(
             {
                 method:$scope.titleForm==="Thêm mới hóa đơn nhập" ?"POST":"PUT",
-                url:$scope.titleForm==="Thêm mới hóa đơn nhập" ?"https://localhost:44334/api/HoaDonNhap/create_HDN":"https://localhost:44334/api/HoaDonNhap/update_HDN",
+                url:$scope.titleForm==="Thêm mới hóa đơn nhập" ?"http://localhost:8888/HoaDonNhap/create_HDN":"http://localhost:8888/HoaDonNhap/update_HDN",
+                headers: { "Authorization": 'Bearer ' + $scope.user.token },
                 data:objHDN
             }
         ).then(function(){       
@@ -236,7 +242,8 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
             $http(
                 {
                     method:"DELETE",
-                    url:"https://localhost:44334/api/HoaDonNhap/delete_HDN/"+maHDN
+                    url:"http://localhost:8888/HoaDonNhap/delete_HDN/"+maHDN,
+                    headers: { "Authorization": 'Bearer ' + $scope.user.token }
                 }
             )
             .then(function()

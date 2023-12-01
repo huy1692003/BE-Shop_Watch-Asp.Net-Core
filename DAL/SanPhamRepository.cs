@@ -28,8 +28,8 @@ namespace DAL
                     "@page_size",pageSize,
                     "@ten_sanpham",TenSanPham,
                     "@gia_tien",giatien,
-                    "@ma_theloai ",MaTheLoai==0 ?"":MaTheLoai,
-                    "@ma_thuonghieu",MaThuongHieu==0?"":MaThuongHieu
+                    "@ma_theloai ",MaTheLoai==-1 ?"":MaTheLoai,
+                    "@ma_thuonghieu",MaThuongHieu==-1?"":MaThuongHieu
                     );
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
@@ -128,6 +128,16 @@ namespace DAL
 
             }
             catch (Exception ex) { throw new Exception(msgError, ex); }
+        }
+        public bool UpdateLuotXem(int maSP)
+        {
+            string msgError = "";
+            var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_UpdateLuotXem", "@maSP", maSP);
+            if(!string.IsNullOrEmpty(msgError))
+            {
+                throw new Exception(msgError.ToString());
+            }
+            return string.IsNullOrEmpty(msgError);
         }
     }
 }

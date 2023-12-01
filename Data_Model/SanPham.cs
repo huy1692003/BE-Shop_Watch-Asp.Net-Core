@@ -13,6 +13,7 @@ namespace Data_Model
         public string image_SP { get; set; }
         public string mota { get; set; }
         public int sldaban { get; set; }
+        public int luotxem {  get; set; }
         public string trangthai { get; set; }
     }
 

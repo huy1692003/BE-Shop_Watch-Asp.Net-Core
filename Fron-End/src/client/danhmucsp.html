@@ -1,0 +1,80 @@
+<main style="width: 95%;margin: 0 auto;margin-top: 20px;">
+   
+    <div id="title-danhmuc">{{search_TL.tenLoai}}</div>
+    <select ng-init="txtSearchGiaTien=''" ng-model="txtSearchGiaTien" style="padding-left: 5px;width: 250px;height: 40px;margin-left: 250px;float: right;" ng-change="getSP_byTL()">
+      <option value="" selected> Chọn giá tiền cần tìm </option>
+      <option value="0-1000000">Dưới 1 triệu</option>
+      <option value="1000000-5000000">Từ 1 đến 5 triệu</option>
+      <option value="5000000-10000000">Từ 5 đến 10 triệu</option>
+   </select>
+    <div style="background-color:  #796752;width: 100%;height: 3px;margin-top: 4px;"></div>
+
+    <!-- Sản phẩm tìm đc -->
+    <h3 ng-if="listSP_byTL.length===0" style="color: red;">Hiện không có sản phẩm bạn muốn tìm kiếm !</h3>
+
+    <div class="containersp" style="justify-content:flex-start;">
+        <!-- sản phẩm -->
+       <div class="boxsp" ng-repeat="x in listSP_byTL">
+        <a href="#!thongtinsp"><img ng-click="clickProductx(x)" src="{{x.image_SP}}" alt="error" ></a>
+        <a href="#!thongtinsp" class="titlettsp">{{x.tenMH}}</a>
+        <div class="giattsp">
+            <p class="gia">{{(x.giaBan)-(x.giaBan/100*15)|number:0}}đ </p>
+            <p class="giacu">{{x.giaBan|number:0}}</p>
+            <span class="giamgia">-15%</span>
+        </div>
+     </div>  
+     
+   </div>
+</main>
+<!-- Phần Cuối -->
+<div style="width: 100%;height: 90px;display: flex; padding:22px 0 10px 10%; color: white; background-color:#796752;margin-top: 30px;">
+    <i class="fa-regular fa-clock" style="color: #fcfcfc;font-size: 33px;margin-right: 13px;"></i>
+    <div style="line-height: 14px;">
+      
+        <span style="font-weight: bold;">MUA HÀNG ONLINE</span>
+        <p> Tất cả các ngày trong tuần</p>
+    </div>
+ 
+    
+    <div style="line-height: 14px;margin-left: 20%;">
+       <i class="fa-solid fa-phone" style="color: #fcfcfc;font-size: 33px;margin-right: 13px;"></i>
+       <div style="display: inline-block;"><span style="font-weight: bold;">HỖ TRỢ BÁN HÀNG</span>
+          <p> 0364174636</p></div>
+       
+   </div>
+ 
+   <div style="line-height: 14px; margin-left: 20%;">
+    <i class="fa-solid fa-envelope" style="color: #fcfcfc;font-size: 33px;margin-right: 13px;"></i>
+    <div style="display: inline-block;">
+       <span style="font-weight: bold;">EMAIL</span>
+       <p> daohuy1692003@gmail.com</p>
+    </div>  
+  
+ </div>   
+ </div>
+ <!--  -->
+ <div style="width: 100%;height:auto;margin-top: 10px;padding: 10px;">
+    <div id="tintucvideo">Tin Tức Video</div>
+    <div style="background-color: #796752;width: 100%;height: 1px;margin-top: 0.2px;margin-bottom: 50px;"></div>
+    <iframe style="display: block;margin: 0 auto;" width="560" height="315" src="https://www.youtube.com/embed/KRxdfxoZsl8?si=jwgi9Y-snDKxe6or" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <p style="font-weight: bold;font-size: 15px;margin-left: 33%;">Hướng dẫn chọn đồng hồ dành cho người dùng mới</p>
+ </div>
+ <!--  -->
+ <footer id="footer-page">
+ 
+    <div style="margin-left: 5%;float: left;margin-top: 1%;">
+       <h4 style="color: white;font-size: 13px;font-weight: bold;">CÔNG TY TNHH PHÁT TRIỂN VÀ THƯƠNG MẠI QUANG HUY</h4>
+       <p style="line-height: 19px;">VPGD : 200A Phố Huế, Hai Bà Trưng, Hà Nội <br>
+          Điện thoại : (024) 2.214.8336 <br>
+          MST: 0105545498 Cấp ngày: 03/10/2011 Nơi cấp: Hà Nội</p>
+    </div>
+    <div style="float: right; width: 40%;height: 30%;;line-height: 50px;"> 
+       <img src="/image/dathongbao.png" style="width: 170px;height: 47px;" alt="">
+       <span style="margin-left: 50px;;">© HuyWatch-All rights reserved</span>
+       <img src="/image/image4.png" alt="">
+       <p>Longines | Tissot | MIDO | Frederique Constant | Seiko | Citizen | Orient
+       </p>
+    </div>
+ </footer>
+ 
+ 

@@ -39,6 +39,10 @@ namespace BUS
         {
             return sp_Dal.Update_SLdaban_New(id, sldaban);
         }
+        public bool UpdateLuotXem(int maSP)
+        {
+            return sp_Dal.UpdateLuotXem(maSP);
+        }
 
     }
 

@@ -95,20 +95,21 @@ BEGIN
 END;
 
 -- Tạo stored procedure cho đăng nhập
-CREATE PROCEDURE sp_DangNhap
+alter PROCEDURE sp_DangNhap
     @TenTaiKhoan NVARCHAR(50),
-    @MatKhau NVARCHAR(50)
+    @MatKhau NVARCHAR(50),
+    @MaLoaiTK int
 AS
 BEGIN
     SELECT * FROM TaiKhoans
-    WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau;
+    WHERE TenTaiKhoan = @TenTaiKhoan AND MatKhau = @MatKhau AND MaLoaiTaiKhoan=@MaLoaiTK;
 END;
 ----Tạo procude Get infor user
-create procedure sp_GetInfo_User
+alter procedure sp_GetInfo_User
 @TenTaiKhoan nvarchar(50)
 as 
 begin
-select k.HoTen,k.DiaChi,k.SoDienThoai,k.Email From TaiKhoans as k where k.TenTaiKhoan=@TenTaiKhoan
+select* From TaiKhoans as k where k.TenTaiKhoan=@TenTaiKhoan
 end
   
  -------BẢNG NHÀ CUNG CẤP-----------------------
@@ -342,6 +343,14 @@ alter PROCEDURE [dbo].[sp_search_sanpham]
 AS
 BEGIN
     SET NOCOUNT ON;
+    ----lấy giá cần tìm kiếm
+    IF @gia_tien!=''
+    begin
+        DECLARE @vi_tri INT = CHARINDEX('-', @gia_tien)
+    -- Tách thành hai biến dựa trên vị trí của '-'
+        DECLARE @giatien_1 float = SUBSTRING(@gia_tien, 1, @vi_tri - 1)
+        DECLARE @giatien_2 float = SUBSTRING(@gia_tien, @vi_tri + 1, LEN(@gia_tien))
+    end
 
     IF @page_size = 0
     BEGIN
@@ -353,7 +362,7 @@ BEGIN
 		join ThuongHieu as th on th.MaTH=sp.MaTH
         WHERE
              (@ten_sanpham ='' OR sp.TenMH LIKE '%' + @ten_sanpham + '%')
-            AND (@gia_tien ='' OR sp.GiaBan LIKE '%' + @gia_tien + '%')
+            AND (@gia_tien ='' OR sp.GiaBan between @giatien_1 and @giatien_2)
             AND (@ma_theloai ='' OR tl.MaLoai = @ma_theloai)
             AND (@ma_thuonghieu='' OR th.MaTH = @ma_thuonghieu);
     END
@@ -370,7 +379,7 @@ BEGIN
 		join ThuongHieu as th on th.MaTH=sp.MaTH
         WHERE
              (@ten_sanpham ='' OR sp.TenMH LIKE '%' + @ten_sanpham + '%')
-            AND (@gia_tien ='' OR sp.GiaBan LIKE '%' + @gia_tien + '%')
+             AND (@gia_tien ='' OR sp.GiaBan between @giatien_1 and @giatien_2)
             AND (@ma_theloai ='' OR tl.MaLoai = @ma_theloai)
             AND (@ma_thuonghieu='' OR th.MaTH = @ma_thuonghieu);
 
@@ -390,7 +399,7 @@ BEGIN
     END;
 END;
 
-EXEC sp_search_sanpham @page_size=0,@page_index=1 ,@ten_sanpham = '',    @gia_tien = '',    @ma_theloai ='',    @ma_thuonghieu  = ''
+EXEC sp_search_sanpham @page_size=10,@page_index=1 ,@ten_sanpham = '',    @gia_tien = '5000000-10000000',    @ma_theloai ='',    @ma_thuonghieu  = ''
 
 
 ----------Thủ tục bảng Hóa Đơn Bán and Chi tiết hóa đơn bán
@@ -430,6 +439,8 @@ begin
 			JSON_VALUE(l.value,'$.giaBan'),
 			cast(JSON_VALUE(l.value,'$.soLuong')as int)*CAST(JSON_VALUE(l.value,'$.giaBan')as float)
 			from openjson(@list_json_chitietHDB) as l
+
+         
 		end
 		---Cập nhật giá tiền tất cả của hóa đơn
 		---lấy tổng tiền tất cả
@@ -439,6 +450,15 @@ begin
 		Update HoaDonBan 
 		set HoaDonBan.ThanhTien=@ThanhTien
 	    where HoaDonBan.MaHD=@MaHoaDon
+        ----Cập nhật lại số lượng đã bán của sản phẩm
+           
+             update SanPham
+             set sldaban=sldaban+c.SoLuong
+             from ChiTietHoaDonBan as c            
+             where SanPham.MaSP=c.MaSP
+      
+        
+        
 end
 
 ------Xóa đơn hàng bán
@@ -836,3 +856,138 @@ BEGIN
         DROP TABLE #Results;
     END
 END;
+
+
+
+
+---------Procedure
+---Thủ tục thêm giỏ hàng
+alter proc sp_add_toCart
+@maSP int,
+@tenSP nvarchar(200),
+@anhSP nvarchar(200),
+@giaban float,
+@taikhoan nvarchar(50)
+as
+begin
+      --tìm kiếm trong giỏ hàng đã tồn tại sản phẩm đó chưa
+      declare @record int 
+      select @record= count(*) from GioHang where maSP=@maSP and taikhoan=@taikhoan
+
+    if(@record=1 )
+        begin
+          update GioHang 
+          set soluong=soluong+1 ,tongtien=(soluong+1)*giaban          
+          where maSP=@maSP
+
+        end
+    else
+        begin
+           insert into GioHang(maSP,tenSP,anhSP,soluong,giaban,tongtien,taikhoan)
+           values(@maSP,@tenSP,@anhSP,1,@giaban,@giaban*1,@taikhoan)
+        end
+end
+
+EXEC sp_add_toCart
+    @maSP = 107,
+    @tenSP = N'Tên Sản Phẩm',
+    @anhSP = N'Đường dẫn ảnh',  
+    @giaban = 10.5,  
+    @taikhoan='huy'
+
+    -----Thủ tục xóa sản phẩm khỏi giỏ hàng
+    alter proc sp_deleteCart
+    @maGH int
+    as 
+    begin
+    delete from GioHang where maGH=@maGH
+    end
+
+    exec sp_deleteCart 3
+
+
+    -----Thủ tục cập nhật số lượng và tổng tiền khi thay đổi số lượng
+    alter proc sp_updateSL_Cart
+    @maGH int,
+    @soluong int
+    as 
+    begin
+    update GioHang
+    set soluong=@soluong, tongtien=@soluong*giaban
+    where maGH=@maGH
+    end
+    exec sp_updateSL_Cart 4,6
+
+    -----Thủ tục lấy tất danh sách đơn hàng theo theo tên tài khoản
+    create proc sp_getAllCart_byTenTK
+    @tentaikhoan nvarchar(50)
+    as
+    begin
+    select * from GioHang where taikhoan=@tentaikhoan
+    end
+    exec sp_getAllCart_byTenTK 'huy'
+
+
+    -----Thủ tục thống kê tại cửa hàng
+    --Thống kê số lượng đơn hàng chưa xác nhận
+    alter proc sp_donhangCXN
+    as
+    begin
+    select * from HoaDonBan where TrangThai=0
+    end
+    ---Thống kê các khách hàng mua nhiều tại quán
+    alter proc sp_danhsachKH_muanhieu
+    as
+    begin
+    select t.TenTaiKhoan,t.AnhDaiDien,t.HoTen,t.SoDienThoai,t.DiaChi,SUM(h.ThanhTien) as tongtien,COUNT(h.MaHD) as sldh 
+    from HoaDonBan as h  
+    join TaiKhoans as t on t.TenTaiKhoan=h.TenTaiKhoan
+    where t.MaLoaiTaiKhoan=2
+    group by t.TenTaiKhoan,t.AnhDaiDien,t.HoTen,t.SoDienThoai,t.DiaChi   
+    order by sldh DESC    
+    end
+    ----Thống kê sản phẩm bán chạy
+    create proc sp_sanpham_banchay
+    as
+    begin
+    select s.MaSP,s.TenMH,s.image_SP,s.sldaban,SUM(c.TongTien) as doanhthu
+    from SanPham as s
+    join ChiTietHoaDonBan as c on s.MaSP=c.MaSP
+    group by s.MaSP,s.TenMH,s.image_SP,s.luotxem,s.sldaban
+    order by s.sldaban DESC
+    end
+    -----thống kê doanh thu theo thời gian
+
+    create proc sp_doanhthu_time
+    @date_start date,
+    @date_end date
+    as
+    begin      
+        
+        select h.MaHD,h.NgayTao,h.TenKH,h.Diachi,h.ThanhTien
+        from HoaDonBan as h
+        where h.NgayTao between convert(date,@date_start) and convert(date,@date_end) or
+        @date_end='' and @date_start=''        
+    end
+   exec sp_doanhthu_time '', @date_end=''
+
+   ------hiển thị thông tin doanh thu theo tháng
+   create proc sp_showdoanhthu
+   as
+   begin
+   ---Tạo bảng ảo chứa tháng
+        CREATE TABLE #temp (thang INT);
+        INSERT INTO #temp (thang)
+        VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12);
+
+        -- Thực hiện LEFT JOIN để kết hợp thông tin từ bảng HoaDonBan và bảng tạm thời
+        SELECT 
+            m.thang,
+            ISNULL(SUM(h.ThanhTien),0) AS DoanhThu
+        FROM  #temp m
+        left JOIN   HoaDonBan h ON MONTH(h.NgayTao) = m.thang      
+        GROUP BY m.thang;
+
+        -- Xóa bảng tạm thời sau khi sử dụng
+        DROP TABLE #temp;
+   end

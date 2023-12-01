@@ -46,7 +46,8 @@ myAdmin.controller('theloaiCtrl', function ($scope,$http) {
     $scope.getTheLoais = () => {
         $http({
               method: "GET",
-              url: "https://localhost:44334/api/TheLoai/GetAll_TheLoai"
+              url: "http://localhost:8888/TheLoai/GetAll_TheLoai",
+              headers: { "Authorization": 'Bearer ' + $scope.user.token }
           }).then((response)=>{
              $scope.listTL=response.data;
           }).catch((error)=>{
@@ -61,7 +62,8 @@ myAdmin.controller('theloaiCtrl', function ($scope,$http) {
         console.log($scope.objTheLoai);
         $http({
             method: "POST",
-            url: "https://localhost:44334/api/TheLoai/Create_TheLoai",
+            url: "http://localhost:8888/TheLoai/Create_TheLoai",
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
             data:$scope.objTheLoai
         }).then((response)=>{
           alert("Thông báo :"+response.data);
@@ -75,7 +77,8 @@ myAdmin.controller('theloaiCtrl', function ($scope,$http) {
         if (confirm("Bạn có chắc chắn muốn xóa")) {
             $http({
                 method: "DELETE",
-                url: 'https://localhost:44334/api/TheLoai/Delete_TheLoai/' + x.maLoai
+                url: 'http://localhost:8888/TheLoai/Delete_TheLoai/' + x.maLoai,
+                headers: { "Authorization": 'Bearer ' + $scope.user.token }
             }).then((result) => {
                 alert("Thông báo: " + result.data);
                 $scope.getTheLoais();
@@ -105,7 +108,8 @@ myAdmin.controller('theloaiCtrl', function ($scope,$http) {
         console.log($scope.objTheLoai);
         $http({
             method: "PUT",
-            url: "https://localhost:44334/api/TheLoai/Update_TheLoai",
+            url: "http://localhost:8888/TheLoai/Update_TheLoai",
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
             data:$scope.objTheLoai
         }).then((response)=>{
           alert("Thông báo :"+response.data);

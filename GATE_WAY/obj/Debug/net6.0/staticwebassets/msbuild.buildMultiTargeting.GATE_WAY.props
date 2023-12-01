@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\GATE_WAY.props" />
+</Project>

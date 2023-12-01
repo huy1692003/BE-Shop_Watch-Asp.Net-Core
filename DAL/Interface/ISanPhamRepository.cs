@@ -14,6 +14,8 @@ namespace DAL.Interface
         bool Delete_SanPham(int id);
         bool Update_Info_SanPham(SanPham th);
         bool Update_SLdaban_New(int id, int sldaban);
-     
+        bool UpdateLuotXem(int maSP);
+
+
     }
 }

@@ -47,7 +47,8 @@ myAdmin.controller('nhacungcapCtrl', function ($scope,$http) {
    $scope.getNCCs = () => {
         $http({
               method: "GET",
-              url: "https://localhost:44334/api/NhaCungCap/getALL_NCC"
+              url: "http://localhost:8888/NCC/getALL_NCC",
+              headers: { "Authorization": 'Bearer ' + $scope.user.token }
           }).then((response)=>{
              $scope.listNCC=response.data;
           }).catch((error)=>{
@@ -63,7 +64,8 @@ myAdmin.controller('nhacungcapCtrl', function ($scope,$http) {
         $scope.reloadData();
         $http({
             method: "POST",
-            url: "https://localhost:44334/api/NhaCungCap/Create_NhaCungCap",
+            url: "http://localhost:8888/NCC/Create_NhaCungCap",
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
             data:$scope.objNCC
         }).then((response)=>{
           alert("Thông báo :"+response.data);
@@ -76,7 +78,8 @@ myAdmin.controller('nhacungcapCtrl', function ($scope,$http) {
         if (confirm("Bạn có chắc chắn muốn xóa")) {
             $http({
                 method: "DELETE",
-                url: 'https://localhost:44334/api/NhaCungCap/Delete_NhaCungCap/' + x.maNCC
+                url: 'http://localhost:8888/NCC/Delete_NhaCungCap/' + x.maNCC,
+                headers: { "Authorization": 'Bearer ' + $scope.user.token }
             }).then((result) => {
                 alert("Thông báo: " + result.data);
                 $scope.getNCCs();
@@ -109,7 +112,8 @@ myAdmin.controller('nhacungcapCtrl', function ($scope,$http) {
         $scope.reloadData();
         $http({
             method: "PUT",
-            url: "https://localhost:44334/api/NhaCungCap/Update_NhaCungCap",
+            url: "http://localhost:8888/NCC/Update_NhaCungCap",
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
             data:$scope.objNCC
         }).then((response)=>{
           alert("Thông báo :"+response.data);

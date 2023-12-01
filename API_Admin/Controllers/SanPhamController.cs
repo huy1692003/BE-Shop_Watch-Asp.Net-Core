@@ -1,11 +1,13 @@
 ﻿using BUS.Interface;
 using Data_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.Search.Models;
 
 namespace API_BanHang.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SanPhamController : ControllerBase
@@ -27,8 +29,8 @@ namespace API_BanHang.Controllers
                 int page = ch.ContainsKey("page") ? Convert.ToInt32(ch["page"].ToString()) : 1;
                 int pageSize = ch.ContainsKey("pageSize") ? Convert.ToInt32(ch["pageSize"].ToString()) : 10;
                 string tenSanPham = ch.ContainsKey("tenSanPham") ? Convert.ToString(ch["tenSanPham"].ToString()) : "";
-                int MaTheLoai = ch.ContainsKey("maTheLoai") ? Convert.ToInt32(ch["maTheLoai"].ToString()) : 0;
-                int MaThuongHieu = ch.ContainsKey("maThuongHieu") ? Convert.ToInt32(ch["maThuongHieu"].ToString()) : 0;
+                int MaTheLoai = ch.ContainsKey("maTheLoai") ? Convert.ToInt32(ch["maTheLoai"].ToString()) : -1;
+                int MaThuongHieu = ch.ContainsKey("maThuongHieu") ? Convert.ToInt32(ch["maThuongHieu"].ToString()) : -1;
                 string giatien = ch.ContainsKey("giatien") ? Convert.ToString(ch["giatien"].ToString()) : "";
 
                 int total = 0;

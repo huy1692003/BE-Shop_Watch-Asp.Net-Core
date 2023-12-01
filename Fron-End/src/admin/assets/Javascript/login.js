@@ -6,25 +6,28 @@ const myAPP=angular.module("loginModule",[]).controller("loginCtrl",function($sc
     {
         if($scope.username!=null&&$scope.password!=null)
         {
+            localStorage.removeItem("user_admin")
             $http(
                 {
                     method:"POST",
-                    url:"https://localhost:44334/api/TaiKhoan/Login",
+                    url:"http://localhost:8888/TaiKhoan/Login",
                     data:{
                         "username": $scope.username,
-                        "password": $scope.password
+                        "password": $scope.password,
+                        "role":1
                     }
                 }               
             ) .then(function(response)
             {
                 alert("Đăng nhập thành công")
                 var user=JSON.stringify(response.data)
-                localStorage.setItem("user",user)
-                console.log(localStorage.getItem("user"))
+                localStorage.setItem("user_admin",user)                
+                $scope.user_admin=localStorage.getItem("user_admin")
+                console.log($scope.user_admin)
                 location.href="./home.html"
             }).catch(function(error)
             {
-                alert("Đăng nhập thất bại hãy thử lại")
+                alert("Thông tin tài khoản hoặc mật khẩu không chính xác !")
             })
         }
         else{

@@ -1,10 +1,12 @@
 ﻿using BUS.Interface;
 using Data_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_Admin.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class HoaDonBanController : ControllerBase
@@ -15,7 +17,7 @@ namespace API_Admin.Controllers
         {
             this.hdb_Bus = hdb_Bus;
         }
-        [Route("User_DeleteHDB")]
+        [Route("delete_HDB/{id}")]
         [HttpDelete]
         public IActionResult Delete_HDB(int Mahdb)
         {
@@ -25,7 +27,7 @@ namespace API_Admin.Controllers
             }
             return BadRequest("Hủy đơn hàng thất bại hãy thử lại !");
         }
-        [Route("update_StatusHDB/{MaHD},{trangthai}")]
+        [Route("update_statusHDB/{MaHD},{trangthai}")]
         [HttpPut]
         public IActionResult update_StatusHDB(int MaHD, int trangthai)
         {
@@ -45,7 +47,7 @@ namespace API_Admin.Controllers
             }
             return BadRequest(false);
         }
-        [Route("get_HDB")]
+        [Route("search_HDB")]
         [HttpPost]
         public IActionResult get_HDB([FromBody] Dictionary<string,object> d)
         {

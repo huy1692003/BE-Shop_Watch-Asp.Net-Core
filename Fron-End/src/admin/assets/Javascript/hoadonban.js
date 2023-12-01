@@ -1,6 +1,5 @@
 myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
     $scope.page = 1;
-
     $scope.txtSearchTrangThai = 0;
     $scope.txtSearchtime_begin = '';
     $scope.txtSearchtime_end = '';
@@ -31,7 +30,8 @@ myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
                 $http(
                     {
                         method:"PUT",
-                        url:"https://localhost:44334/api/HoaDonBan/update_StatusHDB/"+Number(x.maHD)+','+Number(y)
+                        url:"http://localhost:8888/HoaDonBan/update_StatusHDB/"+Number(x.maHD)+','+Number(y),
+                        headers: { "Authorization": 'Bearer ' + $scope.user.token }
                     }
                 ).then(function(response)
                 {
@@ -72,11 +72,17 @@ myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
         
 
     } 
+   
     $scope.getHoaDons = () => {
         $http({
             method: 'POST',
-            url: 'https://localhost:44334/api/HoaDonBan/get_HDB',
-            data: $scope.searchParameters
+            url: 'http://localhost:8888/HoaDonBan/search_HDB',
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
+            data: $scope.searchParameters,
+            headers:{
+                "Authorization":"Bearer "+$scope.user.token,
+                'Content-Type': 'application/json'
+            }
         }).then((response) => {
             $scope.listItem = response.data.data;
             $scope.totalItems = response.data.totalItems     
@@ -119,7 +125,8 @@ myAdmin.controller('hoadonbanCtrl', function($scope, $http)  {
         $http(
             {
                 method:"POST",
-                url:"https://localhost:44334/api/HoaDonBan/getdetail_HDB/"+x.maHD
+                url:"http://localhost:8888/HoaDonBan/getdetail_HDB/"+x.maHD,
+                headers: { "Authorization": 'Bearer ' + $scope.user.token }
             }
         ).then(function(response){
           $scope.inforHDB=response.data;

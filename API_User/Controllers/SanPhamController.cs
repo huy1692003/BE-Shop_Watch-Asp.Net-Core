@@ -23,8 +23,8 @@ namespace API_User.Controllers
                 int page = ch.ContainsKey("page") ? Convert.ToInt32(ch["page"].ToString()) : 1;
                 int pageSize = ch.ContainsKey("pageSize") ? Convert.ToInt32(ch["pageSize"].ToString()) : 10;
                 string tenSanPham = ch.ContainsKey("tenSanPham") ? Convert.ToString(ch["tenSanPham"].ToString()) : "";
-                int MaTheLoai = ch.ContainsKey("maTheLoai") ? Convert.ToInt32(ch["maTheLoai"].ToString()) : 0;
-                int MaThuongHieu = ch.ContainsKey("maThuongHieu") ? Convert.ToInt32(ch["maThuongHieu"].ToString()) : 0;
+                int MaTheLoai = ch.ContainsKey("maTheLoai") ? Convert.ToInt32(ch["maTheLoai"].ToString()) : -1;
+                int MaThuongHieu = ch.ContainsKey("maThuongHieu") ? Convert.ToInt32(ch["maThuongHieu"].ToString()) : -1;
                 string giatien = ch.ContainsKey("giatien") ? Convert.ToString(ch["giatien"].ToString()) : "";
 
                 int total = 0;
@@ -42,6 +42,11 @@ namespace API_User.Controllers
             {
                 return BadRequest($"Lỗi: {ex.Message}");
             }
+        }
+        [HttpPost("update_LuotXem/{maSP}")]
+        public IActionResult UpdateLuotXem(int maSP)
+        {
+            return Ok(sp_Bus.UpdateLuotXem(maSP));
         }
 
 

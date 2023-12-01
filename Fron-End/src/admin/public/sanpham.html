@@ -31,6 +31,7 @@
     </thead>
 </table>
 <div class="table_content">
+    <p ng-if="listItem.length===0" style="color: red;margin-left: 3%;">Không có sản phẩm nào cả</p>
     <table  border="1" cellspacing="0" cellpadding="5" >
         <tr ng-repeat="x in listItem">
             <td style="width: 5%;height: 19px;">{{x.maSP}}</td>     
@@ -47,6 +48,7 @@
         </tr>
     </table>
 </div>
+
  <div class="nextpage" style="float: right;margin-right: 3%;;">
     <button ng-click="page_prev()" ng-disabled="pageprev" >Trang trước</button>
     <button ng-click="page_after()" ng-disabled="pageafter">Trang sau</button>

@@ -1,11 +1,13 @@
 ﻿using BUS.Interface;
 using DAL.Interface;
 using Data_Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API_BanHang.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class TheLoaiController : ControllerBase

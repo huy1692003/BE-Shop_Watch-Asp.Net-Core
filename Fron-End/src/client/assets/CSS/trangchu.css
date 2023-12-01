@@ -7,7 +7,7 @@
 #header{
     background-color:black;
     width: 100%;
-    height: px;
+    height: 95px;
     position: relative;
     display: flex;
     
@@ -135,19 +135,20 @@
 #giohang>button:hover{
     color: gold;
 }
-.quantrivien{
+.login{
     position: absolute;    
-    top:10px;
+    top:13px;
     left: 10px;
     display: inline-block;
-    width: 25px;
+    width: 100px;
     height: 30px;
     padding: 2px;
     padding-top: 2.8px;
     padding-left: 3px;
-    font-size: 17px;
+    font-size: 14px;
     color: #faf2f2;
-    border: 2px solid white;
+    text-decoration: none;
+   
     border-radius: 5px;
 }
 .quantrivien:hover{
@@ -167,7 +168,7 @@
 .home{    
      border-bottom: 2px solid white;
      margin-bottom: 3px;
-     margin: 10px 20px 1.4px 80px;
+     margin: 10px 0 1.4px 50px;
 }
 .menu1{
    
@@ -210,6 +211,7 @@
 .menu1>li:hover .menu2{
     display: block;
     z-index: 999;
+    cursor: pointer;
 }
 .menu1>li>a{     
         
@@ -502,6 +504,57 @@
     margin-top: 50px;
     
 }
+.infor-user{
+    position: absolute;
+    top:90%;
+    left: 101%;
+    width: 200px;
+    height: 100px;
+    background-color: #f2ebeb;
+    color: black;
+    padding: 5px;
+    border-radius: 0px 9px 9px 9px;
+    z-index: 9999999999999999999;
+    cursor: pointer;
+}
+#my_infor{
+    position: fixed;
+    width: 70%;
+    height: 500px;
+    top: 5%;
+    left: 15%;
+    border: 3px solid;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: white;
+    z-index: 99999999999999999999999999999;
+}
+#update_infor_user{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgb(255, 89, 0);
+    color: white;
+    font: 18px;
+    display: inline-block;
+    width: 100px;
+    border: none;
+    font-weight: bold;
+    height: 40px;
+    border-radius: 8px;
+
+}
+#my_infor>.form-detail-infor>input{
+    width: 240px;
+    font-size: 15px;
+}
+#my_infor>.form-detail-infor>span{
+    width: 150px;
+    display: inline-block;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
 .kengang2 .title3{
     width: 46%;
     font-size: 26px;
@@ -515,68 +568,59 @@
     font-weight: bold;
 
 }
-.footer{
-    background-color:#796752;	
-	width: 100%;
-   display: block;
-    margin-top: 40px;
-    border-radius: 6px;
-    padding: 20px 20px 20px 22px;
-    
-}
-.logo{
-    display: inline-block;
-    margin-top: 38px;
-    margin-left: 20px;
-    width: 390px;
-    height: 230px;
-    border-radius: 9px;
-    margin-right: 80px;
-    
-}
-.logo>img{
-    
-    display: inline-block;
+#footer-page{
     width: 100%;
-    height: 92%;
-    border-radius: 15px;
-}
-.noidung{
-    
-    display: inline-block;
-    width: 390px;
-    height: 250px;
-    text-align: center;
+    height: 200px;
+    margin-top: 10px;
+    background-color:#796752;
    
-}
-li{list-style: none;}
-.noidung>ul>li{
-    text-align: left;
-    font-size: 19px;
-    color: #f2ebeb;
-    line-height: 35px;
-}
-.noidung>ul>li:hover{
-    color: gold;
-    cursor: pointer;
-}
-.noidung>ul>li>a{
-    text-decoration: none;
-    font-size: 28px;
-    color: gold;
-    font-weight: bold;
-}
-.noidung>ul>li>a:hover{color: black;}
-.ndend{
-    display: block;
-    width: 1100px;
-    margin: auto;
-    height: 80px;
     color: white;
-    font-size: 14px;
-    text-align: center;
-    margin: 0 auto;
-    margin-top: 30px;
-    border-top: 1px solid black;
-    padding-top: 25px;
+    padding: 30px;
+}
+#tintucvideo{
+    display: inline-block;
+    padding: 14px 36px 8px;
+    color: #fff;
+    font-weight: bold;
+    background: var(--main-color);
+    background-color: #796752;
+    clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0 100%);
+}
+#title-danhmuc{
+    display: inline-block;
+    padding: 14px 36px 8px;
+    color: #fff;
+    font-weight: bold;
+    background: var(--main-color);
+    background-color: #796752;
+    clip-path: polygon(12% 0%, 100% 0%, 88% 100%, 0 100%);
+}
+#ql-donhang{
+    position: fixed;
+    width: 90%;
+    height: 500px;
+    top: 5%;
+    left: 5%;
+    border: 2px solid blue;
+    background-color:white;
+    padding: 10px;
+    z-index: 9999;
+    border-radius: 10px;
+}
+.donhang{
+    width: 98%;
+    height: 220px;
+    background-color:white;
+    position: relative;
+    padding-top: 0px;
+   border-radius: 9px;
+   margin-bottom: 10px;
+}
+.btn{
+    width: auto;
+    padding: 5px;
+    border: none;
+    color:white;
+    font-weight: bold;
+    border-radius: 5px;
 }

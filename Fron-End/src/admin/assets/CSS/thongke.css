@@ -1,0 +1,32 @@
+#group-box
+{
+    margin-left: 3%;
+    width: 89%;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2%;
+}
+.box{
+    width: 200px;
+    height: 70px;
+    border-radius: 8px;
+    color: white;
+    font-size: 12px;
+    text-align: center;
+    padding: 10px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.custom-table .header-table >tr>td{
+   background-color: goldenrod;
+   padding-left: 3px;
+   border: 1px solid;
+   font-size: 13px;
+}
+.custom-table-content>tbody>tr>td{
+    border: 1px solid;
+    height: 40px;
+}

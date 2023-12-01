@@ -1,48 +1,27 @@
-var x=document.querySelector('.xemthems');
-
-x.style.display='none';
-function xemthemsp(a)
+myApp.controller("danhmucspCtrl",function($scope,$http)
 {
-  if(x.style.display=="none")
-  {
-    x.style.display="block";
-   
-    a.innerText="Ẩn Bớt"
-  }
-  else{
-    x.style.display="none"
-    a.innerText='Xem Thêm'
-  } 
-  console.log(x.style.display)
-   
+  $scope.search_TL=JSON.parse(localStorage.getItem('searchTheloai'))
  
-}
-if(localStorage.getItem('slgh')===null)
-{
-localStorage.setItem('slgh',0)
-}
-function slgh()
-{
-var slgh=localStorage.getItem('slgh');
-document.querySelector('.sldh').innerText=slgh;
-}
-slgh();
+  $scope.getSP_byTL=function()
+  {
+    $http(
+      {
+        method:"POST",
+        url:"http://localhost:8888/customer/SanPham/search_SP",
+        data:{
+          page: 1,              // Set the initial page value
+          pageSize: 18,        
+          giatien=$scope.txtSearch_GiaTien,
+          maTheLoai:$scope.search_TL.maLoai   // Set the initial page size
+          
+        }
+      }
+    ).then(function(reponse)
+    {
+      $scope.listSP_byTL=reponse.data.data
+      console.log($scope.listSP_byTL)
+    })
+  }
+  $scope.getSP_byTL()
 
-// chuyển giá tiền sang định dạng 000.000.00
-var a=document.querySelectorAll('.gia')
-for (var x of a) {
-  x.innerText=parseFloat(x.innerText).toLocaleString("de-DE")+"đ"
-}
-
-// Lấy dữ liệu gửi lên bộ nhớ web khi người dùng click vào 1 sản phẩm
-function laydulieu(x)
-{
-  var nodecha=x.parentElement.parentElement;
-  var linkimg=x.src;
-  var tensp=nodecha.children[1].innerText;
-  var giasp=nodecha.children[2].children[0].innerText;
-  localStorage.setItem("linkimgtt",linkimg)
-  localStorage.setItem("tensptt",tensp)
-  localStorage.setItem("giasptt",giasp)
-
-}
+})

@@ -46,7 +46,7 @@ myAdmin.controller('loaitaikhoanCtrl', function ($scope,$http) {
     $scope.getLoaiTKs = () => {
         $http({
               method: "GET",
-              url: "https://localhost:44334/api/LoaiTaiKhoan/GetAll_LoaiTK"
+              url: "http://localhost:8888/LTK/GetAll_LoaiTK"
           }).then((response)=>{
              $scope.listLTK=response.data;
           }).catch((error)=>{
@@ -61,7 +61,7 @@ myAdmin.controller('loaitaikhoanCtrl', function ($scope,$http) {
         console.log($scope.objLoaiTK);
         $http({
             method: "POST",
-            url: "https://localhost:44334/api/LoaiTaiKhoan/Create_LoaiTaiKhoan",
+            url: "http://localhost:8888/LTK/Create_LoaiTaiKhoan",
             data:$scope.objLoaiTK
         }).then((response)=>{
           alert("Thông báo :"+response.data);
@@ -75,7 +75,7 @@ myAdmin.controller('loaitaikhoanCtrl', function ($scope,$http) {
         if (confirm("Bạn có chắc chắn muốn xóa")) {
             $http({
                 method: "DELETE",
-                url: 'https://localhost:44334/api/LoaiTaiKhoan/Delete_LoaiTK/' + x.maLoaiTaiKhoan
+                url: 'http://localhost:8888/LTK/Delete_LoaiTK/' + x.maLoaiTaiKhoan
             }).then((result) => {
                 alert("Thông báo: " + result.data);
                 $scope.getLoaiTKs();
@@ -105,7 +105,7 @@ myAdmin.controller('loaitaikhoanCtrl', function ($scope,$http) {
         console.log($scope.objLoaiTK);
         $http({
             method: "PUT",
-            url: "https://localhost:44334/api/LoaiTaiKhoan/Update_LoaiTK",
+            url: "http://localhost:8888/LTK/Update_LoaiTK",
             data:$scope.objLoaiTK
         }).then((response)=>{
           alert("Thông báo :"+response.data);

@@ -19,14 +19,15 @@ namespace DAL
             this.db = db;
         }
 
-        public TaiKhoans? Login(string username, string password)
+        public TaiKhoans? Login(string username, string password, int role)
         {
             string msgError = "";
             try
             {
                 var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_DangNhap",
                     "@TenTaiKhoan", username,
-                    "@MatKhau", password);
+                    "@MatKhau", password,
+                    "@MaLoaiTK",role);
                 TaiKhoans tk = dt.ConvertTo<TaiKhoans>().ToList().FirstOrDefault();
                 if(!string.IsNullOrEmpty
                     (msgError) )

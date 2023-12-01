@@ -28,10 +28,10 @@ namespace BUS
            
         }
 
-        public TaiKhoans Login(string username, string password)
+        public TaiKhoans Login(string username, string password, int role)
         {
 
-            var user = tk_Dal.Login(username, password);
+            var user = tk_Dal.Login(username, password,role);
             if (user == null)
                 return null;
             var tokenHandler = new JwtSecurityTokenHandler();

@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DAL;
 using Data_Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace API_BanHang.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class NhaCungCapController : ControllerBase

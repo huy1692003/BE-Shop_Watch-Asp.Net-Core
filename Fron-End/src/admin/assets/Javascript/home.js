@@ -1,7 +1,11 @@
 var myAdmin=angular.module("myAdmin",['ngRoute'])
 myAdmin.controller("homeCtrl",($scope,$location)=>{
-   $scope.user=JSON.parse(localStorage.getItem("user"))
+   $scope.user=JSON.parse(localStorage.getItem("user_admin"))
    console.log($scope.user)
+   if(!$scope.user)
+   {
+      location.href='./login.html'
+   }
    $scope.clickSetting=function()
    {
       $scope.showSetting=$scope.showSetting==false?true:false;
@@ -77,8 +81,3 @@ function resetForm(a)
   a.reset()
 }
 
-var user=localStorage.getItem("user")
-if(user==null)
-{
-   location.href="./login.html"
-}

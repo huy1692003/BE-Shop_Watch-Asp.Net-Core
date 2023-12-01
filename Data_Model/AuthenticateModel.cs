@@ -14,6 +14,9 @@ namespace Data_Model
 
         [Required]
         public string Password { get; set; }
+
+        [Required]
+        public int role { get; set; }
     }
 
     public class AppSettings

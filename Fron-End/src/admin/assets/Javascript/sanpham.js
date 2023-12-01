@@ -27,7 +27,8 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     $scope.getProducts = function () {
         $http({
             method: 'POST',
-            url: 'https://localhost:44334/api/SanPham/search_SP',
+            url: 'http://localhost:8888/SanPham/search_SP',
+            headers: { "Authorization": 'Bearer ' + $scope.user.token },
             data: $scope.searchParameters // Send the search parameters as the request body
         }).then(function (response) {
             $scope.listItem = response.data.data;          
@@ -77,7 +78,9 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     $scope.getTheLoai = () => {
       $http({
             method: "GET",
-            url: "https://localhost:44334/api/TheLoai/GetAll_TheLoai"
+            url: "http://localhost:8888/TheLoai/GetAll_TheLoai",
+            headers: { "Authorization": 'Bearer ' + $scope.user.token }
+
         }).then((response)=>{
            $scope.listTheLoai=response.data;
         }).catch((error)=>{
@@ -87,7 +90,8 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
     $scope.getThuongHieu = () => {
       $http({
             method: "GET",
-            url: "https://localhost:44334/getALL_ThuongHieu"
+            url: "http://localhost:8888/ThuongHieu/getALL_ThuongHieu",
+            headers: { "Authorization": 'Bearer ' + $scope.user.token }
         }).then((response)=>{
            $scope.listTH=response.data;
         }).catch((error)=>{
@@ -112,7 +116,7 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             formData.append('file', dataImg);
             $http({
                 method: 'POST',
-                url: 'https://localhost:44334/api/UploadFile/upload',
+                url: 'http://localhost:8888/UploadFile/upload',
                 data: formData,
                 headers: { 'Content-Type': undefined }
             }).then(function(response)
@@ -121,7 +125,8 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
                 $scope.reloadSP();
                 $http({
                     method:"PUT",
-                    url:"https://localhost:44334/api/SanPham/UpdateSP_Info",
+                    url:"http://localhost:8888/SanPham/UpdateSP_Info",
+                    headers: { "Authorization": 'Bearer ' + $scope.user.token },
                     data:$scope.objSP
                 }).then((response)=>{alert("Thông báo :"+response.data),$scope.getProducts()}).catch((error)=>{alert("Thông báo :" + error)})  
 
@@ -131,7 +136,8 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         {
             $http({
                 method:"PUT",
-                url:"https://localhost:44334/api/SanPham/UpdateSP_Info",
+                url:"http://localhost:8888/SanPham/UpdateSP_Info",
+                headers: { "Authorization": 'Bearer ' + $scope.user.token },
                 data:$scope.objSP
             }).then((response)=>{alert("Thông báo :"+response.data),$scope.getProducts()}).catch((error)=>{alert("Thông báo :" + error)})  
         }  
@@ -170,6 +176,7 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             giaBan: $scope.giaBan,
             image_SP: $scope.imageSP,
             mota: $scope.Mota,
+            luotxem:0,
             sldaban: $scope.sldaban,
             trangthai: $scope.trangthai}  
     }     
@@ -187,7 +194,7 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
             formData.append('file', file);
             $http({
                 method: 'POST',
-                url: 'https://localhost:44334/api/UploadFile/upload',
+                url: 'http://localhost:8888/UploadFile/upload',
                 data: formData,
                 headers: { 'Content-Type': undefined }
             })
@@ -197,13 +204,14 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
                  $scope.reloadSP() ; 
                  $http({
                      method:"POST",
-                     url:'https://localhost:44334/api/SanPham/create_SP',
+                     url:'http://localhost:8888/SanPham/create_SP',
+                     headers: { "Authorization": 'Bearer ' + $scope.user.token },
                      data: $scope.objSP
                  }).then((result)=>{
                      alert("Thông báo : "+result.data);
                    
                  }).catch((error)=>
-                          {alert("Có lỗi khi thêm sản phẩm hãy xem lại dữ liệu đã nhập đầy đủ hay chưa ?")
+                    {alert("Có lỗi khi thêm sản phẩm hãy xem lại dữ liệu đã nhập đầy đủ hay chưa ?")
                           console.log("Lỗi :" + error)})
                  
             })     
@@ -222,7 +230,8 @@ myAdmin.controller('sanphamCtrl', function ($scope,$http) {
         if (confirm("Bạn có chắc chắn muốn xóa")) {
             $http({
                 method: "DELETE",
-                url: 'https://localhost:44334/api/SanPham/Delete_SP/' + x.maSP
+                url: 'http://localhost:8888/SanPham/Delete_SP/' + x.maSP,
+                headers: { "Authorization": 'Bearer ' + $scope.user.token }
             }).then((result) => {
                 alert("Thông báo: " + result.data);
                 $scope.getProducts();
