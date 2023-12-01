@@ -217,7 +217,9 @@ myAdmin.controller('hoadonnhapCtrl', function($scope, $http)  {
             "methodPay": $scope.methodPay,
             "tongtien": $scope.tongtien,
             "chiTietHoaDonNhap":$scope.listSPSelect
+
         }
+        console.log(objHDN)
         $http(
             {
                 method:$scope.titleForm==="Thêm mới hóa đơn nhập" ?"POST":"PUT",

@@ -21,51 +21,49 @@
 </head>
 <body  ng-app="myAdmin" ng-controller="homeCtrl">
     <!-- -->
-    <div class="container">
+    <div class="container" >
        
         <!-- Các chức năng chính phía trái -->
-        <div class="content_left">
+        <div class="content_left" style="padding-top: 0;">
 
-             <div class="fuction_system" style="margin-top: 18%;margin-bottom: 14%;">Chức năng hệ thống</div>
+             <div class="fuction_system" style="margin-bottom: 14%;margin-top: 0;height: 6%;background-color:#4C60DA;color: white;font-weight: 800;;"><i class="fa-solid fa-earth-americas" style="color: #ffffff;margin-right: 4px;font-size: 24px;"></i>Huy Watch</div>
              <div class="menu">
-              <div class="click_page"><i class="fa-solid fa-chart-simple" style="color: #fafafa;"></i><a href="#!thongke" id="pageTK" >Thống kê</a></div>
+              <div class="click_page"><i class="fa-solid fa-chart-simple" style=""></i><a href="#!thongke" id="pageTK" >Thống kê</a></div>
 
-              <div class="click_page"><i class="fa-brands fa-product-hunt" style="color: #ffffff; font-size: 27px;"></i><a href="#!sanpham" id="pageSP" >Sản phẩm</a> </div>
+              <div class="click_page"><i class="fa-brands fa-product-hunt" style=" font-size: 27px;"></i><a href="#!sanpham" id="pageSP" >Sản phẩm</a> </div>
 
-              <div class="click_page"><i class="fa-sharp fa-solid fa-gears"></i><a href="#!thuonghieu" id="pageTH">Thương hiệu</a></div>  
+              <div class="click_page"><i class="fa-sharp fa-solid fa-gears" style=""></i><a href="#!thuonghieu" id="pageTH">Thương hiệu</a></div>  
 
-              <div class="click_page"><i class="fa-solid fa-bars"></i><a href="#!theloai" id="pageTL">Thể loại</a> </div>
+              <div class="click_page"><i class="fa-solid fa-bars" style=""></i ><a href="#!theloai" id="pageTL">Thể loại</a> </div>
                 
-              <div class="click_page"><i class="fa-solid fa-truck-field-un" style="color: #fcfcfd;"></i> <a href="#!nhacungcap" id="pageNCC" >Nhà cung cấp</a></div>
+              <div class="click_page"><i class="fa-solid fa-truck-field-un" style=""></i> <a href="#!nhacungcap" id="pageNCC" >Nhà cung cấp</a></div>
               
-              <div class="click_page"><i class="fa-solid fa-file-invoice" style="color: #ffffff;"></i> <a href="#!loaitaikhoan" id="pageLTK">Loại tài khoản</a></div>
+              <div class="click_page"><i class="fa-solid fa-file-invoice" style=""></i> <a href="#!loaitaikhoan" id="pageLTK">Loại tài khoản</a></div>
                      
-              <div class="click_page"><i class="fa-solid fa-money-bill" style="color: #f7f7f7;"></i> <a href="#!hoadonban" id="pageHDB">Hóa Đơn Bán</a></div>
+              <div class="click_page"><i class="fa-solid fa-money-bill" style=""></i> <a href="#!hoadonban" id="pageHDB">Hóa Đơn Bán</a></div>
               
-              <div class="click_page"><i class="fa-solid fa-file-import"></i> <a href="#!hoadonnhap" id="padeHDN" >Hóa Đơn Nhập</a></div>
+              <div class="click_page"><i class="fa-solid fa-file-import" style=""></i> <a href="#!hoadonnhap" id="pageHDN" >Hóa Đơn Nhập</a></div>
                   
         </div>
             
         </div>
         <!-- Nội dung phải---header -->
         <div class="content_right">
-            <div class="header_top" style="background-color: #222D32;color: white;position: relative;">
+            <div class="header_top" style="background-color:#6777EF;color:white;position: relative;">
+                <img src="/image/trangthai.png"  style="width: 150px;height: 32px;position: relative;bottom: 3px;left: 340px;">
+               <span style="float: right;display: inline-block;"ng-if="user!=null">
+                    <img src="/image/boy.png" style="height: 26px;width: 28px;border-radius: 50%;border: 1px solid;position: relative;" alt="" title="{{user.taikhoan}}">
+                    <i class="fa-solid fa-gear" style="color: white;margin-bottom: 5px;position: relative;bottom: 4px;" ng-click="clickSetting()"></i>
                 
-               <span style="float: right;padding-bottom: 5px;"ng-if="user!=null">
-                Xin chào , {{user.taikhoan}} 
-                <button style="border: none;background-color: #222D32" ng-click="clickSetting()">
-                    <i class="fa-solid fa-gear" style="color: white;background-color: #222D32;"></i>
-                    
-                </button>
                </span>
-               <div id="setting" ng-init="showSetting=false" ng-show="showSetting">
+               <div id="setting" ng-init="showSetting=false" ng-show="showSetting" style="border-radius: 5px 0 5px 5px;">
                 <span>Thông tin tài khoản</span><br>
                 <span>Đổi mật khẩu</span><br>
                 <span ng-click="logout()">Đăng xuất</span><br>
             </div>
         </div>
         <!-- Nội dung phải---content -->
-        <div ng-view style="width: 99%;height: 92.6%;margin-left: 3px;margin-top: 8px;"></div>    
+        <div ng-view style="width: 99%;height: 92.6%;margin-left: 3px;margin-top: 8px;background-color: #F6F9FF;padding-top: 10px;"></div>    
              
         </div>
 

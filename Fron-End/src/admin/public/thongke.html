@@ -16,9 +16,9 @@
     <div id="container-khachhang" ng-init="showThongKe_KH=false" ng-show="showThongKe_KH">
         <div style="margin: 10px 0 20px 20px; cursor: pointer;font-weight: bold;" onclick="window.location.href='#!thongke'">Quay lại</div>
         <h3 class="title_manage">Khách Hàng Thân Thiết</h3>
-        <table class="custom-table" style=" border-collapse: collapse;">
-            <thead class="header-table">
-                <tr style="height: 7px;">
+        <table >
+            <thead style="background-color: #EAECF4;color: #7A707E;border: none;">              
+              
                     <td style="width: 10%;">Tài Khoản</td>
                     <td style="width: 10%;">Avatar</td>
                     <td style="width: 15%;">Họ Tên</td>
@@ -27,12 +27,12 @@
                     <td style="width: 10%;">Chi tiêu</td>
                    
                     <td style="width: 8%;text-align: center;">Số ĐH</td>
-                </tr>               
+                               
             </thead>
         </table>
-        <div class="content-table" style="height: 500px;overflow-y: auto;overflow-x: hidden;">
-            <table class="custom-table-content" style=" border-collapse: collapse;">
-                    <tr style="height: 7px;" ng-repeat="x in listKH_muanhieu">
+        <div class="content-table" style="height: 500px;overflow-y: auto;overflow-x: hidden;margin-top: 3px;">
+            <table >
+                    <tr style="height: 45px;border-bottom: 2px solid rgb(226, 223, 223);" ng-repeat="x in listKH_muanhieu">
                         <td style="width: 10%;">{{x.tenTaiKhoan}}</td>
                         <td style="width: 10%;"> <img style="width: 20px;height: 20px;border: 1px solid;" src="{{x.anhDaiDien}}" alt="error"></td>
                         <td style="width: 15%;">{{x.hoTen}}</td>
@@ -51,19 +51,19 @@
         <div style="margin: 10px 0 20px 20px; cursor: pointer;font-weight: bold;" onclick="window.location.href='#!thongke'">Quay lại</div>
         <h3 class="title_manage">Sản phẩm bán chạy</h3>
         <table class="custom-table" style=" border-collapse: collapse;">
-            <thead class="header-table">
-                <tr style="height: 7px;">
+            <thead style="background-color: #EAECF4;color: #7A707E;border: none;">
+                
                     <td style="width: 15%;">Mã SP</td>
                     <td style="width: 20%;">Tên sản phẩm</td>
                     <td style="width: 20%;">Ảnh sản phẩm</td>
                     <td style="width: 15%;">Số lượng bán ra</td>
                     <td style="width: 15%;">Doanh Thu</td>                  
-                </tr>               
+                              
             </thead>
         </table>
         <div class="content-table" style="height: 500px;overflow-y: auto;overflow-x: hidden;">
-            <table class="custom-table-content" style=" border-collapse: collapse;">
-                <tr style="height: 10px;" ng-repeat="x in listSP_banchay">
+            <table class="custom-table-content" style="border: none;">
+                <tr style="height: 45px;border: none;" ng-repeat="x in listSP_banchay">
                     <td style="width: 15%;">{{x.maSP}}</td>
                     <td style="width: 20%;">{{x.tenMH}}</td>
                     <td style="width: 20%;"><img src="{{x.image_SP}}" alt="error" style="width: 40px;height: 30px;"></td>
@@ -76,7 +76,7 @@
 
       <!-- Thống kê doanh thu theo thời gian -->
       <div id="container-doanhthu-time" ng-init="showThongKe_DoanhThu_time=false" ng-show="showThongKe_DoanhThu_time">
-        <div style="margin: 10px 0 20px 20px; cursor: pointer;font-weight: bold;" onclick="window.location.href='#!thongke'">Quay lại</div>
+        <div style="margin: 5px 0 5px 20px; cursor: pointer;font-weight: bold;" onclick="window.location.href='#!thongke'">Quay lại</div>
         <h3 class="title_manage">Doanh thu tại cửa hàng</h3>
         <div style="text-align: center;margin: 10px 0;">
             <input type="date" ng-model="time_start_input" >
@@ -87,8 +87,8 @@
         </div>
         <table class="custom-table" style=" border-collapse: collapse;">
             <thead class="header-table">
-                <tr style="height: 7px;">
-                    <td style="width: 15%;">Mã HĐ</td>
+                <tr style="height: 30px;">
+                    <td style="width: 15%;height: 30px;">Mã HĐ</td>
                     <td style="width: 20%;">Tên Khách Hàng</td>
                     <td style="width: 15%;">Địa chỉ</td>
                     <td style="width: 20%;">Ngày tạo</td>
@@ -97,7 +97,7 @@
                 </tr>               
             </thead>
         </table>
-        <div class="content-table" style="height: 370px;overflow-y: auto;overflow-x: hidden;">
+        <div class="content-table" style="height: 320px;overflow-y: auto;overflow-x: hidden;">
             <table class="custom-table-content" style=" border-collapse: collapse;">
                 <tr style="height: 10px;" ng-repeat="x in listHDB_time">
                     <td style="width: 15%;">{{x.maHD}}</td>
@@ -109,6 +109,6 @@
             </table>
         </div>
 
-        <div style="color: red;text-align: right;padding-right: 100px;font-weight: bold;">Tổng doanh thu : {{tongdoanhthu|number:0}} VNĐ</div>
+        <div style="color: red;text-align: right;padding-right: 100px;font-weight: bold;margin-top: 10px;">Tổng doanh thu : {{tongdoanhthu|number:0}} VNĐ</div>
     </div>
 </main>

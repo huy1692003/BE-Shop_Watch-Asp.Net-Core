@@ -3,24 +3,30 @@
 <button class="addnew"  ng-click="showAddSP()"> Thêm mới</button>
 <div class="taskbar">   
      
-        <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập tên sản phẩm"  ng-model="txtSearchTenSanPham">
-        <select class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" ng-model="txtSearchThuongHieu">
+        <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập tên sản phẩm"  ng-model="txtSearchTenSanPham" ng-change="clickSearch()">
+        <select class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" ng-model="txtSearchThuongHieu" ng-change="clickSearch()">
             <option style="color: rgb(166, 163, 163); font-style: italic;" value="" > - Chọn thương hiệu -</option>
             <option ng-repeat="th in listTH" value={{th.maTH}}>{{th.tenThuongHieu}}</option>
         </select>   
-        <select class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" ng-model="txtSearchTheloai">
+        <select class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" ng-model="txtSearchTheloai" ng-change="clickSearch()">
                <option style="color: rgb(166, 163, 163); font-style: italic;" value="" >- Chọn thể loại -</option>
                 <option ng-repeat="a in listTheLoai" value={{a.maLoai}}>{{a.tenLoai}}</option>
-       </select>       
-        <input type="text" class="search" style="height: 29px;width: 160px;border-radius: 5px;padding-left: 4px;" placeholder=" Nhập giá tiền " ng-model="txtSearchGiaTien">
-        <button style="width: 90px;height: 30px;border-radius: 5px;cursor: pointer;" ng-click="clickSearch()">Search</button>
+       </select>    
+       <select ng-init="txtSearchGiaTien=''" ng-model="txtSearchGiaTien" class="search" style="width: 200px;border-radius: 5px;" ng-change="clickSearch()">
+        <option value="" selected> Chọn giá tiền cần tìm </option>
+        <option value="0-1000000">Dưới 1 triệu</option>
+        <option value="1000000-5000000">Từ 1 đến 5 triệu</option>
+        <option value="5000000-10000000">Từ 5 đến 10 triệu</option>
+     </select>   
+     
+        <!-- <button style="width: 90px;height: 30px;border-radius: 5px;cursor: pointer;" ng-click="clickSearch()">Search</button> -->
         <div style="margin: 8px 2%;display: inline-block;float: right;"><span style="color: rgb(150, 148, 148);font-size: 16px;">Showing </span><input type="number" value="8" ng-model="pageSize" ng-change="clickSearch()" style="width: 50px;height: 20px;"></div>
       
 </div>
 
 <table  border="1" cellspacing="0" cellpadding="5" class="table_header">
     
-    <thead>
+    <thead style="background-color: #EAECF4;color: #7A707E;border: none;">
         <td style="width: 5%;height: 19px;">Mã SP</td>     
         <td style="width: 18%;" >Tên sản phẩm</td>        
         <td style="width: 8%;">Số lượng tồn</td>
@@ -32,14 +38,14 @@
 </table>
 <div class="table_content">
     <p ng-if="listItem.length===0" style="color: red;margin-left: 3%;">Không có sản phẩm nào cả</p>
-    <table  border="1" cellspacing="0" cellpadding="5" >
-        <tr ng-repeat="x in listItem">
+    <table  cellspacing="0" cellpadding="5" >
+        <tr ng-repeat="x in listItem" style="border-bottom: 2px solid rgb(189, 186, 186);margin-bottom: 5px;">
             <td style="width: 5%;height: 19px;">{{x.maSP}}</td>     
             <td style="width: 18%;" >{{x.tenMH}}</td>        
             <td style="width: 8%;">{{x.soLuongton}}</td>
             <td style="width: 7%;">{{x.giaBan}}</td>        
             <td style="width: 10%;">{{x.trangthai}}</td>
-            <td style="width: 10%;height: 40px;"><img src="{{x.image_SP}}" style="width: 70%;height:91%;"></td>
+            <td style="width: 10%;height: 40px;"><img src="{{x.image_SP}}" style="width: 55%;height:91%;"></td>
             <td style="width: 14%;">
                 <button class="task" ng-click="showeditSP(x)"><i class="fa-solid fa-wrench"></i></button>
                 <!-- <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button> -->

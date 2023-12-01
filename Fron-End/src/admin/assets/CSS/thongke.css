@@ -23,10 +23,10 @@
 .custom-table .header-table >tr>td{
    background-color: goldenrod;
    padding-left: 3px;
-   border: 1px solid;
+   height: 50px;
    font-size: 13px;
 }
 .custom-table-content>tbody>tr>td{
-    border: 1px solid;
+   border-bottom: 2px solid rgb(241, 240, 240);
     height: 40px;
 }

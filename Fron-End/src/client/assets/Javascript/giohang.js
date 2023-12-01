@@ -11,6 +11,9 @@ myApp.controller("giohangCtrl",function($scope,$http)
             }
         ).then(function()
         {            
+            $scope.listSP_order=[];
+            $scope.listSP_select=[];
+            $scope.TinhTongTien()
             $scope.getAll_Cart();           
            
             
@@ -30,9 +33,12 @@ myApp.controller("giohangCtrl",function($scope,$http)
             }
         ).then(function()
         {
-          $scope.getAll_Cart();
-          $scope.thanhtien=0
-          $scope.thanhtien=0
+         
+                  
+          $scope.listSP_order=[];
+          $scope.listSP_select=[];
+          $scope.TinhTongTien()
+          $scope.getAll_Cart();   
            
            
         })
@@ -117,48 +123,46 @@ myApp.controller("giohangCtrl",function($scope,$http)
     {
         if( $scope.checkInfor())
         {
-                    if( $scope.listSP_order.length>0)
-                    {
-                        var objDH=
-                        {
-                            "maHD": 0,
-                            "trangThai": 0,
-                            "ngayTao": "2023-11-17T12:17:57.143Z",
-                            "ngayDuyet": "2023-11-17T12:17:57.143Z",
-                            "ngayHuy": "2023-11-17T12:17:57.143Z",
-                            "tenKH": $scope.tenKH,
-                            "diachi": $scope.diachi,
-                            "email": $scope.email,
-                            "sdt": $scope.sdt+'',
-                            "diaChiGiaoHang": $scope.diaChiGiaoHang,
-                            "thanhTien": $scope.thanhtien,
-                            "thoiGianGiaoHang": "2023-11-17T12:17:57.143Z",
-                            "tenTaiKhoan": $scope.user_Customer.taikhoan,
-                            "methodPay": $scope.methodPay,
-                            "chiTietHoaDonBan": $scope.listSP_order
-                        }    
-                        console.log(objDH)                   
-                        if(objDH!=null)
-                        {
+                    if($scope.listSP_order.length>0)
+                    {  
                             $http(
                                 {
                                     method:"POST",
                                     url:"https://localhost:44329/api/DonHang/create_hdb_byuser",
-                                    data:objDH
+                                    data: {
+                                        "maHD": 0,
+                                        "trangThai": 0,
+                                        "ngayTao": "2023-11-17T12:17:57.143Z",
+                                        "ngayDuyet": "2023-11-17T12:17:57.143Z",
+                                        "ngayHuy": "2023-11-17T12:17:57.143Z",
+                                        "tenKH": $scope.tenKH,
+                                        "diachi": $scope.diachi,
+                                        "email": $scope.email,
+                                        "sdt": $scope.sdt+'',
+                                        "diaChiGiaoHang": $scope.diaChiGiaoHang,
+                                        "thanhTien": $scope.thanhtien,
+                                        "thoiGianGiaoHang": "2023-11-17T12:17:57.143Z",
+                                        "tenTaiKhoan": $scope.user_Customer.taikhoan,
+                                        "methodPay": $scope.methodPay,
+                                        "chiTietHoaDonBan": $scope.listSP_order
+                                    }    
                                 }
                             ).then(function(reponse)
                                 {
                                     alert(reponse.data)
                                     $scope.resetData();                                    
+                                }).catch(function(error)
+                                {
+                                    console.log(error.data)
                                 })
-                        }  
-                    }
+                        }                      
                 
                     else{
                         alert("Vui lòng chọn sản phẩm cần mua !")
                     }
         }
-        else{
+        else
+        {
             alert("Nhập đầy đủ và hợp lệ thông tin của đơn hàng !")
         }
         
@@ -188,6 +192,9 @@ myApp.controller("giohangCtrl",function($scope,$http)
         $scope.listSP_select.forEach(x => {
             $scope.delete_Cart(x)
             });
+                 
+        $scope.listSP_order=[];
+        $scope.listSP_select=[];             
         $scope.thanhtien=0
     }
 })

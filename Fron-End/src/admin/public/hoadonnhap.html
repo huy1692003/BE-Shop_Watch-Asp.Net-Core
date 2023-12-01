@@ -8,7 +8,7 @@
         <!-- Nội dung -->
          
         <table  border="1" cellspacing="0" cellpadding="5" class="table_header" >
-            <thead>
+            <thead style="background-color: #EAECF4;color: #7A707E;border: none;">
                 <td style="width: 5%;height: 19px;">Mã HĐ</td>     
                 <td style="width: 10%;" >Mã NCC</td>        
                 <td style="width: 17%;">Tên TK Nhập</td>
@@ -19,9 +19,9 @@
             </thead>
         </table>
         <div class="table_content">
-            <table  border="1" cellspacing="0" cellpadding="5"  >
+            <table   cellspacing="0" cellpadding="5"  >
                 
-                <tr ng-repeat="x in listItem">
+                <tr ng-repeat="x in listItem" style="border-bottom: 2px solid rgb(230, 227, 227);">
                     <td style="width: 5%;height: 19px;">{{x.maHD}}</td>     
                     <td style="width: 10%;" >{{x.maNCC}}</td>        
                     <td style="width: 17%;">{{x.tenTaiKhoan}}</td>
@@ -69,7 +69,7 @@
                                     <label class="titlePrp">Phương thức thanh toán </label>
                                     <select ng-model="methodPay">
                                         <option style="color: rgb(166, 163, 163); font-style: italic;" value="" selected>- Chọn phương thức thanh toán -</option>
-                                        <option value="1">Thanh toán khi nhận hàng</option>
+                                        <option value="1">Thanh toán tiền mặt</option>
                                         <option value="2">Momo</option>
                                         <option value="3">Tài khoản ngân hàng</option>
                                     </select> <br>

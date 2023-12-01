@@ -22,7 +22,6 @@ myAdmin.controller("homeCtrl",($scope,$location)=>{
       }
    }
    
- 
 
   
 });
@@ -69,12 +68,6 @@ $routeProvider.when('/thongke', {
 
 
 
-function check_activePage(a)
-{  
-document.querySelectorAll('.check_color').forEach(x=>x.style.color='white')
-a.style.color='blue'
-   
-}
 
 function resetForm(a)
 {

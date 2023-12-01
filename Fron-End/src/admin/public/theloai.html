@@ -3,7 +3,7 @@
     <button class="addnew" ng-click="showAddTL()"> Thêm mới</button> 
 
     <table  border="1" cellspacing="0" cellpadding="5" class="table_header" style="margin-top: 1%;">
-        <thead>
+        <thead style="background-color: #EAECF4;color: #7A707E;border: none;">
             <td style="width: 5%;height: 19px;">Mã Loại</td>     
             <td style="width: 12%;" >Tên thể loại</td>        
             <td style="width: 14%;">Ghi chú</td>          
@@ -11,13 +11,13 @@
         </thead>
     </table>
     <div class="table_content" >
-        <table  border="1" cellspacing="0" cellpadding="5" >
-            <tr ng-repeat="x in listTL">
+        <table   cellspacing="0" cellpadding="5" >
+            <tr ng-repeat="x in listTL" style="border-bottom: 2px solid rgb(184, 180, 180);">
                    <td style="width: 5%;height: 19px;">{{x.maLoai}}</td>     
-                   <td style="width: 12%;" >{{x.tenLoai}}</td>        
-                   <td style="width: 14%;">{{x.ghichu}}</td>                  
+                   <td style="width: 12%;text-align: center;" >{{x.tenLoai}}</td>        
+                   <td style="width: 14%;text-align: left;">{{x.ghichu}}</td>                  
                    <td style="width: 14%;">
-                    <button class="task" ng-click="showeditTL(x)"><i class="fa-solid fa-wrench"></i></button>
+                    <button  class="task" ng-click="showeditTL(x)"><i class="fa-solid fa-wrench"></i></button>
                     <!-- <button class="task" ng-click="detailSP(x)"><i class="fa-solid fa-circle-info"></i></button> -->
                     <button class="task" ng-click="deleteTL(x) "><i class="fa-solid fa-delete-left"></i></button>
                 </td>  

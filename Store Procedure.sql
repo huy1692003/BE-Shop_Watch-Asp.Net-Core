@@ -426,7 +426,7 @@ begin
 		set @MaHoaDon=SCOPE_IDENTITY();
 		declare @Tongtien Float;
 
-		---Thêm chi tiết hóa đơn nhập
+		---Thêm chi tiết hóa đơn bán
 		if(@list_json_chitietHDB is not null)
 		begin
 			insert into ChiTietHoaDonBan(MaHD,MaSP,imageSP,tenSP,soLuong,giaBan,tongtien)
@@ -440,7 +440,7 @@ begin
 			cast(JSON_VALUE(l.value,'$.soLuong')as int)*CAST(JSON_VALUE(l.value,'$.giaBan')as float)
 			from openjson(@list_json_chitietHDB) as l
 
-         
+          
 		end
 		---Cập nhật giá tiền tất cả của hóa đơn
 		---lấy tổng tiền tất cả
@@ -455,7 +455,7 @@ begin
              update SanPham
              set sldaban=sldaban+c.SoLuong
              from ChiTietHoaDonBan as c            
-             where SanPham.MaSP=c.MaSP
+             where SanPham.MaSP=c.MaSP and c.MaHD=@MaHoaDon
       
         
         
@@ -607,7 +607,7 @@ begin
         update HoaDonBan 
 		set TenKH=@TenKH,Diachi=@Diachi,Email=@Email,SDT=@SDT,DiaChiGiaoHang=@DiaChiGiaoHang,methodPay=@methodPay
 		where HoaDonBan.MaHD=@maHD
-		---Thêm chi tiết hóa đơn nhập nếu trong bảng chi tiết chưa có
+		---Thêm chi tiết hóa đơn bán nếu trong bảng chi tiết chưa có
 		IF (@list_json_chitietHDB IS NOT NULL)
 			BEGIN
 				-- Bước 1: Trích xuất dữ liệu từ JSON và lưu vào bảng tạm #UpdatedDetails
@@ -677,7 +677,7 @@ EXEC sp_updateHDB
 
 	
 -----Thêm hóa đơn nhập and chi tiết hóa đơn nhập
-create proc sp_CreateHDN
+alter proc sp_CreateHDN
    @MaNCC int,
    @TenTK nvarchar(200),
    @GhiChu  nvarchar(Max),
@@ -705,6 +705,12 @@ begin
 			JSON_VALUE(l.value,'$.giaNhap'),
 			cast(JSON_VALUE(l.value,'$.soLuong')as int)*CAST(JSON_VALUE(l.value,'$.giaNhap')as float)
 			from openjson(@list_json_chitietHDN) as l
+            ----Cập nhật lại số lượng sản phẩm
+            update SanPham
+            set soLuongton = soLuongton + cast(JSON_VALUE(l.value, '$.soLuong') as int) 
+            from openjson(@list_json_chitietHDN) as l
+            where MaSP = JSON_VALUE(l.value, '$.maSP')
+
 		end
 		---Cập nhật giá tiền tất cả của hóa đơn
 		---lấy tổng tiền tất cả
@@ -730,6 +736,12 @@ begin
         update HoaDonNhap
 		set MaNCC=@MaNCC,GhiChu=@GhiChu,methodPay=@methodPay
 		where HoaDonNhap.MaHD=@maHDN
+
+        ----Xóa số lượng tồn sản phẩm của các chitiethd cũ      
+            update sp set sp.soLuongton=sp.soLuongton- c.soLuong 
+            from ChiTietHoaDonNhap as c 
+            join SanPham as sp on sp.MaSP=c.MaSP
+            where c.MaHDN=@maHDN
 		---Thêm chi tiết hóa đơn nhập nếu trong bảng chi tiết chưa có
 		IF (@list_json_chitietHDN IS NOT NULL)
 			BEGIN
@@ -752,7 +764,7 @@ begin
 				FROM OPENJSON(@list_json_chitietHDN) AS l
 
 				-- Bước 2: Thêm chi tiết mới hoặc cập nhật chi tiết đã tồn tại
-				-- Cập nhật chi tiết hóa đơn bán
+				-- Cập nhật chi tiết hóa đơn nhập cũ
 				UPDATE ct
 				SET
 					ct.SoLuong = u.soLuong,
@@ -762,16 +774,23 @@ begin
 				INNER JOIN #UpdatedDetails u ON ct.MaSP = u.maSP
 				WHERE ct.MaHDN = @maHDN
 
-				-- Thêm chi tiết hóa đơn bán mới
+				-- Thêm chi tiết hóa đơn nhập mới 
 				insert into ChiTietHoaDonNhap(MaHDN,MaSP,SoLuong,GiaNhap,TongTien)
 				select @MaHDN,s.maSP,s.soLuong,s.giaNhap,s.tongTien
 				FROM #UpdatedDetails as s
 				WHERE s.maSP NOT IN (SELECT MaSP FROM ChiTietHoaDonNhap WHERE MaHDN = @maHDN)
-
+                ---Cập nhật số lượng của các sp mới nhập mà chưa tồn tại trong hóa đơn cũ             
+                
 				-- Bước 3: Xóa các chi tiết không có trong danh sách cập nhật
 				DELETE FROM ChiTietHoaDonNhap
 				WHERE MaHDN = @maHDN AND MaSP NOT IN (SELECT maSP FROM #UpdatedDetails)
 
+                ----Cập nhật lại số lượng tồn của các sản phẩm sau khi sửa hóa đơn
+
+                  update sp set sp.soLuongton=sp.soLuongton+ c.soLuong 
+                  from ChiTietHoaDonNhap as c 
+                  join SanPham as sp on sp.MaSP=c.MaSP
+                  where c.MaHDN=@maHDN
 				-- Bước 4: Xóa bảng tạm
 				DROP TABLE #UpdatedDetails
 			END
@@ -950,9 +969,10 @@ EXEC sp_add_toCart
     create proc sp_sanpham_banchay
     as
     begin
-    select s.MaSP,s.TenMH,s.image_SP,s.sldaban,SUM(c.TongTien) as doanhthu
+    select top(5) s.MaSP,s.TenMH,s.image_SP,s.sldaban,SUM(c.TongTien) as doanhthu
     from SanPham as s
     join ChiTietHoaDonBan as c on s.MaSP=c.MaSP
+    where s.sldaban>10
     group by s.MaSP,s.TenMH,s.image_SP,s.luotxem,s.sldaban
     order by s.sldaban DESC
     end
@@ -991,3 +1011,6 @@ EXEC sp_add_toCart
         -- Xóa bảng tạm thời sau khi sử dụng
         DROP TABLE #temp;
    end
+
+   update SanPham
+   set sldaban=10

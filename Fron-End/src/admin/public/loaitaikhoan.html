@@ -2,7 +2,7 @@
     <h3 class="title_manage">Quản lý loại tài khoản</h3>
     <button class="addnew" ng-click="showAddLTK()"> Thêm mới</button> 
     <table  border="1" cellspacing="0" cellpadding="5" class="table_header" style="margin-top: 2%;">
-        <thead>
+        <thead style="background-color: #EAECF4;color: #7A707E;border: none;">
             <td style="width: 5%;height: 19px;">Mã Loại TK</td>     
             <td style="width: 12%;" >Tên loại</td>        
             <td style="width: 14%;">Mô tả</td>          
@@ -10,8 +10,8 @@
         </thead>
     </table>
     <div class="table_content" >
-        <table  border="1" cellspacing="0" cellpadding="5" >
-            <tr ng-repeat="x in listLTK">
+        <table   cellspacing="0" cellpadding="5" >
+            <tr ng-repeat="x in listLTK" style="border-bottom: 2px solid rgb(237, 237, 237);">
                    <td style="width: 5%;height: 19px;">{{x.maLoaiTaiKhoan}}</td>     
                    <td style="width: 12%;" >{{x.tenLoai}}</td>        
                    <td style="width: 14%;">{{x.mota}}</td>                  

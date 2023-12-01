@@ -11,7 +11,7 @@ myApp.controller("danhmucspCtrl",function($scope,$http)
         data:{
           page: 1,              // Set the initial page value
           pageSize: 18,        
-          giatien=$scope.txtSearch_GiaTien,
+          giatien:$scope.txtSearchGiaTien,
           maTheLoai:$scope.search_TL.maLoai   // Set the initial page size
           
         }
