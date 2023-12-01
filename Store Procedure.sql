@@ -963,6 +963,7 @@ EXEC sp_add_toCart
     join TaiKhoans as t on t.TenTaiKhoan=h.TenTaiKhoan
     where t.MaLoaiTaiKhoan=2
     group by t.TenTaiKhoan,t.AnhDaiDien,t.HoTen,t.SoDienThoai,t.DiaChi   
+    having SUM(h.ThanhTien)>3000000
     order by sldh DESC    
     end
     ----Thống kê sản phẩm bán chạy

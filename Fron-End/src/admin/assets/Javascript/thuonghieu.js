@@ -70,7 +70,7 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
             formData.append('file', file);
             $http({
                 method: 'POST',
-                url: 'http://localhost:8888/ThuongHieu/api/UploadFile/upload',
+                url: 'https://localhost:44329/api/UploadFile/upload',
                 data: formData,
                 headers: { 'Content-Type': undefined }
             })
@@ -88,7 +88,7 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
                    alert("Thông báo :"+response.data);
                    $scope.getThuongHieu();
                  }).catch((error)=>{
-                    alert("Lỗi : "+error)})                
+                    console.log("Lỗi : "+error)})                
                  
             })     
          
@@ -106,20 +106,22 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
                 alert("Thông báo: " + result.data);
                 $scope.getThuongHieu();
             }).catch((error) => {
-                alert("Thông báo: " + error);
+                console.log("Thông báo: " + error.data);
             });
         } else {
             // Người dùng đã nhấn nút "Cancel", không thực hiện hành động xóa
             console.log("Hành động xóa đã bị hủy bỏ.");
         }
     }     
-    $scope.showeditSP=(x)=>{
+    $scope.showeditTH=(x)=>{
         $scope.screen_shadow=true;
         $scope.editTHShow=true;
         $scope.maTH=x.maTH;
         $scope.tenThuongHieu=x.tenThuongHieu;
         $scope.moTa=x.moTa;
         $scope.hinhAnh=x.hinhAnh; 
+        $scope.reloadData()
+        console.log($scope.objThuongHieu)
        
         
        
@@ -128,9 +130,11 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
 
     $scope.editTH=()=>{
         var fileInput = document.getElementById('fileInput2');
-        var file = fileInput.files[0];        
-        if (!file) {
-           
+        var file = fileInput.files[0];
+        $scope.reloadData()
+          console.log($scope.objThuongHieu)        
+        if (!file)
+         {           
             $http({
                      method: "PUT",
                      url: "http://localhost:8888/ThuongHieu/Update_ThuongHieu",
@@ -140,7 +144,7 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
                    alert("Thông báo :"+response.data);
                    $scope.getThuongHieu();
                  }).catch((error)=>{
-                    alert("Lỗi : "+error)})             
+                    console.log(error.data)})             
                              
          }   
         else
@@ -149,7 +153,7 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
             formData.append('file', file);
             $http({
                 method: 'POST',
-                url: 'http://localhost:8888/ThuongHieu/api/UploadFile/upload',
+                url: 'https://localhost:44329/api/UploadFile/upload',
                 data: formData,
                 headers: { 'Content-Type': undefined }
             })
@@ -166,7 +170,7 @@ myAdmin.controller('thuonghieuCtrl', function ($scope,$http) {
                    alert("Thông báo :"+response.data);
                    $scope.getThuongHieu();
                  }).catch((error)=>{
-                    alert("Lỗi : "+error)})                
+                        console.log(error.data)})                
                  
             })     
          

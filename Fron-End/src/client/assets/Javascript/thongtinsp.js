@@ -74,6 +74,7 @@ myApp.controller("thongtinspCtrl",function($scope,$http)
         }
        else{
         alert("Hãy đăng nhập để sử dụng chức năng này !")
+        location.href="./login.html"
        }
         
     }
@@ -105,6 +106,7 @@ myApp.controller("thongtinspCtrl",function($scope,$http)
         }
        else{
         alert("Hãy đăng nhập để sử dụng chức năng này !")
+        location.href="./login.html"
        }
     }
 })
