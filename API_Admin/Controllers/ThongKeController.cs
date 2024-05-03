@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API_Admin.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ThongKeController : ControllerBase
@@ -32,7 +32,7 @@ namespace API_Admin.Controllers
         {
             return bus_tk.getListSP_BanChay();
         }
-        [HttpPost("getListHDB_Date")]
+        [HttpGet("getListHDB_Date")]
         public IActionResult getListHDB_Date(string time_start, string time_end)
         {
             float doanhthu = bus_tk.getListHDB_Date(time_start, time_end).Sum(s => s.ThanhTien);
@@ -43,6 +43,11 @@ namespace API_Admin.Controllers
         public List<thongke.DoanhThuNam> showDoanhThu()
         {
             return bus_tk.showDoanhThu();
+        }
+        [HttpGet("getOverView")]
+        public thongkeTongQuan getOver_View()
+        {
+            return bus_tk.getOver_View();
         }
 
     }

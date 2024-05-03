@@ -92,10 +92,29 @@ namespace DAL
                     throw new Exception(msgError + dt.ToString());
                 }
                 if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
-                return dt.ConvertTo<HoaDonBan>().ToList();
+
+
+                return convertHDB(dt.ConvertTo<HoaDonBan>().ToList())!;
             }
             catch (Exception ex) { throw ex; }
 
+
+        }
+        public List<HoaDonBan>? convertHDB(List<HoaDonBan> list)
+        {
+            List<HoaDonBan> result=new List<HoaDonBan>() ;
+            try
+            {
+                foreach (HoaDonBan h in list)
+                {
+                    result.Add(getDetail_HoaDonBan(h.MaHD)!);
+                }
+                return result;
+            }
+            catch
+            {
+                throw new Exception();
+            }
         }
 
         public HoaDonBan? getDetail_HoaDonBan(int MaHD)

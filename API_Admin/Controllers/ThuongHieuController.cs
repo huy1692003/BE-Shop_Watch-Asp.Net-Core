@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API_BanHang.Controllers
 {
-    [Authorize]
+    
     [Route("api/ThuongHieu")]
     [ApiController]
     public class ThuongHieuController : ControllerBase
@@ -18,13 +18,13 @@ namespace API_BanHang.Controllers
             this.thBUS = thBUS;
         }
         
-        [Route("getALL_ThuongHieu")]
+        [Route("GetALL_TH")]
         [HttpGet]
         public List<ThuongHieu> GetAll_ThuongHieu()
         {
             return thBUS.GetAll_ThuongHieu();
         }
-        [Route("Create_ThuongHieu")]
+        [Route("Create_TH")]
         [HttpPost]
         public IActionResult Create_ThuongHieu([FromBody]ThuongHieu th)
         {
@@ -35,7 +35,7 @@ namespace API_BanHang.Controllers
             }
             return BadRequest("Thêm thất bại");
         }
-        [Route("Delete_ThuongHieu_byID/{id}")]
+        [Route("Delete_TH/{id}")]
         [HttpDelete]
         public IActionResult Delete_ThuongHieu(int id)
         {
@@ -46,7 +46,7 @@ namespace API_BanHang.Controllers
             }
             return BadRequest("Xóa thất bại");
         }
-        [Route("Update_ThuongHieu")]
+        [Route("Update_TH")]
         [HttpPut]
         public IActionResult Update_ThuongHieu([FromBody]ThuongHieu th)
         {
@@ -57,11 +57,11 @@ namespace API_BanHang.Controllers
             }
             return BadRequest("Cập nhật thất bại");
         }
-        [Route("Get_ThuongHieu_byName/{Name}")]
+        [Route("Get_ThuongHieu_byName/{name}")]
         [HttpGet]
-        public List<ThuongHieu> Get_ThuongHieu_byName(string Name)
+        public List<ThuongHieu> Get_ThuongHieu_byName(string name)
         {
-            return thBUS.Get_ThuongHieu_byName(Name);
+            return thBUS.Get_ThuongHieu_byName(name);
         }
     }
 }

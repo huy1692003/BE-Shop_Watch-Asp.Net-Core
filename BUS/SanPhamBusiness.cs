@@ -43,7 +43,14 @@ namespace BUS
         {
             return sp_Dal.UpdateLuotXem(maSP);
         }
-
+        public SanPham getDetailProduct(int masp)
+        {
+            return sp_Dal.getDetailProduct(masp);
+        }
+        public List<SanPham>? getPrd_BestSelling(int maTL = -1, int maTH = -1)
+        {
+            return sp_Dal.getPrd_BestSelling(maTL, maTH);
+        }
     }
 
 }

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_BanHang.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class TheLoaiController : ControllerBase

@@ -31,7 +31,7 @@ namespace API_User.Controllers
             try
             {
                 int page = d.ContainsKey("page") ? Convert.ToInt32(d["page"].ToString()) : 1;
-                int pageSize = d.ContainsKey("pageSize") ? Convert.ToInt32(d["pageSize"].ToString()) : 10;
+                int pageSize = d.ContainsKey("pageSize") ? Convert.ToInt32(d["pageSize"].ToString()) : 20;
                 int trangthai = d.ContainsKey("trangthai") ? Convert.ToInt32(d["trangthai"].ToString()) : 0;
                 string? time_begin = d.ContainsKey("time_begin") ? Convert.ToString(d["time_begin"].ToString()) : "";
                 string? time_end = d.ContainsKey("time_end") ? Convert.ToString(d["time_end"].ToString()) : "";

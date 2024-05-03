@@ -1,5 +1,6 @@
 myApp.controller("giohangCtrl",function($scope,$http)
 {  
+   
     $scope.getAll_Cart();
     $scope.delete_Cart=function(x)
     {     

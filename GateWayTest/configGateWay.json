@@ -1,0 +1,272 @@
+﻿{
+  "Routes": [
+    {
+      // admin
+
+      // nhà cung cấp
+      "DownstreamPathTemplate": "/api/NhaCungCap/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/NCC/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // thương hiệu
+      "DownstreamPathTemplate": "/api/ThuongHieu/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/ThuongHieu/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // LTK
+      "DownstreamPathTemplate": "/api/LoaiTaiKhoan/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/LTK/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // sản phẩm
+      "DownstreamPathTemplate": "/api/SanPham/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/sanpham/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // hoadonban
+      "DownstreamPathTemplate": "/api/HoaDonBan/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/HoaDonBan/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // hoadonnhap
+      "DownstreamPathTemplate": "/api/HoaDonNhap/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/HoaDonNhap/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // tài khoản
+      "DownstreamPathTemplate": "/api/TaiKhoan/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/TaiKhoan/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // nhà cung cấp
+      "DownstreamPathTemplate": "/api/TheLoai/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/TheLoai/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // uploadFile
+      "DownstreamPathTemplate": "/api/UploadFile/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/UploadFile/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // uploadFile
+      "DownstreamPathTemplate": "/api/ThongKe/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/ThongKe/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    }
+
+
+
+
+
+
+
+    //khách hàng
+    ,
+    {
+      // thương hiệu
+      "DownstreamPathTemplate": "/api/ThuongHieu/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/ThuongHieu/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // thể loại
+      "DownstreamPathTemplate": "/api/TheLoai/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/TheLoai/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // giỏ hàng
+      "DownstreamPathTemplate": "/api/GioHang/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/GioHang/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // sản phẩm
+      "DownstreamPathTemplate": "/api/SanPham/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/SanPham/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // tài khoản
+      "DownstreamPathTemplate": "/api/TaiKhoan/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/TaiKhoan/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // đơn hàng
+      "DownstreamPathTemplate": "/api/DonHang/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/DonHang/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // uploadfile
+      "DownstreamPathTemplate": "/api/UploadFile/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/UploadFile/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    }
+  ]
+
+
+}

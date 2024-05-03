@@ -36,7 +36,7 @@ namespace DAL
                 {
                     throw new Exception(dt.ToString() + msgError);
                 }
-                return string.IsNullOrEmpty(msgError) ? true : false;
+                return string.IsNullOrEmpty(msgError);
             }
             catch (Exception ex) { throw ex; }
         }
@@ -111,7 +111,17 @@ namespace DAL
                     throw new Exception(msgError + dt.ToString());
                 }
                 if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
-                return dt.ConvertTo<HoaDonNhap>().ToList();
+                List<HoaDonNhap> tmp= dt.ConvertTo<HoaDonNhap>().ToList();
+                List<HoaDonNhap> listNew = new List<HoaDonNhap>();
+
+
+                foreach (HoaDonNhap hdn in tmp)
+                {
+                    
+                    listNew.Add(getDetail_HDN_byID(hdn.MaHD)!);
+                }
+
+                return listNew;
             }
             catch (Exception ex) { throw ex; }
 

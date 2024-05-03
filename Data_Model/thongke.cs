@@ -22,7 +22,7 @@ namespace Data_Model
         {
             public int MaSP { get; set; }
             public string TenMH { get; set; }
-            public string image_SP { get; set; }
+            public string anhSP { get; set; }
             public int sldaban { get; set; }
             public float doanhthu { get; set; }
         }
@@ -31,7 +31,7 @@ namespace Data_Model
             public int MaHD { get; set; }
             public DateTime NgayTao { get; set; }
             public string TenKH { get; set; }
-            public string Diachi { get; set; }
+            public string DiaChiGiaoHang { get; set; }
             public float ThanhTien { get; set; }
         }
         public class DoanhThuNam

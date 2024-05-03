@@ -38,6 +38,9 @@ namespace BUS
         {
             return dal_tk.showDoanhThu();
         }
-
+        public thongkeTongQuan getOver_View()
+        {
+            return dal_tk.getOver_View();
+        }
     }
 }

@@ -33,6 +33,8 @@ builder.Services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
 builder.Services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
 builder.Services.AddTransient<IThongKeRepository, ThongKeRepository>();
 builder.Services.AddTransient<IThongkeBusiness,ThongkeBusiness>();
+builder.Services.AddTransient<ITinTucRepository, TinTucRepository>();
+builder.Services.AddTransient<ITinTucBusiness, TinTucBusiness>();
 
 
 

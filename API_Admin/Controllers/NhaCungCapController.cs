@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace API_BanHang.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class NhaCungCapController : ControllerBase

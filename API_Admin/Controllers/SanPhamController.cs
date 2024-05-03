@@ -7,7 +7,7 @@ using Microsoft.Azure.Search.Models;
 
 namespace API_BanHang.Controllers
 {
-    [Authorize]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class SanPhamController : ControllerBase

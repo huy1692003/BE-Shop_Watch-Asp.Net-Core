@@ -23,7 +23,7 @@ namespace API_User.Controllers
             {
                 return Ok(true);
             }
-            return BadRequest(false);
+            return NotFound(false);
         }
         [HttpDelete("delete_toCart/{maGH}")]
         public IActionResult deleteCart(int maGH)
@@ -33,7 +33,7 @@ namespace API_User.Controllers
             {
                 return Ok(true);
             }
-            return BadRequest(false);
+            return NotFound(false);
         }
         [HttpPut("update_SLCart/{maGH}/{sl}")]
         public IActionResult updateSL(int maGH,int sl)
@@ -43,10 +43,10 @@ namespace API_User.Controllers
             {
                 return Ok(true);
             }
-            return BadRequest(false);
+            return NotFound(false);
         }
         [Route("getALLSP_Cart")]
-        [HttpPost]
+        [HttpGet]
         public List<GioHang> getALLSP_Cart(string Tentk)
         {
             return bus_GH.getALl_Cart_byTenTK(Tentk);

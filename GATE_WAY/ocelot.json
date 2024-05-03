@@ -13,7 +13,7 @@
         }
 
       ],
-      "UpstreamPathTemplate": "/NCC/{everything}",
+      "UpstreamPathTemplate": "/NhaCungCap/{everything}",
       "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
 
     },
@@ -43,7 +43,7 @@
         }
 
       ],
-      "UpstreamPathTemplate": "/LTK/{everything}",
+      "UpstreamPathTemplate": "/LoaiTaiKhoan/{everything}",
       "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
 
     },
@@ -58,7 +58,23 @@
         }
 
       ],
-      "UpstreamPathTemplate": "/sanpham/{everything}",
+      "UpstreamPathTemplate": "/SanPham/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    //Tin tức
+    {
+
+      "DownstreamPathTemplate": "/api/TinTuc/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/TinTuc/{everything}",
       "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
 
     },
@@ -248,6 +264,21 @@
 
       ],
       "UpstreamPathTemplate": "/customer/DonHang/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // tin tức
+      "DownstreamPathTemplate": "/api/TinTuc/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/TinTuc/{everything}",
       "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
 
     },

@@ -15,6 +15,8 @@ namespace DAL.Interface
         bool Update_Info_SanPham(SanPham th);
         bool Update_SLdaban_New(int id, int sldaban);
         bool UpdateLuotXem(int maSP);
+        SanPham getDetailProduct(int masp);
+         List<SanPham>? getPrd_BestSelling(int maTL = -1, int maTH = -1);
 
 
     }

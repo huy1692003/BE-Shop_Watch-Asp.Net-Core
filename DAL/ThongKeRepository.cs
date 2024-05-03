@@ -18,6 +18,37 @@ namespace DAL
         {
             this.db = db;
         }
+
+        public thongkeTongQuan getOver_View()
+        {
+            string msgError = "";
+            try
+            {
+                var data = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_thongkeTongQuan");
+                if (msgError != "")
+                {
+                    throw new Exception(msgError);
+                }
+                else
+                {
+                    thongkeTongQuan tmp = new thongkeTongQuan();
+                    tmp.slsp =(int) data.Rows[0]["slsp"];
+                    tmp.slkh = (int)data.Rows[0]["slkh"];
+                    tmp.sldhHuy = (int)data.Rows[0]["sldhHuy"];
+                    tmp.sldhThanhCong = (int)data.Rows[0]["sldhThanhCong"];
+                    tmp.sldhChoXacNhan = (int)data.Rows[0]["sldhChoXacNhan"];
+                    tmp.doanhThuHomNay = (double)data.Rows[0]["doanhThuHomNay"];
+                    return tmp;
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
         public List<HoaDonBan> getHDB_CXN()
         {
             string msgError = "";

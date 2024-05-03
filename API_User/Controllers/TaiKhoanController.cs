@@ -23,17 +23,17 @@ namespace API_User.Controllers
             {
                 return Ok(new { taikhoan = tk.TenTaiKhoan, email = tk.Email, tk.Token });
             }
-            return BadRequest("Thông tin tài khoản hoặc mật khẩu không chính xác !");
+            return NotFound("Thông tin tài khoản hoặc mật khẩu không chính xác !");
         }
         [Route("Create_TaiKhoan")]
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Create_TaiKhoan(string username, string password)
         {
-            if (tk_Bus.Create_TaiKhoan(username, password, 1))
+            if (tk_Bus.Create_TaiKhoan(username, password, 2))
             {
                 return Ok("Đăng kí Thành Công");
             }
-            return BadRequest("Có lỗi khi đăng kí hãy xem lại tài khoản mật khẩu  !");
+            return NotFound("Có lỗi khi đăng kí hãy xem lại tài khoản mật khẩu  !");
         }
         [Route("Update_TaiKhoan")]
         [HttpPut]

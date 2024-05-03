@@ -33,7 +33,8 @@ builder.Services.AddTransient<IHoaDonNhapRepository, HoaDonNhapRepository>();
 builder.Services.AddTransient<IHoaDonNhapBusiness, HoaDonNhapBusiness>();
 builder.Services.AddTransient<IGioHangRepository, GioHangRepository>();
 builder.Services.AddTransient<IGioHangBusiness, GiohangBusiness>();
-
+builder.Services.AddTransient<ITinTucRepository, TinTucRepository>();
+builder.Services.AddTransient<ITinTucBusiness, TinTucBusiness>();
 // Add services to the container.
 
 

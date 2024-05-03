@@ -14,6 +14,6 @@ namespace BUS.Interface
         List<thongke.SanPhamBanChay> getListSP_BanChay();
         List<thongke.DoanhThuTheoThoiGian> getListHDB_Date(string time_start, string time_end);
         List<thongke.DoanhThuNam> showDoanhThu();
-
+        thongkeTongQuan getOver_View();
     }
 }

@@ -48,7 +48,32 @@ namespace API_User.Controllers
         {
             return Ok(sp_Bus.UpdateLuotXem(maSP));
         }
+        [HttpGet("detail_Prd/{maSP}")]
+        public IActionResult getDetail_prd(int maSP)
+        {
+            SanPham sp=sp_Bus.getDetailProduct(maSP);
+            if(sp!=null)
+            {
+                return Ok(sp);
+            }
+            return BadRequest(false);
+        }
+        [HttpGet("getPrd_BestSelling")]
+        public IActionResult getPrd_BestSelling()
+        {
+            List<SanPham> Prd_BestSelling_Men = sp_Bus.getPrd_BestSelling(maTL: 17);
+            List<SanPham> Prd_BestSelling_women = sp_Bus.getPrd_BestSelling(maTL: 18);
+            List<SanPham> Prd_BestSelling_couples = sp_Bus.getPrd_BestSelling(maTL: 19);
+            return Ok(
+                new
+                {
+                    BestSelling_Men= Prd_BestSelling_Men,
+                    BestSelling_Women = Prd_BestSelling_women,
+                    BestSelling_couples= Prd_BestSelling_couples
 
+                }
+               );            
 
+        }
     }
 }

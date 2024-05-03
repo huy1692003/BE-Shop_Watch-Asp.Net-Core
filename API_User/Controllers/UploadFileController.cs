@@ -44,7 +44,8 @@ namespace API_Admin.Controllers
                     return BadRequest("Không tìm thấy tệp hoặc tệp trống.");
                 }
 
-                string filePath = $"/{file.FileName}";
+                var date = DateTime.Now;
+                string filePath = $"{date.Ticks}{Path.GetExtension(file.FileName)}";
                 var fullPath = CreatePathFile(filePath);
                 using (var fileStream = new FileStream(fullPath, FileMode.Create))
                 {
