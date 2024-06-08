@@ -77,7 +77,7 @@ namespace API_Admin.Controllers
 
         }
         [Route("getdetail_HDB/{MaHD}")]
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetDetaiHDB(int MaHD)
         {
             var obj = hdb_Bus.getDetail_HoaDonBan(MaHD);
@@ -86,6 +86,19 @@ namespace API_Admin.Controllers
                 return Ok(obj);
             }
             return BadRequest("Không tìm thấy đơn hàng");
+        }
+        [Route("cancelHDB")]
+        [HttpPut]
+        public IActionResult cancelHDB([FromBody] Dictionary<string, object> d)
+        {
+            int MaHD = d.ContainsKey("mahd") ? Convert.ToInt32(d["mahd"].ToString()) : -1;
+            string LiDoHuy = d.ContainsKey("lidohuy") ? Convert.ToString(d["lidohuy"].ToString()) : "";
+            bool check= hdb_Bus.cancelHDB(MaHD, LiDoHuy!);
+            if(check)
+            {
+                return Ok("Cancel success !!");
+            }
+            return NotFound();
         }
     }
 }

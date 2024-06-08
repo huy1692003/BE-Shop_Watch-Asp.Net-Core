@@ -23,6 +23,11 @@ namespace BUS
         {
             return sp_Dal.SearchSP(pageIndex, pageSize, out total, TenSanPham, MaTheLoai, MaThuongHieu, giatien);
         }
+
+        public List<SanPham>? getProduct_ByUser(int pageIndex, int pageSize, out int total, string TenSanPham, int MaTheLoai, int MaThuongHieu, string giatien)
+        {
+            return sp_Dal.getProduct_ByUser(pageIndex, pageSize, out total, TenSanPham, MaTheLoai, MaThuongHieu, giatien);
+        }
         public bool Create_SanPham(SanPham sp)
         {
             return sp_Dal.Create_SanPham(sp);
@@ -50,6 +55,14 @@ namespace BUS
         public List<SanPham>? getPrd_BestSelling(int maTL = -1, int maTH = -1)
         {
             return sp_Dal.getPrd_BestSelling(maTL, maTH);
+        }
+        public bool createFeedBack(DanhGia dg)
+        {
+            return sp_Dal.createFeedBack(dg);
+        }
+        public List<DanhGia> getFeedBack_bymaSP(int maSP)
+        {
+            return sp_Dal.getFeedBack_bymaSP(maSP);
         }
     }
 

@@ -22,7 +22,7 @@ namespace API_BanHang.Controllers
             var tk = tk_Bus.Login(user.Username, user.Password,user.role);
             if (tk!=null)
             {
-                return Ok(new {taikhoan=tk.TenTaiKhoan,email=tk.Email,tk.Token});
+                return Ok(new {taikhoan=tk.TenTaiKhoan,email=tk.Email,token=tk.Token,role=user.role});
             }
             return BadRequest("Thông tin tài khoản hoặc mật khẩu không chính xác !");
         }

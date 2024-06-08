@@ -28,9 +28,9 @@ namespace DAL
                     "@TenTaiKhoan", username,
                     "@MatKhau", password,
                     "@MaLoaiTK",role);
-                TaiKhoans tk = dt.ConvertTo<TaiKhoans>().ToList().FirstOrDefault();
+                TaiKhoans? tk = dt.ConvertTo<TaiKhoans>().ToList().FirstOrDefault();
                 if(!string.IsNullOrEmpty
-                    (msgError) )
+                    (msgError) )    
                 {
                     throw new Exception(msgError);
                 }

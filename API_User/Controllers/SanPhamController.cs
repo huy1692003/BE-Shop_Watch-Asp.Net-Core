@@ -28,7 +28,7 @@ namespace API_User.Controllers
                 string giatien = ch.ContainsKey("giatien") ? Convert.ToString(ch["giatien"].ToString()) : "";
 
                 int total = 0;
-                var data = sp_Bus.SearchSP(page, pageSize, out total, tenSanPham, MaTheLoai, MaThuongHieu, giatien);
+                var data = sp_Bus.getProduct_ByUser(page, pageSize, out total, tenSanPham, MaTheLoai, MaThuongHieu, giatien);
 
                 return Ok(new
                 {
@@ -40,7 +40,7 @@ namespace API_User.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest($"Lỗi: {ex.Message}");
+                return NotFound($"Lỗi: {ex.Message}");
             }
         }
         [HttpPost("update_LuotXem/{maSP}")]
@@ -56,7 +56,7 @@ namespace API_User.Controllers
             {
                 return Ok(sp);
             }
-            return BadRequest(false);
+            return NotFound();
         }
         [HttpGet("getPrd_BestSelling")]
         public IActionResult getPrd_BestSelling()
@@ -74,6 +74,22 @@ namespace API_User.Controllers
                 }
                );            
 
+        }
+        [HttpPost("createFeedback")]
+        public IActionResult createFeedBack(DanhGia dg)
+        {
+            bool check=  sp_Bus.createFeedBack(dg);
+            if(check)
+            {
+                return Ok(true);
+
+            }
+             return BadRequest(); 
+        }
+        [HttpGet("getFeedback-byMaSP/{maSP}")]
+        public List<DanhGia> getFeedBack_bymaSP(int maSP)
+        {
+            return sp_Bus.getFeedBack_bymaSP(maSP);
         }
     }
 }

@@ -31,11 +31,12 @@ namespace DAL
                     "@Diachi", hdb.Diachi,
                     "@Email", hdb.Email,
                     "@SDT", hdb.SDT,
+                    "@GiamGia", hdb.GiamGia,
                     "@DiaChiGiaoHang", hdb.DiaChiGiaoHang,
                     "@ThoiGianGiaoHang", DateTime.Now.AddDays(2),
                     "@tentaikhoan", hdb.TenTaiKhoan,
-                    "@methodPay",hdb.methodPay,
-                    "@list_json_chitietHDB", hdb.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(hdb.ChiTietHoaDonBan) : null);
+                    "@methodPay", hdb.methodPay,
+                    "@list_json_chitietHDB", hdb.ChiTietHoaDonBan != null ? MessageConvert.SerializeObject(hdb.ChiTietHoaDonBan) : null); ;
                 if (!string.IsNullOrEmpty(msgError))
                 {
                     throw new Exception(msgError + dt.ToString());
@@ -139,6 +140,8 @@ namespace DAL
             catch (Exception ex) { throw ex; }
 
         }
+
+
         public bool updateDetail_HDB(HoaDonBanUpdate a)
         {
    
@@ -162,7 +165,25 @@ namespace DAL
                 return string.IsNullOrEmpty(msgError) ? true : false;
             }
             catch (Exception ex) { throw ex; }
-        }    
+        }
+
+       
+        public bool cancelHDB(int MaHD, string LiDoHuy)
+        {
+
+            string msgError = "";
+            try
+            {
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_HuyDonHang", "@Lidohuy", LiDoHuy, "@MaHD", MaHD);
+
+                if (!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError + dt.ToString());
+                }
+                return string.IsNullOrEmpty(msgError) ? true : false;
+            }
+            catch (Exception ex) { throw ex; }
+        }
     }
 
 }

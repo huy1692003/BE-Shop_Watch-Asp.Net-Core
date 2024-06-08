@@ -73,5 +73,12 @@ namespace API_User.Controllers
             }
             return BadRequest(false);
         }
+
+        [Route("cancelHDB")]
+        [HttpPut]
+        public bool cancelHDB(int MaHD, string LiDoHuy)
+        {
+            return hdb_bus.cancelHDB(MaHD, LiDoHuy);
+        }
     }
 }

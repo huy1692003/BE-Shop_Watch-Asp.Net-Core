@@ -23,7 +23,7 @@ namespace API_User.Controllers
             {
                 return Ok(true);
             }
-            return NotFound(false);
+            return NotFound();
         }
         [HttpDelete("delete_toCart/{maGH}")]
         public IActionResult deleteCart(int maGH)
@@ -33,7 +33,7 @@ namespace API_User.Controllers
             {
                 return Ok(true);
             }
-            return NotFound(false);
+            return NotFound();
         }
         [HttpPut("update_SLCart/{maGH}/{sl}")]
         public IActionResult updateSL(int maGH,int sl)
@@ -43,7 +43,7 @@ namespace API_User.Controllers
             {
                 return Ok(true);
             }
-            return NotFound(false);
+            return NotFound();
         }
         [Route("getALLSP_Cart")]
         [HttpGet]

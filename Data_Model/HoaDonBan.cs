@@ -13,6 +13,8 @@
         public string? SDT { get; set; }
         public string? DiaChiGiaoHang { get; set; }
         public float ThanhTien { get; set; }
+        public float GiamGia {  get; set; }
+        public string? LiDoHuy { get; set; }
         public DateTime ThoiGianGiaoHang { get; set; }
         public string? TenTaiKhoan { get; set; }
         public string? methodPay { get; set; }

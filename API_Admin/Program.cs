@@ -35,6 +35,12 @@ builder.Services.AddTransient<IThongKeRepository, ThongKeRepository>();
 builder.Services.AddTransient<IThongkeBusiness,ThongkeBusiness>();
 builder.Services.AddTransient<ITinTucRepository, TinTucRepository>();
 builder.Services.AddTransient<ITinTucBusiness, TinTucBusiness>();
+builder.Services.AddTransient<IKhachHangRepository, KhachHangRepository>();
+builder.Services.AddTransient<IKhachHangBusiness, KhachHangBusiness>();
+builder.Services.AddTransient<IMaGiamGiaRespository, MaGiamGiaRespository>();
+builder.Services.AddTransient<IMaGiamGiaBusiness, MaGiamGiaBusiness>();
+builder.Services.AddTransient<INhanVienRepository, NhanVienRepository>();
+builder.Services.AddTransient<INhanVienBusiness, NhanVienBusiness>();
 
 
 

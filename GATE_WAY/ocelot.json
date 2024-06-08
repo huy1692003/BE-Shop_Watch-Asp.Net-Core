@@ -33,6 +33,51 @@
 
     },
     {
+      // mã giảm giá
+      "DownstreamPathTemplate": "/api/MaGiamGia/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/MaGiamGia/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // khach hang
+      "DownstreamPathTemplate": "/api/KhachHang/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/KhachHang/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // nhanvien
+      "DownstreamPathTemplate": "/api/NhanVien/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44334
+        }
+
+      ],
+      "UpstreamPathTemplate": "/NhanVien/{everything}",
+      "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
       // LTK
       "DownstreamPathTemplate": "/api/LoaiTaiKhoan/{everything}",
       "DownstreamScheme": "https",
@@ -265,6 +310,21 @@
       ],
       "UpstreamPathTemplate": "/customer/DonHang/{everything}",
       "UpstreamHttpMethod": [ "GET", "PUT", "POST", "DELETE" ]
+
+    },
+    {
+      // Mã giảm giá
+      "DownstreamPathTemplate": "/api/MaGiamGia/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44329
+        }
+
+      ],
+      "UpstreamPathTemplate": "/customer/MaGiamGia/{everything}",
+      "UpstreamHttpMethod": [ "GET" ]
 
     },
     {

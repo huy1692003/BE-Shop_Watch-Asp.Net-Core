@@ -42,6 +42,10 @@ namespace BUS
         {
             return hdb_Dal.updateDetail_HDB( a);
         }
+        public bool cancelHDB(int MaHD, string LiDoHuy)
+        {
+            return hdb_Dal.cancelHDB(MaHD,LiDoHuy);
+        }
     }
 
 }

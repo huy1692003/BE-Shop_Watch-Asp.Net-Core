@@ -48,6 +48,38 @@ namespace DAL
                 throw ex;
             }
         }
+
+        public List<SanPham>? getProduct_ByUser(int pageIndex, int pageSize, out int total, string TenSanPham, int MaTheLoai, int MaThuongHieu, string giatien)
+        {
+            string msgError = "";
+            total = 0;
+            try
+            {
+                var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_search_sanpham_by_user",
+                    "@page_index ", pageIndex,
+                    "@page_size", pageSize,
+                    "@ten_sanpham", TenSanPham,
+                    "@gia_tien", giatien,
+                    "@ma_theloai ", MaTheLoai == -1 ? "" : MaTheLoai,
+                    "@ma_thuonghieu", MaThuongHieu == -1 ? "" : MaThuongHieu
+                    );
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                if (pageSize != 0)
+                {
+                    if (dt.Rows.Count > 0) total = (int)dt.Rows[0]["RecordCount"];
+                }
+
+
+                return convertListSP(dt);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
         public List<SanPham>? convertListSP(DataTable data)
         {
             List<SanPham> list = new List<SanPham>();
@@ -220,6 +252,49 @@ namespace DAL
             {
                 throw ex;
             }
+        }
+
+        public bool createFeedBack(DanhGia dg)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = db.ExecuteScalarSProcedureWithTransaction(out msgError, "sp_createDanhGia",
+                    "@masp", dg.maSP,
+                    "@noidung", dg.noidung,
+                    "@sosao", dg.sosao,
+                    "@tentaikhoan", dg.tentaikhoan);
+
+                if (!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError);
+                }
+
+                return string.IsNullOrEmpty(msgError);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<DanhGia> getFeedBack_bymaSP(int maSP)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = db.ExecuteSProcedureReturnDataTable(out msgError, "sp_getFeedBack", "@masp", maSP);
+                if (!string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(msgError);
+                }
+                return dt.ConvertTo<DanhGia>().ToList();
+            }
+            catch (Exception ex)
+            {
+                // Bắn ra lỗi
+                throw ex;
+            }
+
         }
     }
 }

@@ -17,6 +17,10 @@ namespace DAL.Interface
         bool UpdateLuotXem(int maSP);
         SanPham getDetailProduct(int masp);
          List<SanPham>? getPrd_BestSelling(int maTL = -1, int maTH = -1);
+        bool createFeedBack(DanhGia dg);
+        List<DanhGia> getFeedBack_bymaSP(int maSP);
+
+        List<SanPham>? getProduct_ByUser(int pageIndex, int pageSize, out int total, string TenSanPham, int MaTheLoai, int MaThuongHieu, string giatien);
 
 
     }
